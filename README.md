@@ -4,7 +4,7 @@ StreaMix es un mashup que busca facilitar la interacción con las diferentes com
 
 StreaMix permite al usuario seguir retransmisiones en directo desde Twitch o YouTube a la vez que consulta opiniones y noticias en directo o interactúa con otros usuarios de la comunidad seleccionada en las diferentes plataformas indicadas: Twitter, Reddit, Discord...
 
-###Apps a Integrar
+### Apps a Integrar
 **Twitch** es una plataforma que ofrece un servicio de Streaming de video en vivo, siendo una de sus principales funciones la retransmisión de videojuegos en directo.
 **Twitter** es una red social que se describe como microblogging.
 **YouTube** es un sitio web dedicado a compartir videos,musica etc.
