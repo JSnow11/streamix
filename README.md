@@ -1,1 +1,1 @@
-# streamix
+# StreaMix
