@@ -1,9 +1,8 @@
 body {
+    margin-top: 150px;
     text-align: center;
-    align-items: center;
-    background-image: url(images/background.png);
+    background-image: url(images/background.jpg);
     background-size: cover;
-    grid-column: 100px;
 }
 
 footer {
