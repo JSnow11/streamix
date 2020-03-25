@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
         <property name="java-output-path" value="/aiss-project-template/target/aiss-project-template-0.0.1-SNAPSHOT/WEB-INF/classes"/>
         <property name="context-root" value="project_name"/>
     </wb-module>
