@@ -1,4 +1,4 @@
-package aiss.utility;
+package utility;
 
 import java.util.Set;
 import java.util.HashSet;

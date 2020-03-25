@@ -16,6 +16,19 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
+	<servlet>
+		<servlet-name>Search</servlet-name>
+		<servlet-class>controller.YTSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
 	<!--  OAUTH SERVLETS 
   
   	For each OAuth 2.0 service, you need to create two servlets: one for the initiation 
