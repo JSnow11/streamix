@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +23,9 @@ public class YTSearchController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		log.log(Level.WARNING, "La query es: "+request.getParameter("searchQuery"));
 		String query = request.getParameter("searchQuery");
+		log.log(Level.WARNING, "La query es: "+query);
 		RequestDispatcher rd = null;
 		
 		log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
@@ -40,7 +40,9 @@ public class YTSearchController extends HttpServlet {
 			log.log(Level.SEVERE, "Objects = null");
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
+		
 		rd.forward(request, response);
+		
 	
 	}
 	
