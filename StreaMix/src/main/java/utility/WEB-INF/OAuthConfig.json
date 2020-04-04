@@ -1,18 +1,20 @@
 {
 	"Discord":{
-		"tokenUrl":"https://discordapp.com/api/oauth2/token"
-		"clientId":"692063894600024085"
-		"clientSecret":"ezW_n5P1Y9hZfifRMXJHhxBkzcaARwhn"
-		"authorizationFormUrl":"https://discordapp.com/api/oauth2/authorize?client_id=692063894600024085&redirect_uri=http%3A%2F%2Flocalhost%3A8090%2Foauth2callback%2FDiscord&response_type=code"
-		"scopes":{identify}
+		"tokenUrl":"https://discordapp.com/api/oauth2/token",
+		"clientId":"692063894600024085",
+		"clientSecret":"ezW_n5P1Y9hZfifRMXJHhxBkzcaARwhn",
+		"authorizationFormUrl":"https://discordapp.com/api/oauth2/authorize?client_id=692063894600024085&redirect_uri=http%3A%2F%2Flocalhost%3A8090%2Foauth2callback%2FDiscord&response_type=code",
+		"scopes":"identity"
+		
 		
 	},
 	"Youtube":{
-		"tokenUrl":""
-		"clientId":""
-		"clientSecret":""
-		"authorizationFormUrl":""
+		"tokenUrl":"",
+		"clientId":"",
+		"clientSecret":"",
+		"authorizationFormUrl":"",
 		"scopes":{}
 	
 	
+	}
 	}
