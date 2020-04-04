@@ -34,9 +34,10 @@
                 <div class="twitch">
                     <h2>Twitch: </h2>
                     <hr><br>
-                    <c:forEach items="${requestScope.ytvideos}" var="video">
+                    <c:forEach items="${requestScope.twStreams}" var="stream">
                         <p>Title:
-                            <c:out value="${video.snippet.title}"></c:out>
+                            <c:out value="${stream.channel.channelTitle}"></c:out>
+                            <c:out value="${stream.game}"></c:out>
                         </p>
                     </c:forEach>
 

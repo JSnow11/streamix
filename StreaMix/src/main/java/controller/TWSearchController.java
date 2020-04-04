@@ -23,9 +23,9 @@ public class TWSearchController {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.log(Level.WARNING, "La query es: "+request.getParameter("searchQuery"));
+		log.log(Level.INFO, "La query es: "+request.getParameter("searchQuery"));
 		String query = request.getParameter("searchQuery");
-		log.log(Level.WARNING, "La query es: "+query);
+		log.log(Level.INFO, "La query es: "+query);
 		RequestDispatcher rd = null;
 		
 		log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
