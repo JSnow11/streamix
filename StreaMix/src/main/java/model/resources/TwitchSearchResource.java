@@ -11,7 +11,7 @@ import model.twitch.TwitchSearch;
 
 
 public class TwitchSearchResource {
-	public static final String apiKey = "vmyhjn4lvbiyfe1u4rn12km8jyx6qn";
+	public static final String apiKey = "nafycue8z9e8v8z4ntwkw2pham4nem";
 	public static final Logger log = Logger.getLogger(TwitchSearchResource.class.getName());
 	
 	public TwitchSearch getStreams(String query) throws UnsupportedEncodingException {
