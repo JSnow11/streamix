@@ -1,14 +1,13 @@
 package controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.apphosting.api.ApiProxy.LogRecord.Level;
 
 import model.resources.TwitchSearchResource;
 import model.twitch.TwitchSearch;
@@ -36,7 +35,7 @@ public class TWSearchController {
 		
 		if(tws != null) {
 			rd = request.getRequestDispatcher("/double.jsp");
-			request.setAttribute("twStreams", tws.getItems());
+			request.setAttribute("twStreams", tws.getStreams());
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			rd = request.getRequestDispatcher("/error.jsp");
