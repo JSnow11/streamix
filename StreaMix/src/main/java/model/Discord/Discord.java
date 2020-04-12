@@ -13,44 +13,116 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+    "reactions",
+    "attachments",
+    "tts",
+    "embeds",
+    "timestamp",
+    "mention_everyone",
     "id",
-    "guild_id",
-    "name",
-    "type",
-    "position",
-    "permission_overwrites",
-    "rate_limit_per_user",
-    "nsfw",
-    "topic",
-    "last_message_id",
-    "parent_id"
+    "pinned",
+    "edited_timestamp",
+    "author",
+    "mention_roles",
+    "content",
+    "channel_id",
+    "mentions",
+    "type"
 })
 public class Discord {
 
+    @JsonProperty("reactions")
+    private List<Reaction> reactions = null;
+    @JsonProperty("attachments")
+    private List<Object> attachments = null;
+    @JsonProperty("tts")
+    private Boolean tts;
+    @JsonProperty("embeds")
+    private List<Object> embeds = null;
+    @JsonProperty("timestamp")
+    private String timestamp;
+    @JsonProperty("mention_everyone")
+    private Boolean mentionEveryone;
     @JsonProperty("id")
     private String id;
-    @JsonProperty("guild_id")
-    private String guildId;
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("pinned")
+    private Boolean pinned;
+    @JsonProperty("edited_timestamp")
+    private Object editedTimestamp;
+    @JsonProperty("author")
+    private Author author;
+    @JsonProperty("mention_roles")
+    private List<Object> mentionRoles = null;
+    @JsonProperty("content")
+    private String content;
+    @JsonProperty("channel_id")
+    private String channelId;
+    @JsonProperty("mentions")
+    private List<Object> mentions = null;
     @JsonProperty("type")
     private Integer type;
-    @JsonProperty("position")
-    private Integer position;
-    @JsonProperty("permission_overwrites")
-    private List<Object> permissionOverwrites = null;
-    @JsonProperty("rate_limit_per_user")
-    private Integer rateLimitPerUser;
-    @JsonProperty("nsfw")
-    private Boolean nsfw;
-    @JsonProperty("topic")
-    private String topic;
-    @JsonProperty("last_message_id")
-    private String lastMessageId;
-    @JsonProperty("parent_id")
-    private String parentId;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("reactions")
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
+    @JsonProperty("reactions")
+    public void setReactions(List<Reaction> reactions) {
+        this.reactions = reactions;
+    }
+
+    @JsonProperty("attachments")
+    public List<Object> getAttachments() {
+        return attachments;
+    }
+
+    @JsonProperty("attachments")
+    public void setAttachments(List<Object> attachments) {
+        this.attachments = attachments;
+    }
+
+    @JsonProperty("tts")
+    public Boolean getTts() {
+        return tts;
+    }
+
+    @JsonProperty("tts")
+    public void setTts(Boolean tts) {
+        this.tts = tts;
+    }
+
+    @JsonProperty("embeds")
+    public List<Object> getEmbeds() {
+        return embeds;
+    }
+
+    @JsonProperty("embeds")
+    public void setEmbeds(List<Object> embeds) {
+        this.embeds = embeds;
+    }
+
+    @JsonProperty("timestamp")
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    @JsonProperty("timestamp")
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @JsonProperty("mention_everyone")
+    public Boolean getMentionEveryone() {
+        return mentionEveryone;
+    }
+
+    @JsonProperty("mention_everyone")
+    public void setMentionEveryone(Boolean mentionEveryone) {
+        this.mentionEveryone = mentionEveryone;
+    }
 
     @JsonProperty("id")
     public String getId() {
@@ -62,24 +134,74 @@ public class Discord {
         this.id = id;
     }
 
-    @JsonProperty("guild_id")
-    public String getGuildId() {
-        return guildId;
+    @JsonProperty("pinned")
+    public Boolean getPinned() {
+        return pinned;
     }
 
-    @JsonProperty("guild_id")
-    public void setGuildId(String guildId) {
-        this.guildId = guildId;
+    @JsonProperty("pinned")
+    public void setPinned(Boolean pinned) {
+        this.pinned = pinned;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("edited_timestamp")
+    public Object getEditedTimestamp() {
+        return editedTimestamp;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("edited_timestamp")
+    public void setEditedTimestamp(Object editedTimestamp) {
+        this.editedTimestamp = editedTimestamp;
+    }
+
+    @JsonProperty("author")
+    public Author getAuthor() {
+        return author;
+    }
+
+    @JsonProperty("author")
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    @JsonProperty("mention_roles")
+    public List<Object> getMentionRoles() {
+        return mentionRoles;
+    }
+
+    @JsonProperty("mention_roles")
+    public void setMentionRoles(List<Object> mentionRoles) {
+        this.mentionRoles = mentionRoles;
+    }
+
+    @JsonProperty("content")
+    public String getContent() {
+        return content;
+    }
+
+    @JsonProperty("content")
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @JsonProperty("channel_id")
+    public String getChannelId() {
+        return channelId;
+    }
+
+    @JsonProperty("channel_id")
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    @JsonProperty("mentions")
+    public List<Object> getMentions() {
+        return mentions;
+    }
+
+    @JsonProperty("mentions")
+    public void setMentions(List<Object> mentions) {
+        this.mentions = mentions;
     }
 
     @JsonProperty("type")
@@ -90,76 +212,6 @@ public class Discord {
     @JsonProperty("type")
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    @JsonProperty("position")
-    public Integer getPosition() {
-        return position;
-    }
-
-    @JsonProperty("position")
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
-
-    @JsonProperty("permission_overwrites")
-    public List<Object> getPermissionOverwrites() {
-        return permissionOverwrites;
-    }
-
-    @JsonProperty("permission_overwrites")
-    public void setPermissionOverwrites(List<Object> permissionOverwrites) {
-        this.permissionOverwrites = permissionOverwrites;
-    }
-
-    @JsonProperty("rate_limit_per_user")
-    public Integer getRateLimitPerUser() {
-        return rateLimitPerUser;
-    }
-
-    @JsonProperty("rate_limit_per_user")
-    public void setRateLimitPerUser(Integer rateLimitPerUser) {
-        this.rateLimitPerUser = rateLimitPerUser;
-    }
-
-    @JsonProperty("nsfw")
-    public Boolean getNsfw() {
-        return nsfw;
-    }
-
-    @JsonProperty("nsfw")
-    public void setNsfw(Boolean nsfw) {
-        this.nsfw = nsfw;
-    }
-
-    @JsonProperty("topic")
-    public String getTopic() {
-        return topic;
-    }
-
-    @JsonProperty("topic")
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    @JsonProperty("last_message_id")
-    public String getLastMessageId() {
-        return lastMessageId;
-    }
-
-    @JsonProperty("last_message_id")
-    public void setLastMessageId(String lastMessageId) {
-        this.lastMessageId = lastMessageId;
-    }
-
-    @JsonProperty("parent_id")
-    public String getParentId() {
-        return parentId;
-    }
-
-    @JsonProperty("parent_id")
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 
     @JsonAnyGetter
