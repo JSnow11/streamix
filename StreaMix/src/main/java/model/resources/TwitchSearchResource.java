@@ -30,6 +30,7 @@ public class TwitchSearchResource {
 		Series<Header> headerValue = new Series<Header>(Header.class);
 	    req.getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, headerValue);
 	    headerValue.add("Client-ID", clientID);
+	    headerValue.add("Accept", "Accept: application/vnd.twitchtv.v5+json");
 	    
 	    log.log(Level.INFO, "Header añadido");
 	    

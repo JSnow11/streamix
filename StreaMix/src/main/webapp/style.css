@@ -1,134 +1,227 @@
-    * {
-        margin: 0;
-        padding: 10;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-        padding: 20px;
-        text-align: center;
-        background-image: url(images/background.jpg);
-        background-size: cover;
-    }
-    
-    .container {
-        display: flex;
-        flex-flow: row;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
-        align-items: center;
-        height: 90vh;
-        border: 10px;
-    }
-    
-    .yt {
-        width: 40vw;
-        padding: 10px;
-        background-color: rgba(14, 14, 14, 0.534);
-        color: rgba(255, 255, 255, 0.733);
-        border-radius: 20px;
-    }
-    
-    .ytList {
-        text-align: left;
-        height: 80%;
-        width: 100%;
-    }
-    
-    .twitch {
-        width: 40vw;
-        padding: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        background-color: rgba(14, 14, 14, 0.534);
-        color: rgba(255, 255, 255, 0.733);
-        border-radius: 20px;
-    }
-    
-    .browser {
-        text-align: center;
-        align-items: center;
-        flex-grow: 2.5;
-    }
-    
-    .trend {
-        flex-grow: 1;
-        margin-right: 20px;
-        margin-left: 10px;
-        height: 80vh;
-        background-color: rgba(14, 14, 14, 0.534);
-        color: rgba(255, 255, 255, 0.733);
-        border-radius: 10px;
-    }
-    
-    .twitterTrending {
-        height: 40%;
-        text-align: left;
-        padding: 20px;
-    }
-    
-    .twitchTrending {
-        height: 40%;
-        text-align: left;
-        padding: 20px;
-    }
-    
-    .center {
-        height: 100%;
-        width: 100%;
-        text-align: center;
-        align-items: center;
-    }
-    
-    input[type=search] {
-        border-radius: 10px;
-        width: 75%;
-        height: 30px;
-        padding: 12px;
-        background-color: rgba(14, 14, 14, 0.534);
-        box-sizing: border-box;
-        text-align: center;
-        font-size: 18px;
-        color: rgb(206, 206, 206);
-    }
-    
-     ::placeholder {
-        color: white;
-        opacity: 0.4;
-    }
-    
-    h1 {
-        color: rgb(48, 48, 48);
-        margin-top: 60;
-        vertical-align: middle;
-    }
-    
-    img {
-        vertical-align: text-bottom;
-    }
-    
-    li {
-        text-align: inherit;
-    }
-    
-    h2 {
-        font-size: 20px;
-        font-style: bold;
-    }
-    
-    p {
-        font-size: 12px;
-    }
-    
-    hr {
-        background-color: rgba(14, 14, 14, 0.534);
-    }
-    
-    footer {
-        height: 10vh;
-        position: absolute;
-        bottom: 0;
-        text-align: right;
-        width: 96vw;
-    }
+html {
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+    background-image: url(images/background.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-flow: row;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90%;
+    margin: 2%;
+}
+
+.viewContainer {
+    display: flex;
+    flex-flow: row;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    height: 90%;
+    margin: 4%;
+}
+
+
+/*Double, picking a video ---------------------------------------------------------------*/
+
+.yt {
+    width: 40vw;
+    padding: 5%;
+    background-color: rgba(14, 14, 14, 0.534);
+    color: rgba(255, 255, 255, 0.733);
+    border-radius: 20px;
+}
+
+.ytList {
+    text-align: left;
+    height: 80%;
+    width: 100%;
+}
+
+.twitch {
+    width: 40vw;
+    padding: 10px;
+    background-color: rgba(14, 14, 14, 0.534);
+    color: rgba(255, 255, 255, 0.733);
+    border-radius: 20px;
+}
+
+
+/*--------------------------------------------------------------------------------------------------*/
+
+
+/*browser + trending --------------------------------------------------------------------------------*/
+
+.browser {
+    text-align: center;
+    align-items: center;
+    flex-grow: 2;
+}
+
+.left {
+    float: left;
+}
+
+.trend {
+    flex-grow: 1;
+    margin: 3%;
+    height: 60vh;
+    width: 20vw;
+    background-color: rgba(14, 14, 14, 0.534);
+    color: rgba(255, 255, 255, 0.733);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.trend:hover {
+    background-color: rgba(14, 14, 14, 0.685);
+    color: rgba(255, 255, 255, 0.733);
+}
+
+.twitterTrending {
+    height: 40%;
+    text-align: left;
+    padding: 20px;
+}
+
+.twitchTrending {
+    height: 40%;
+    text-align: left;
+    padding: 20px;
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+
+/*View -----------------------------------------------------------------------------------------*/
+
+.screen {
+    flex-grow: 4;
+    width: 100%;
+    height: 90%;
+}
+
+.social {
+    flex-grow: 2;
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+.center {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+
+input[type=search] {
+    background-color: rgba(14, 14, 14, 0.534);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 40%;
+}
+
+input[type=search]:hover {
+    background-color: rgba(14, 14, 14, 0.685);
+    width: 42%;
+    color: rgb(245, 245, 245);
+}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+a:hover {
+    background-color: rgba(243, 243, 243, 0.082);
+    border: 1px solid white;
+}
+
+.linkOption a:hover {
+    background-color: rgba(255, 255, 255, 0.493);
+    border-radius: 20px;
+    border-color: white;
+}
+
+ ::placeholder {
+    color: white;
+    opacity: 0.4;
+}
+
+h1 {
+    color: rgb(48, 48, 48);
+    margin-top: 60;
+    vertical-align: middle;
+}
+
+h3 {
+    border-style: hidden hidden solid hidden;
+}
+
+img {
+    vertical-align: text-bottom;
+}
+
+li {
+    text-align: inherit;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.158);
+    margin: 3%;
+    border-radius: 10px;
+}
+
+p {
+    font-size: 12px;
+}
+
+hr {
+    background-color: rgba(14, 14, 14, 0.534);
+}
+
+footer {
+    height: 10vh;
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+    width: 100%;
+    padding: 4%;
+}
+
+
+/*Embeed-------------------------------------------------------------------------*/
+
+iframe {
+    width: 90%;
+    height: 85%;
+}

@@ -34,16 +34,17 @@
 			YTSearchResource ytsr = new YTSearchResource();
 			YtSearch yts = ytsr.getVideos(queryYT);
 			
-			/*
+			
 			String queryTW = request.getParameter("searchQuery");
 			log.log(Level.FINE, "Processing GET request, keywords: " + queryTW + " processed.");
 			TwitchSearchResource twsr = new TwitchSearchResource();
 			TwitchSearch tws = twsr.getStreams(queryTW);
-			*/
 			
-			if(yts != null /*&& tws != null*/) {
+			
+			if(yts != null && tws != null) {
 				rd = request.getRequestDispatcher("/double.jsp");
 				request.setAttribute("ytvideos", yts.getItems());
+				request.setAttribute("twstreams", tws.getStreams());
 			}else {
 				log.log(Level.SEVERE, "Objects = null");
 				rd = request.getRequestDispatcher("/error.jsp");

@@ -6,7 +6,7 @@
 
         <head>
             <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <link rel="icon" href="favicon.ico">
+            <link rel="icon" href="images/Logo.png">
             <link rel="stylesheet" href="style.css">
             <title>StreaMix</title>
         </head>
@@ -33,10 +33,11 @@
                 </div>
                 <div class="twitch">
                     <h2>Twitch: </h2>
+                    <br>
                     <hr><br>
-                    <c:forEach items="${requestScope.ytvideos}" var="video">
+                    <c:forEach items="${requestScope.twstreams}" var="video">
                         <p>Title:
-                            <c:out value="${video.snippet.title}"></c:out>
+                            <c:out value="${stream.game}"></c:out>
                         </p>
                     </c:forEach>
 
