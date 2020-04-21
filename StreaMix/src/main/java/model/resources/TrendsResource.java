@@ -17,7 +17,7 @@ public class TrendsResource {
 	public static final Logger log = Logger.getLogger(TrendsResource.class.getName());
 	
 	public Trending getTrends() throws ResourceException, IOException {
-		String uri = "https://api.twitter.com/1.1/trends/place.json?id="+locationID;
+		String uri = "https://api.twitter.com/1.1/trends/place.json?id="+locationID+"&limit=5";
 		log.log(Level.INFO, "trends URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
