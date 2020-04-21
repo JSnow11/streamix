@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 
@@ -11,23 +14,21 @@
 <body>
     <div class="container">
         <div class="browser">
-            <h1>
-                <a href="index.html"><img src="images/Logo.png" alt="logo" width="50%"></a>
-            </h1>
+            <a href="index.html"><img src="images/Logo.png" alt="logo"></a>
             <br>
             <form action="search" method="GET">
                 <input type="search" id="searchQuery" name="searchQuery" placeholder="Search" /><br>
             </form>
-
         </div>
         <div class="trend">
             <h2>TRENDING</h2>
             <div class="twitchTrending">
                 <h3>Streaming</h3>
-                <a href="#"> League of Legends</a><br>
-                <a href="#"> Overwatch</a><br>
-                <a href="#"> Fortnite</a><br>
-                <a href="#"> League of Legends</a><br>
+                <c:forEach items="${requestScope.trends}" var="trend">
+                        <p>
+                            <a href="#"><c:out value="${trend.name}"></c:out></a>
+                        </p><br>
+                   </c:forEach>
             </div>
             <div class="twitterTrending">
                 <h3>Topics</h3>
@@ -36,8 +37,6 @@
                 <a href="#"> #Pandemia</a><br>
             </div>
         </div>
-
-
     </div>
     <footer>
         <a href="https://github.com/JSnow11/streamix/projects/1"><img src="images/GitHubIcon.png" alt="git" width="30"></a>

@@ -29,7 +29,7 @@ public class Trend {
     @JsonProperty("query")
     private String query;
     @JsonProperty("tweet_volume")
-    private Object tweetVolume;
+    private Integer tweetVolume;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -74,12 +74,12 @@ public class Trend {
     }
 
     @JsonProperty("tweet_volume")
-    public Object getTweetVolume() {
+    public Integer getTweetVolume() {
         return tweetVolume;
     }
 
     @JsonProperty("tweet_volume")
-    public void setTweetVolume(Object tweetVolume) {
+    public void setTweetVolume(Integer tweetVolume) {
         this.tweetVolume = tweetVolume;
     }
 

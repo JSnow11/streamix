@@ -35,7 +35,7 @@
                     <h2>Twitch: </h2>
                     <br>
                     <hr><br>
-                    <c:forEach items="${requestScope.twstreams}" var="video">
+                    <c:forEach items="${requestScope.twstreams}" var="stream">
                         <p>Title:
                             <c:out value="${stream.game}"></c:out>
                         </p>

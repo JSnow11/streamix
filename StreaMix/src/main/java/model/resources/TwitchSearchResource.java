@@ -2,11 +2,11 @@ package model.resources;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.engine.header.HeaderConstants;
-import org.restlet.Request;
 import org.restlet.data.Header;
 import org.restlet.resource.ClientResource;
 import org.restlet.util.Series;
@@ -25,16 +25,23 @@ public class TwitchSearchResource {
 		log.log(Level.INFO, "twitchSearch URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
-		Request req = cr.getRequest();
-		
-		Series<Header> headerValue = new Series<Header>(Header.class);
-	    req.getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, headerValue);
-	    headerValue.add("Client-ID", clientID);
-	    headerValue.add("Accept", "Accept: application/vnd.twitchtv.v5+json");
+		addHeader(cr,"Accept", "application/vnd.twitchtv.v5+json");
+		addHeader(cr,"Client-ID", clientID);
 	    
-	    log.log(Level.INFO, "Header añadido");
+	    log.log(Level.WARNING, "Header añadido");
 	    
 	    TwitchSearch twS = cr.get(TwitchSearch.class);
 		return twS;
+	}
+	
+	public void addHeader(ClientResource cr, String headerName, String headerValue) {
+	    Series<Header> headers = (Series<Header>) cr.getRequest().getAttributes()
+	        .get(HeaderConstants.ATTRIBUTE_HEADERS);
+
+	    if (headers == null) {
+	    	headers = new Series<Header>(Header.class);
+	    	cr.getRequest().getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, headers);
+	    }
+	    headers.add(headerName, headerValue);
 	}
 }

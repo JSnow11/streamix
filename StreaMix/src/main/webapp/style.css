@@ -32,13 +32,14 @@ body {
 
 .viewContainer {
     display: flex;
+    align-items: flex-start;
     flex-flow: row;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
     align-items: flex-start;
     height: 90%;
-    margin: 3%;
+    margin: 1%;
 }
 
 
@@ -75,7 +76,24 @@ body {
 .browser {
     text-align: center;
     align-items: center;
-    flex-grow: 2;
+    width: 100%;
+    padding: 2% 6%;
+}
+
+.browser img {
+    width: 70%;
+}
+
+.smallBrowser {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 2% 6%;
+}
+
+.smallBrowser form {
+    min-width: 100%;
 }
 
 .left {
@@ -83,10 +101,9 @@ body {
 }
 
 .trend {
-    flex-grow: 1;
     margin: 3%;
-    height: 60vh;
-    width: 20vw;
+    height: 70%;
+    width: 30%;
     background-color: rgba(14, 14, 14, 0.534);
     color: rgba(255, 255, 255, 0.733);
     border-radius: 10px;
@@ -122,7 +139,7 @@ body {
     justify-content: center;
     border-radius: 10px;
     margin: 2%;
-    width: 75%;
+    width: 60%;
     height: 80%;
     background-color: rgba(14, 14, 14, 0.534);
 }
@@ -135,8 +152,7 @@ body {
 .social {
     margin: 2%;
     height: 80%;
-    width: 40%;
-    width: 20vw;
+    width: 25%;
     background-color: rgba(14, 14, 14, 0.534);
     color: rgba(255, 255, 255, 0.733);
     border-radius: 10px;
@@ -199,12 +215,12 @@ input[type=search] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 40%;
+    width: 80%;
 }
 
 input[type=search]:hover {
     background-color: rgba(14, 14, 14, 0.685);
-    width: 42%;
+    width: 81%;
     color: rgb(245, 245, 245);
 }
 
@@ -278,8 +294,8 @@ footer {
 /*Embeed-------------------------------------------------------------------------*/
 
 iframe {
-    width: 90%;
-    height: 85%;
+    width: 96%;
+    height: 95%;
     border-radius: 10px;
     border: hidden;
 }

@@ -29,19 +29,17 @@
 
 			RequestDispatcher rd = null;
 
-			String queryYT = request.getParameter("searchQuery");
-			log.log(Level.FINE, "Processing GET request, keywords: " + queryYT + " processed.");
+			String query = request.getParameter("searchQuery");
+			log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
+			
 			YTSearchResource ytsr = new YTSearchResource();
-			YtSearch yts = ytsr.getVideos(queryYT);
-			
-			
-			String queryTW = request.getParameter("searchQuery");
-			log.log(Level.FINE, "Processing GET request, keywords: " + queryTW + " processed.");
+			YtSearch yts = ytsr.getVideos(query);
+
 			TwitchSearchResource twsr = new TwitchSearchResource();
-			TwitchSearch tws = twsr.getStreams(queryTW);
+			TwitchSearch tws = twsr.getStreams(query);
 			
 			
-			if(yts != null && tws != null) {
+			if((yts != null) && (tws != null)) {
 				rd = request.getRequestDispatcher("/double.jsp");
 				request.setAttribute("ytvideos", yts.getItems());
 				request.setAttribute("twstreams", tws.getStreams());
