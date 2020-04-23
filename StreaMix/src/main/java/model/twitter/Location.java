@@ -34,6 +34,11 @@ public class Location {
         this.name = name;
     }
 
+    public Location withName(String name) {
+        this.name = name;
+        return this;
+    }
+
     @JsonProperty("woeid")
     public Integer getWoeid() {
         return woeid;
@@ -44,6 +49,11 @@ public class Location {
         this.woeid = woeid;
     }
 
+    public Location withWoeid(Integer woeid) {
+        this.woeid = woeid;
+        return this;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -52,6 +62,11 @@ public class Location {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    public Location withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }

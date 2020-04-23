@@ -2,6 +2,7 @@
 package model.twitter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -12,75 +13,82 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "name",
-    "url",
-    "promoted_content",
-    "query",
-    "tweet_volume"
+    "trends",
+    "as_of",
+    "created_at",
+    "locations"
 })
 public class Trend {
 
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("url")
-    private String url;
-    @JsonProperty("promoted_content")
-    private Object promotedContent;
-    @JsonProperty("query")
-    private String query;
-    @JsonProperty("tweet_volume")
-    private Integer tweetVolume;
+    @JsonProperty("trends")
+    private List<Trend> trends = null;
+    @JsonProperty("as_of")
+    private String asOf;
+    @JsonProperty("created_at")
+    private String createdAt;
+    @JsonProperty("locations")
+    private List<Location> locations = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("trends")
+    public List<Trend> getTrends() {
+        return trends;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("trends")
+    public void setTrends(List<Trend> trends) {
+        this.trends = trends;
     }
 
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
+    public Trend withTrends(List<Trend> trends) {
+        this.trends = trends;
+        return this;
     }
 
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+    @JsonProperty("as_of")
+    public String getAsOf() {
+        return asOf;
     }
 
-    @JsonProperty("promoted_content")
-    public Object getPromotedContent() {
-        return promotedContent;
+    @JsonProperty("as_of")
+    public void setAsOf(String asOf) {
+        this.asOf = asOf;
     }
 
-    @JsonProperty("promoted_content")
-    public void setPromotedContent(Object promotedContent) {
-        this.promotedContent = promotedContent;
+    public Trend withAsOf(String asOf) {
+        this.asOf = asOf;
+        return this;
     }
 
-    @JsonProperty("query")
-    public String getQuery() {
-        return query;
+    @JsonProperty("created_at")
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    @JsonProperty("query")
-    public void setQuery(String query) {
-        this.query = query;
+    @JsonProperty("created_at")
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    @JsonProperty("tweet_volume")
-    public Integer getTweetVolume() {
-        return tweetVolume;
+    public Trend withCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return this;
     }
 
-    @JsonProperty("tweet_volume")
-    public void setTweetVolume(Integer tweetVolume) {
-        this.tweetVolume = tweetVolume;
+    @JsonProperty("locations")
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    @JsonProperty("locations")
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public Trend withLocations(List<Location> locations) {
+        this.locations = locations;
+        return this;
     }
 
     @JsonAnyGetter
@@ -91,6 +99,11 @@ public class Trend {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    public Trend withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }

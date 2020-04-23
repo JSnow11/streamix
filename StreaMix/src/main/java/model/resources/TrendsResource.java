@@ -24,9 +24,9 @@ public class TrendsResource {
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
-
-		log.log(Level.WARNING, cr.get().getText());
+		
 		Trending t = cr.get(Trending.class);
+		log.log(Level.WARNING, "Parseado");
 		return t;
 	}
 }

@@ -24,11 +24,11 @@
             <h2>TRENDING</h2>
             <div class="twitchTrending">
                 <h3>Streaming</h3>
-                <c:forEach items="${requestScope.trends}" var="trend">
+                <c:forEach items="${requestScope.tweets}" var="status">
                         <p>
-                            <a href="#"><c:out value="${trend.name}"></c:out></a>
+                            <a href="#"><c:out value="${status.user.name}"></c:out></a>
                         </p><br>
-                   </c:forEach>
+                </c:forEach>
             </div>
             <div class="twitterTrending">
                 <h3>Topics</h3>
