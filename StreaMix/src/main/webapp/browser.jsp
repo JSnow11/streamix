@@ -24,17 +24,15 @@
             <h2>TRENDING</h2>
             <div class="twitchTrending">
                 <h3>Streaming</h3>
-                <c:forEach items="${requestScope.tweets}" var="status">
-                        <p>
-                            <a href="#"><c:out value="${status.user.name}"></c:out></a>
-                        </p><br>
-                </c:forEach>
+                
             </div>
             <div class="twitterTrending">
                 <h3>Topics</h3>
-                <a href="#"> #Coronavirus</a><br>
-                <a href="#"> #Virus</a><br>
-                <a href="#"> #Pandemia</a><br>
+                <div class="scroll">
+	                <c:forEach items="${requestScope.trends}" var="trend">
+						<a href="#"><c:out value="${trend.getName().toString()}"></c:out></a>
+	                </c:forEach>
+                </div>
             </div>
         </div>
     </div>

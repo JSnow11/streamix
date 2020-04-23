@@ -20,8 +20,8 @@ public class TwitchSearchResource {
 	
 	public TwitchSearch getStreams(String query) throws UnsupportedEncodingException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
-		String uri = "https://api.twitch.tv/kraken/search/streams?query=" + queryFormatted;
-		
+		String uri = "https://api.twitch.tv/kraken/search/streams?q=" + queryFormatted + "&limit=5";
+
 		log.log(Level.INFO, "twitchSearch URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
