@@ -19,7 +19,7 @@ public class TweetsResource {
 	public static final String bearerToken = "AAAAAAAAAAAAAAAAAAAAAFGTDgEAAAAAEZoGu1eukF9DG%2Fd1iNeDCfHMvWU%3DPR3zJLzXYZ7TgjyWbsRe1qgdntSe1QSGFmKvck1yc6IeUCn18L";
 	public static final Logger log = Logger.getLogger(TrendsResource.class.getName());
 	
-	public TweetList getTweets(String query) throws ResourceException, IOException {
+	public List<String> getTweets(String query) throws ResourceException, IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
 		String uri = "https://api.twitter.com/1.1/search/tweets.json?q="+queryFormatted+"&count=2";
 		log.log(Level.INFO, "tweets URI: "+uri);

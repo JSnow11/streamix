@@ -408,6 +408,7 @@ public class TrendsResource {
 				if(trd.contains("name")) {
 					name = trd.split(":")[1].trim();
 					name = name.substring(1,name.length()-2);
+					name=uncode(name);
 				}
 				if(trd.contains("tweet_volume")) {
 					String pv = trd.split(":")[1].trim();
@@ -417,5 +418,19 @@ public class TrendsResource {
 			}
 		}
 		return Trending.of(lt);
+	}
+	private static String uncode(String st) {
+		String str = st.split(" ")[0];
+		
+		str =  str.replace("\\"," ");
+		String[] arr = str.split("u");
+		
+		String text = "";
+		for(int i = 1; i < arr.length; i++){
+		    int hexVal = Integer.parseInt(arr[i].trim(), 16);
+		    text += (char)hexVal;
+		}
+		return text;
+		
 	}
 }

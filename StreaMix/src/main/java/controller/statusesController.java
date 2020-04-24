@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,11 +38,11 @@ public class statusesController extends HttpServlet {
 
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
-		TweetList t = tr.getTweets("hola");
+		List<String> t = tr.getTweets("hola");
 		
 		if(t != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
-			request.setAttribute("tweets", t.getStatuses());
+			request.setAttribute("tweets", t);
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			rd = request.getRequestDispatcher("/error.jsp");
