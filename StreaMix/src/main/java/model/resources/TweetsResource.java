@@ -391,9 +391,9 @@ public class TweetsResource {
 				"    \"since_id_str\": \"0\"\r\n" + 
 				"  }\r\n" + 
 				"}";
-		List<String> T=parse(st);
+		List<String> t=parse(st);
 		log.log(Level.WARNING, "Parseado");
-		return T;
+		return t;
 	}
 private static List<String> parse(String st) {
 		
