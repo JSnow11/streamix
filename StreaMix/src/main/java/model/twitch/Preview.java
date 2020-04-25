@@ -40,6 +40,11 @@ public class Preview {
         this.large = large;
     }
 
+    public Preview withLarge(String large) {
+        this.large = large;
+        return this;
+    }
+
     @JsonProperty("medium")
     public String getMedium() {
         return medium;
@@ -48,6 +53,11 @@ public class Preview {
     @JsonProperty("medium")
     public void setMedium(String medium) {
         this.medium = medium;
+    }
+
+    public Preview withMedium(String medium) {
+        this.medium = medium;
+        return this;
     }
 
     @JsonProperty("small")
@@ -60,6 +70,11 @@ public class Preview {
         this.small = small;
     }
 
+    public Preview withSmall(String small) {
+        this.small = small;
+        return this;
+    }
+
     @JsonProperty("template")
     public String getTemplate() {
         return template;
@@ -70,6 +85,11 @@ public class Preview {
         this.template = template;
     }
 
+    public Preview withTemplate(String template) {
+        this.template = template;
+        return this;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -78,6 +98,11 @@ public class Preview {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    public Preview withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }

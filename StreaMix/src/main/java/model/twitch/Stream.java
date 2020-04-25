@@ -28,7 +28,7 @@ public class Stream {
     @JsonProperty("_id")
     private Integer id;
     @JsonProperty("average_fps")
-    private Double averageFps;
+    private Integer averageFps;
     @JsonProperty("channel")
     private Channel channel;
     @JsonProperty("created_at")
@@ -58,14 +58,24 @@ public class Stream {
         this.id = id;
     }
 
+    public Stream withId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
     @JsonProperty("average_fps")
-    public Double getAverageFps() {
+    public Integer getAverageFps() {
         return averageFps;
     }
 
     @JsonProperty("average_fps")
-    public void setAverageFps(Double averageFps) {
+    public void setAverageFps(Integer averageFps) {
         this.averageFps = averageFps;
+    }
+
+    public Stream withAverageFps(Integer averageFps) {
+        this.averageFps = averageFps;
+        return this;
     }
 
     @JsonProperty("channel")
@@ -78,6 +88,11 @@ public class Stream {
         this.channel = channel;
     }
 
+    public Stream withChannel(Channel channel) {
+        this.channel = channel;
+        return this;
+    }
+
     @JsonProperty("created_at")
     public String getCreatedAt() {
         return createdAt;
@@ -86,6 +101,11 @@ public class Stream {
     @JsonProperty("created_at")
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Stream withCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return this;
     }
 
     @JsonProperty("delay")
@@ -98,6 +118,11 @@ public class Stream {
         this.delay = delay;
     }
 
+    public Stream withDelay(Integer delay) {
+        this.delay = delay;
+        return this;
+    }
+
     @JsonProperty("game")
     public String getGame() {
         return game;
@@ -106,6 +131,11 @@ public class Stream {
     @JsonProperty("game")
     public void setGame(String game) {
         this.game = game;
+    }
+
+    public Stream withGame(String game) {
+        this.game = game;
+        return this;
     }
 
     @JsonProperty("is_playlist")
@@ -118,6 +148,11 @@ public class Stream {
         this.isPlaylist = isPlaylist;
     }
 
+    public Stream withIsPlaylist(Boolean isPlaylist) {
+        this.isPlaylist = isPlaylist;
+        return this;
+    }
+
     @JsonProperty("preview")
     public Preview getPreview() {
         return preview;
@@ -126,6 +161,11 @@ public class Stream {
     @JsonProperty("preview")
     public void setPreview(Preview preview) {
         this.preview = preview;
+    }
+
+    public Stream withPreview(Preview preview) {
+        this.preview = preview;
+        return this;
     }
 
     @JsonProperty("video_height")
@@ -138,6 +178,11 @@ public class Stream {
         this.videoHeight = videoHeight;
     }
 
+    public Stream withVideoHeight(Integer videoHeight) {
+        this.videoHeight = videoHeight;
+        return this;
+    }
+
     @JsonProperty("viewers")
     public Integer getViewers() {
         return viewers;
@@ -148,6 +193,11 @@ public class Stream {
         this.viewers = viewers;
     }
 
+    public Stream withViewers(Integer viewers) {
+        this.viewers = viewers;
+        return this;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -156,6 +206,11 @@ public class Stream {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    public Stream withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }

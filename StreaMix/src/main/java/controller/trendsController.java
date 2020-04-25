@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.resources.LiveTwitchResource;
 import model.resources.TrendsResource;
 import model.resources.TwitchSearchResource;
 import model.resources.YTSearchResource;
+import model.twitch.Live;
 import model.twitch.TwitchSearch;
 import model.twitter.Trending;
 import model.yt.YtSearch;
@@ -31,13 +33,16 @@ public class trendsController extends HttpServlet {
 		log.log(Level.INFO, "Peticion de trends realizada");
 
 		RequestDispatcher rd = null;
-
 		TrendsResource tr = new TrendsResource();
 		Trending t = tr.getTrends();
+		
+		//LiveTwitchResource ltr = new LiveTwitchResource();
+		//Live l = ltr.getStreams();
 		
 		if(t != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
 			request.setAttribute("trends", t.getTrends());
+			//request.setAttribute("live", l.getStreams());
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			rd = request.getRequestDispatcher("/error.jsp");

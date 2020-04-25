@@ -160,7 +160,7 @@ public class test {
 				if(trd.contains("name")) {
 					name = trd.split(":")[1].trim();
 					name = name.substring(1,name.length()-2);
-					name=uncode(name);
+					name=decode(name);
 				}
 				if(trd.contains("tweet_volume")) {
 					String pv = trd.split(":")[1].trim();
@@ -171,7 +171,7 @@ public class test {
 		}
 		return Trending.of(lt);
 	}
-	private static String uncode(String st) {
+	private static String decode(String st) {
 		String str = st.split(" ")[0];
 		
 		str =  str.replace("\\"," ");

@@ -16,6 +16,7 @@ import org.restlet.resource.ResourceException;
 import org.restlet.util.Series;
 
 import model.twitch.TwitchSearch;
+import utility.Tools;
 
 
 public class TwitchSearchResource {
@@ -31,7 +32,7 @@ public class TwitchSearchResource {
 		ClientResource cr = new ClientResource(uri);
 		//MediaType tmt = new MediaType("application/vnd.twitchtv.v5+json", "twitch media type");
 		cr.accept(MediaType.valueOf("application/vnd.twitchtv.v5+json"));
-		addHeader(cr,"Client-ID", clientID);
+		Tools.addHeader(cr,"Client-ID", clientID);
 	    
 	    log.log(Level.WARNING, "Header añadido");
 	    log.log(Level.WARNING, cr.getRequest().toString());
@@ -39,16 +40,5 @@ public class TwitchSearchResource {
 	    log.log(Level.WARNING, cr.get().getText());
 	    TwitchSearch twS = cr.get(TwitchSearch.class);
 		return twS;
-	}
-	
-	public void addHeader(ClientResource cr, String headerName, String headerValue) {
-	    Series<Header> headers = (Series<Header>) cr.getRequest().getAttributes()
-	        .get(HeaderConstants.ATTRIBUTE_HEADERS);
-	    
-	    if (headers == null) {
-	    	headers = new Series<Header>(Header.class);
-	    	cr.getRequest().getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, headers);
-	    }
-	    headers.add(headerName, headerValue);
 	}
 }

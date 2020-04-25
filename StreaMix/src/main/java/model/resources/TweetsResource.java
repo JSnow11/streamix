@@ -12,12 +12,11 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import model.twitter.Trending;
-import model.twitter.TweetList;
+import utility.Tools;
 
 public class TweetsResource {
 	public static final String bearerToken = "AAAAAAAAAAAAAAAAAAAAAFGTDgEAAAAAEZoGu1eukF9DG%2Fd1iNeDCfHMvWU%3DPR3zJLzXYZ7TgjyWbsRe1qgdntSe1QSGFmKvck1yc6IeUCn18L";
-	public static final Logger log = Logger.getLogger(TrendsResource.class.getName());
+	public static final Logger log = Logger.getLogger(TweetsResource.class.getName());
 	
 	public List<String> getTweets(String query) throws ResourceException, IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
@@ -391,11 +390,12 @@ public class TweetsResource {
 				"    \"since_id_str\": \"0\"\r\n" + 
 				"  }\r\n" + 
 				"}";
-		List<String> t=parse(st);
-		log.log(Level.WARNING, "Parseado");
+		List<String> t= parse(st);
+		t = getHtml(t);
+		log.log(Level.WARNING, "Parseado" + t);
 		return t;
 	}
-private static List<String> parse(String st) {
+	private static List<String> parse(String st) {
 		
 		List<String> lu = new ArrayList<>();
 		Boolean b=true;
@@ -415,7 +415,16 @@ private static List<String> parse(String st) {
 				
 			}
 		}
-		
 		return lu;
+	}
+	
+	private static List<String> getHtml(List<String> ls) throws ResourceException, IOException {
+		List<String> lhtml = new ArrayList<>();
+		for(String s : ls) {
+			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s+"&theme=dark";
+			ClientResource cr = new ClientResource(uri);
+			lhtml.add(Tools.parseHtml(cr.get().getText()));
 		}
+		return lhtml;
+	}
 }
