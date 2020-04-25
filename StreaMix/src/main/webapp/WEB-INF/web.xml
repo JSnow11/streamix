@@ -12,22 +12,22 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>trends</servlet-name>
-    <servlet-class>controller.trendsController</servlet-class>
+    <servlet-name>Trends</servlet-name>
+    <servlet-class>controller.TrendsController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>trends</servlet-name>
+    <servlet-name>Trends</servlet-name>
     <url-pattern>/trends</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>statusesController</display-name>
-    <servlet-name>statusesController</servlet-name>
-    <servlet-class>controller.statusesController</servlet-class>
+    <display-name>ViewController</display-name>
+    <servlet-name>ViewController</servlet-name>
+    <servlet-class>controller.ViewController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>statusesController</servlet-name>
-    <url-pattern>/statuses</url-pattern>
+    <servlet-name>ViewController</servlet-name>
+    <url-pattern>/view</url-pattern>
   </servlet-mapping>
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>

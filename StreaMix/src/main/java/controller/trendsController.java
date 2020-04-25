@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.jetty.io.WriteFlusher.Listener;
 
 import model.resources.LiveTwitchResource;
 import model.resources.TrendsResource;
@@ -19,12 +23,11 @@ import model.twitch.TwitchSearch;
 import model.twitter.Trending;
 import model.yt.YtSearch;
 
-public class trendsController extends HttpServlet {
+public class TrendsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(trendsController.class.getName());
-       
-	
-    public trendsController() {
+	private static final Logger log = Logger.getLogger(TrendsController.class.getName());
+
+	public TrendsController() {
         super();
         
     }
@@ -45,6 +48,10 @@ public class trendsController extends HttpServlet {
 			//request.setAttribute("live", l.getStreams());
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
+			List<String> errores = new ArrayList<>();
+			if(t == null) errores.add("Fallo al obtener Trends de Twitter");
+			//if(rd == null) errores.add("Fallo al obtener Posts de Reddit");
+			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
 		

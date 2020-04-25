@@ -18,14 +18,14 @@ import model.resources.TweetsResource;
 /**
  * Servlet implementation class statusesController
  */
-public class viewController extends HttpServlet {
+public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(trendsController.class.getName());
+	private static final Logger log = Logger.getLogger(TrendsController.class.getName());
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public viewController() {
+	public ViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
