@@ -18,14 +18,15 @@ import utility.Tools;
 public class SubPostsRedditResource {
 	public static final Logger log = Logger.getLogger(SubPostsRedditResource.class.getName());
 	
-	public RedditSearch getSubreddits(String queryFormatted) throws ResourceException, IOException {
+	private RedditSearch getSubreddits(String queryFormatted) throws ResourceException, IOException {
 		String uri = "https://www.reddit.com/subreddits/search.json?q="+queryFormatted+"&limit=2";
 
 		log.log(Level.INFO, "twitchSearch URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
 
-	    log.log(Level.WARNING, cr.get().getText());
+		log.log(Level.WARNING, cr.get().getText());
+		
 	    RedditSearch ssrr = cr.get(RedditSearch.class);
 		return ssrr;
 	}
@@ -45,8 +46,8 @@ public class SubPostsRedditResource {
 			
 			for(Child ch2 : rp.getData().getChildren()) {
 				String uri2 = "https://www.reddit.com/oembed?url=" + URLEncoder.encode(ch2.getData().getUrl(),"UTF-8");
-				ClientResource cr2 = new ClientResource(uri);
-				lhtml.add(Tools.parseHtml(cr.get().getText()));
+				ClientResource cr2 = new ClientResource(uri2);
+				lhtml.add(Tools.parseHtml(cr2.get().getText()));
 				
 			}
 			

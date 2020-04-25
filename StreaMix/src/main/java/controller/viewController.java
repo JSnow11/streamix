@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,21 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.resources.SubPostsRedditResource;
 import model.resources.TweetsResource;
-import model.twitter.TweetList;
 
 /**
  * Servlet implementation class statusesController
  */
-public class statusesController extends HttpServlet {
+public class viewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(trendsController.class.getName());
-       
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public statusesController() {
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public viewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,25 +36,32 @@ public class statusesController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de trends realizada");
 
+		String pickedTopic = request.getParameter("pickedTopic");
+		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
+		
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
 		List<String> t = tr.getTweets("hola");
 		
-		if(t != null) {
+		SubPostsRedditResource sprr = new SubPostsRedditResource();
+		List<String> rp = sprr.getPosts(pickedTopic);
+		
+		if(t != null && rp != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
 			request.setAttribute("tweets", t);
+			request.setAttribute("redditPosts", rp);
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
+			List<String> errores = new ArrayList<>();
+			if(t == null) errores.add("Fallo al obtener Trends de Twitter");
+			if(rp == null) errores.add("Fallo al obtener Posts de Reddit");
+			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
 		
 		rd.forward(request, response);	
-	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -1,19 +1,13 @@
 package model.resources;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.restlet.engine.header.HeaderConstants;
-import org.restlet.data.Header;
 import org.restlet.data.MediaType;
-import org.restlet.data.Metadata;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-import org.restlet.util.Series;
 
 import model.twitch.TwitchSearch;
 import utility.Tools;
