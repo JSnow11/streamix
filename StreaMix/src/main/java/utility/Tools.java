@@ -1,26 +1,35 @@
 package utility;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.restlet.data.Header;
 import org.restlet.engine.header.HeaderConstants;
 import org.restlet.resource.ClientResource;
 import org.restlet.util.Series;
 
 public class Tools {
+	@SuppressWarnings("serial")
+	private static final Map<String, String> Map = new HashMap<String, String>() {{
+	    put("\\u00ED", "í");
+	    put("\\u00E9", "é");
+	    put("\\u00E1", "á");
+	    put("\\u00F3", "ó");
+	    put("\\u00FA", "ú");
+	    put("\\u003C", "<");
+	    put("\\u003E", ">");
+	    put("\\u00F1", "ñ");
+	}};
 	public static String decode(String st) {
-		String str = st.split(" ")[0];
 		
-		str =  str.replace("\\"," ");
-		String[] arr = str.split("u");
-		
-		String text = "";
-		for(int i = 1; i < arr.length; i++){
-		    int hexVal = Integer.parseInt(arr[i].trim(), 16);
-		    text += (char)hexVal;
+		for(String s:Map.keySet()) {
+			st=st.replace(s, Map.get(s));
 		}
-		return text;
+		return st;
 	}
 	public static void addHeader(ClientResource cr, String headerName, String headerValue) {
-	    Series<Header> headers = (Series<Header>) cr.getRequest().getAttributes()
+	    @SuppressWarnings("unchecked")
+		Series<Header> headers = (Series<Header>) cr.getRequest().getAttributes()
 	        .get(HeaderConstants.ATTRIBUTE_HEADERS);
 	    
 	    if (headers == null) {
