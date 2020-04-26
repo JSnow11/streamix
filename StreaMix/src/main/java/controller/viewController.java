@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.resources.SubPostsRedditResource;
+import model.resources.PostsRedditResource;
 import model.resources.TweetsResource;
 
 /**
@@ -43,7 +43,7 @@ public class ViewController extends HttpServlet {
 		TweetsResource tr = new TweetsResource();
 		List<String> t = tr.getTweets("hola");
 		
-		SubPostsRedditResource sprr = new SubPostsRedditResource();
+		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
 		
 		if(t != null && rp != null) {

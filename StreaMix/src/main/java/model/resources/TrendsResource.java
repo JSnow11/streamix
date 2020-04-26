@@ -1,13 +1,16 @@
 package model.resources;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.restlet.Response;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
+import org.restlet.data.Encoding;
 import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
@@ -27,321 +30,380 @@ public class TrendsResource {
 		
 		ClientResource cr = new ClientResource(uri);
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
+		
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
 		
 		//String st = cr.get(String.class);
-		String st = "[{\r\n" + 
-				"    \"trends\": [{\r\n" + 
-				"            \"name\": \"#SVGala10\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SVGala10\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23SVGala10\",\r\n" + 
-				"            \"tweet_volume\": 113583\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#SanchezMarchateYa\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SanchezMarchateYa\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23SanchezMarchateYa\",\r\n" + 
-				"            \"tweet_volume\": 86654\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#DiaDelLibro\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23DiaDelLibro\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23DiaDelLibro\",\r\n" + 
-				"            \"tweet_volume\": 223127\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#BetisEnCasa\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23BetisEnCasa\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23BetisEnCasa\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#LaJunglaDuos\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23LaJunglaDuos\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23LaJunglaDuos\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Travis Scott\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Travis+Scott%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Travis+Scott%22\",\r\n" + 
-				"            \"tweet_volume\": 333577\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Vargas Llosa\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Vargas+Llosa%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Vargas+Llosa%22\",\r\n" + 
-				"            \"tweet_volume\": 21057\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Rodgers\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Rodgers\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Rodgers\",\r\n" + 
-				"            \"tweet_volume\": 102412\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"M\\u00E1s de 5.000\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22M%C3%A1s+de+5.000%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22M%C3%A1s+de+5.000%22\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"lamb\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=lamb\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"lamb\",\r\n" + 
-				"            \"tweet_volume\": 228257\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Joe Burrow\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Joe+Burrow%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Joe+Burrow%22\",\r\n" + 
-				"            \"tweet_volume\": 91507\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Sant Jordi\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Sant+Jordi%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Sant+Jordi%22\",\r\n" + 
-				"            \"tweet_volume\": 156247\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Zara\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Zara\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Zara\",\r\n" + 
-				"            \"tweet_volume\": 68581\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"ana mar\\u00EDa\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22ana+mar%C3%ADa%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22ana+mar%C3%ADa%22\",\r\n" + 
-				"            \"tweet_volume\": 23155\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Arag\\u00F3n\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Arag%C3%B3n\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Arag%C3%B3n\",\r\n" + 
-				"            \"tweet_volume\": 26637\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Castilla\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Castilla\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Castilla\",\r\n" + 
-				"            \"tweet_volume\": 28615\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Isa Serra\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Isa+Serra%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Isa+Serra%22\",\r\n" + 
-				"            \"tweet_volume\": 30600\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Cristina Segu\\u00ED\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Cristina+Segu%C3%AD%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Cristina+Segu%C3%AD%22\",\r\n" + 
-				"            \"tweet_volume\": 27066\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Leonor\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Leonor\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Leonor\",\r\n" + 
-				"            \"tweet_volume\": 20501\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Poder Judicial\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Poder+Judicial%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Poder+Judicial%22\",\r\n" + 
-				"            \"tweet_volume\": 48623\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Manuel Castells\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Manuel+Castells%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Manuel+Castells%22\",\r\n" + 
-				"            \"tweet_volume\": 17336\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Badalona\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=Badalona\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"Badalona\",\r\n" + 
-				"            \"tweet_volume\": 13559\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"Rodrigo Rato\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Rodrigo+Rato%22\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%22Rodrigo+Rato%22\",\r\n" + 
-				"            \"tweet_volume\": 22771\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#FelizViernesATodos\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23FelizViernesATodos\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23FelizViernesATodos\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#SamanthaSinM\\u00E1s\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SamanthaSinM%C3%A1s\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23SamanthaSinM%C3%A1s\",\r\n" + 
-				"            \"tweet_volume\": 32369\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#felizjueves\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23felizjueves\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23felizjueves\",\r\n" + 
-				"            \"tweet_volume\": 48040\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#SanJorge\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SanJorge\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23SanJorge\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#VergURJCenza\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23VergURJCenza\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23VergURJCenza\",\r\n" + 
-				"            \"tweet_volume\": 12263\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#usalytirar\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23usalytirar\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23usalytirar\",\r\n" + 
-				"            \"tweet_volume\": 14568\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#WorldBookDay\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23WorldBookDay\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23WorldBookDay\",\r\n" + 
-				"            \"tweet_volume\": 184833\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#felizsantjordi\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23felizsantjordi\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23felizsantjordi\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#Gasol16\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23Gasol16\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23Gasol16\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#Villalar2020\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23Villalar2020\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23Villalar2020\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#HTCMania13Aniversario\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23HTCMania13Aniversario\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23HTCMania13Aniversario\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#sanjordi\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23sanjordi\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23sanjordi\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#DiaDeAragon\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23DiaDeAragon\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23DiaDeAragon\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#DiaDeLaTierra\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23DiaDeLaTierra\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23DiaDeLaTierra\",\r\n" + 
-				"            \"tweet_volume\": 21075\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#CuarentenaESP\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23CuarentenaESP\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23CuarentenaESP\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#AsiNonUDC\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23AsiNonUDC\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23AsiNonUDC\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#20A\\u00F1osDeGH\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%2320A%C3%B1osDeGH\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%2320A%C3%B1osDeGH\",\r\n" + 
-				"            \"tweet_volume\": null\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#flaviocalma1m\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23flaviocalma1m\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23flaviocalma1m\",\r\n" + 
-				"            \"tweet_volume\": 19737\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#NFLDraft2020\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23NFLDraft2020\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23NFLDraft2020\",\r\n" + 
-				"            \"tweet_volume\": 167715\r\n" + 
-				"        },\r\n" + 
-				"        {\r\n" + 
-				"            \"name\": \"#santjordiacasa\",\r\n" + 
-				"            \"url\": \"http:\\/\\/twitter.com\\/search?q=%23santjordiacasa\",\r\n" + 
-				"            \"promoted_content\": null,\r\n" + 
-				"            \"query\": \"%23santjordiacasa\",\r\n" + 
-				"            \"tweet_volume\": 14937\r\n" + 
-				"        }\r\n" + 
-				"    ],\r\n" + 
-				"    \"as_of\": \"2020-04-24T18:10:27Z\",\r\n" + 
-				"    \"created_at\": \"2020-04-24T06:36:17Z\",\r\n" + 
-				"    \"locations\": [{\r\n" + 
-				"        \"name\": \"Seville\",\r\n" + 
-				"        \"woeid\": 774508\r\n" + 
-				"    }]\r\n" + 
-				"}]";
+		String st = "[\r\n" + 
+				"    {\r\n" + 
+				"        \"trends\": [\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#cacerolada\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23cacerolada\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23cacerolada\",\r\n" + 
+				"                \"tweet_volume\": 58701\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#FeriaDeAbril2020\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23FeriaDeAbril2020\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23FeriaDeAbril2020\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#25Abril\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%2325Abril\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%2325Abril\",\r\n" + 
+				"                \"tweet_volume\": 43421\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Jon Kortajarena\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Jon+Kortajarena%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Jon+Kortajarena%22\",\r\n" + 
+				"                \"tweet_volume\": 44713\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Trump\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Trump\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Trump\",\r\n" + 
+				"                \"tweet_volume\": 3373195\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"El 2\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22El+2%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22El+2%22\",\r\n" + 
+				"                \"tweet_volume\": 22370\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#StopConfinamientoEspana\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23StopConfinamientoEspana\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23StopConfinamientoEspana\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#AloPresidente\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23AloPresidente\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23AloPresidente\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Kim Jong-un\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Kim+Jong-un%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Kim+Jong-un%22\",\r\n" + 
+				"                \"tweet_volume\": 182364\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Bella Ciao\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Bella+Ciao%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Bella+Ciao%22\",\r\n" + 
+				"                \"tweet_volume\": 102035\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Runners\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Runners\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Runners\",\r\n" + 
+				"                \"tweet_volume\": 10318\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Don Patricio\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Don+Patricio%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Don+Patricio%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Pearl Harbor\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Pearl+Harbor%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Pearl+Harbor%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Personalidades\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Personalidades\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Personalidades\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"John Shelby\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22John+Shelby%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22John+Shelby%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Rels B\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Rels+B%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Rels+B%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Beckham\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Beckham\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Beckham\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Perspectiva\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Perspectiva\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Perspectiva\",\r\n" + 
+				"                \"tweet_volume\": 14652\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Kobe Bryant\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Kobe+Bryant%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Kobe+Bryant%22\",\r\n" + 
+				"                \"tweet_volume\": 19793\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"l\\u00E9rida\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=l%C3%A9rida\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"l%C3%A9rida\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Juninho Pernambucano\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Juninho+Pernambucano%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Juninho+Pernambucano%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Camera Caf\\u00E9\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Camera+Caf%C3%A9%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Camera+Caf%C3%A9%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Terelu\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Terelu\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Terelu\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Nick Cave\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Nick+Cave%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Nick+Cave%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Madrid R\\u00EDo\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Madrid+R%C3%ADo%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Madrid+R%C3%ADo%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"consejo de europa\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22consejo+de+europa%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22consejo+de+europa%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Antonio Burgos\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%22Antonio+Burgos%22\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%22Antonio+Burgos%22\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Blancas\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=Blancas\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"Blancas\",\r\n" + 
+				"                \"tweet_volume\": 14558\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#VerguenzaDeOposicion\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23VerguenzaDeOposicion\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23VerguenzaDeOposicion\",\r\n" + 
+				"                \"tweet_volume\": 21506\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#EnCasaConVivaLaVida\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23EnCasaConVivaLaVida\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23EnCasaConVivaLaVida\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#EurovisionAgain\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23EurovisionAgain\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23EurovisionAgain\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#2demayo\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%232demayo\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%232demayo\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#EDASantiagoAbascal\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23EDASantiagoAbascal\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23EDASantiagoAbascal\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#AvengersEndgame\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23AvengersEndgame\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23AvengersEndgame\",\r\n" + 
+				"                \"tweet_volume\": 22713\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#NataliaTourEnCasa\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23NataliaTourEnCasa\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23NataliaTourEnCasa\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#CampusFraudULEnto\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23CampusFraudULEnto\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23CampusFraudULEnto\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#FirstDates25A\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23FirstDates25A\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23FirstDates25A\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#L6Ndesescalando\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23L6Ndesescalando\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23L6Ndesescalando\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#MatchingInazuma\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23MatchingInazuma\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23MatchingInazuma\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#LutoNacionalYA\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23LutoNacionalYA\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23LutoNacionalYA\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#MerlosGate\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23MerlosGate\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23MerlosGate\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#EscapeRoomAkelarre\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23EscapeRoomAkelarre\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23EscapeRoomAkelarre\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#Tonucci\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23Tonucci\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23Tonucci\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#AndalucismoSigloXXI\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23AndalucismoSigloXXI\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23AndalucismoSigloXXI\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#JaviSerranoLive\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23JaviSerranoLive\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23JaviSerranoLive\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#martalopez\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23martalopez\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23martalopez\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#bodorriomarinana\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23bodorriomarinana\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23bodorriomarinana\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#MiVoto40SamSmith\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23MiVoto40SamSmith\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23MiVoto40SamSmith\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#Tormenta\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23Tormenta\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23Tormenta\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            },\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"#FascismoNuncaMais\",\r\n" + 
+				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23FascismoNuncaMais\",\r\n" + 
+				"                \"promoted_content\": null,\r\n" + 
+				"                \"query\": \"%23FascismoNuncaMais\",\r\n" + 
+				"                \"tweet_volume\": null\r\n" + 
+				"            }\r\n" + 
+				"        ],\r\n" + 
+				"        \"as_of\": \"2020-04-25T19: 45: 21Z\",\r\n" + 
+				"        \"created_at\": \"2020-04-25T19: 40: 35Z\",\r\n" + 
+				"        \"locations\": [\r\n" + 
+				"            {\r\n" + 
+				"                \"name\": \"Seville\",\r\n" + 
+				"                \"woeid\": 774508\r\n" + 
+				"            }\r\n" + 
+				"        ]\r\n" + 
+				"    }\r\n" + 
+				"]";
+		
 		log.log(Level.WARNING, st);
+		st = URLDecoder.decode(st, "UTF8");
+		log.log(Level.WARNING, st);
+		
 		Trending t = parse(st);
 		log.log(Level.WARNING, "Parseado");
 		return t;

@@ -30,7 +30,7 @@
                 <h3>Topics</h3>
                 <div class="scroll">
 	                <c:forEach items="${requestScope.trends}" var="trend">
-						<a href="#"><c:out value="${trend.getName().toString()}"></c:out></a>    
+						<a href="/search?searchQuery='hola'"><c:out value="${trend.getName().toString()}"></c:out></a>    
 	                </c:forEach>
                 </div>
             </div>
