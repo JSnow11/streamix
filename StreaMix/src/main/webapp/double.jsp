@@ -23,9 +23,13 @@
                     <h2>YouTube: </h2>
                     <br>
                     <hr><br>
-                    <c:forEach items="${requestScope.ytvideos}" var="video">
-                            <a href="/view?pickedTopic=hola"><c:out value="${video.snippet.title}"></c:out></a>
-                    </c:forEach>
+                    <div class="videos">
+                        <c:forEach items="${requestScope.ytvideos}" var="video">
+                        
+                                <a href="/view?pickedTopic=hola"><img src=<c:out value="${video.snippet.thumbnails.medium.url}"></c:out> width="110"></a>
+    
+                        </c:forEach>
+                    </div>
                 </div>
                 <div class="twitch">
                     <h2>Twitch: </h2>

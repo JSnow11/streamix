@@ -53,6 +53,12 @@ body {
     border-radius: 20px;
 }
 
+.videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .ytList {
     text-align: left;
     height: 80%;
