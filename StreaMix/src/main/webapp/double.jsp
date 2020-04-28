@@ -12,34 +12,25 @@
         </head>
 
         <body>
-            <header>
-                <h1>
-                    <a href="index.html"><img src="images/Logo.png" alt="logo" width="50"></a>
-                    <form action="/search" method="GET">
-                        <input type="search" id="searchQuery" name="searchQuery" placeholder="Search" />
-                    </form>
-                </h1>
-            </header>
+            <div class="smallBrowser">
+                <a class="left" href="index.html"><img src="images/Logo.png" alt="logo" width="50"></a>
+                <form action="/search" method="GET">
+                    <input type="search" id="searchQuery" name="searchQuery" placeholder="Search" />
+                </form>
+            </div>
             <div class=container>
                 <div class="yt">
                     <h2>YouTube: </h2>
                     <br>
                     <hr><br>
                     <c:forEach items="${requestScope.ytvideos}" var="video">
-                        <p>Title:
-                            <c:out value="${video.snippet.title}"></c:out>
-                        </p>
+                            <a href="/view?pickedTopic=hola"><c:out value="${video.snippet.title}"></c:out></a>
                     </c:forEach>
                 </div>
                 <div class="twitch">
                     <h2>Twitch: </h2>
                     <br>
                     <hr><br>
-                    <c:forEach items="${requestScope.twstreams}" var="stream">
-                        <p>Title:
-                            <c:out value="${stream.game}"></c:out>
-                        </p>
-                    </c:forEach>
 
                 </div>
 

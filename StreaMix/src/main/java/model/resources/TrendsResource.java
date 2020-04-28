@@ -7,11 +7,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.restlet.Response;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
-import org.restlet.data.Encoding;
-import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
@@ -400,10 +397,6 @@ public class TrendsResource {
 				"    }\r\n" + 
 				"]";
 		
-		log.log(Level.WARNING, st);
-		st = URLDecoder.decode(st, "UTF8");
-		log.log(Level.WARNING, st);
-		
 		Trending t = parse(st);
 		log.log(Level.WARNING, "Parseado");
 		return t;
@@ -418,7 +411,7 @@ public class TrendsResource {
 				if(trd.contains("name")) {
 					name = trd.split(":")[1].trim();
 					name = name.substring(1,name.length()-1);
-					//name= Tools.decode(name);
+					name= Tools.decode(name);
 				}
 				if(trd.contains("tweet_volume")) {
 					String pv = trd.split(":")[1].trim();

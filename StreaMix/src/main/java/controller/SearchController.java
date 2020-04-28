@@ -36,18 +36,18 @@ import java.util.logging.Level;
 			YTSearchResource ytsr = new YTSearchResource();
 			YtSearch yts = ytsr.getVideos(query);
 
-			TwitchSearchResource twsr = new TwitchSearchResource();
-			TwitchSearch tws = twsr.getStreams(query);
+			//TwitchSearchResource twsr = new TwitchSearchResource();
+			//TwitchSearch tws = twsr.getStreams(query);
 			
 			
-			if((yts != null) && (tws != null)) {
+			if((yts != null) /*&& (tws != null)*/) {
 				rd = request.getRequestDispatcher("/double.jsp");
 				request.setAttribute("ytvideos", yts.getItems());
-				request.setAttribute("twstreams", tws.getStreams());
+				//request.setAttribute("twstreams", tws.getStreams());
 			}else {
 				log.log(Level.SEVERE, "Objects = null");
 				List<String> errores = new ArrayList<>();
-				if(tws == null) errores.add("Fallo al obtener Streams de Twitch");
+				//if(tws == null) errores.add("Fallo al obtener Streams de Twitch");
 				if(yts == null) errores.add("Fallo al obtener Videos de YT");
 				request.setAttribute("errors", errores);
 				rd = request.getRequestDispatcher("/error.jsp");

@@ -390,6 +390,7 @@ public class TweetsResource {
 				"    \"since_id_str\": \"0\"\r\n" + 
 				"  }\r\n" + 
 				"}";
+		log.log(Level.WARNING, "comienza el parseo");
 		List<String> t= parse(st);
 		t = getHtml(t);
 		log.log(Level.WARNING, "Parseado" + t);
@@ -399,16 +400,17 @@ public class TweetsResource {
 		
 		List<String> lu = new ArrayList<>();
 		Boolean b=true;
-		String url ="";
+		String id ="";
 		for(String trd: st.split("[{},]")) {
 			if(!trd.contains("statuses")&&!trd.contains("sidebar")) {
-				if(trd.contains("\"id\"")&&b) {
-					url = trd.split(":")[1].trim();
-					url = url.substring(1,url.length()-1);
-					lu.add(url);
+				if(trd.contains("\"id\"") && b) {
+					id = trd.split(":")[1].trim();
+					id = id.substring(0,id.length()-2);
+					lu.add(id);
+					log.log(Level.WARNING, "id:"+id);
 					b=false;
 					
-					}
+				}
 				if(trd.contains("\"created_at\"")) {
 					b=true;
 				}
@@ -421,10 +423,11 @@ public class TweetsResource {
 	private static List<String> getHtml(List<String> ls) throws ResourceException, IOException {
 		List<String> lhtml = new ArrayList<>();
 		for(String s : ls) {
-			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s+"&theme=dark";
+			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/1125490788736032770";
 			ClientResource cr = new ClientResource(uri);
 			lhtml.add(Tools.parseHtml(cr.get().getText()));
 		}
+		log.log(Level.WARNING, "html conseguido");
 		return lhtml;
 	}
 }

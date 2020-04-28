@@ -147,6 +147,7 @@ public class test {
 				"        ]\r\n" + 
 				"    }\r\n" + 
 				"]";
+				
 		Trending t = parse(st);
 		System.out.println(t.getTrends().get(0).getName());
 	}

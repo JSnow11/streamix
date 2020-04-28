@@ -34,20 +34,20 @@ public class ViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.log(Level.INFO, "Peticion de trends realizada");
+		log.log(Level.INFO, "Peticion de view realizada");
 
 		String pickedTopic = request.getParameter("pickedTopic");
 		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
 		
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
-		List<String> t = tr.getTweets("hola");
+		List<String> t = tr.getTweets(pickedTopic);
 		
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
 		
-		if(t != null && rp != null) {
-			rd = request.getRequestDispatcher("/browser.jsp");
+		if(t != null) {
+			rd = request.getRequestDispatcher("/view.jsp");
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
 		}else {

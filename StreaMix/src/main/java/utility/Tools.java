@@ -18,10 +18,10 @@ public class Tools {
 	    put("\\u00FA", "ú");
 	    put("\\u003C", "<");
 	    put("\\u003E", ">");
-	    put("\\u00F1", "ñ");
+		put("\\u00F1", "ñ");
+		put("\\u0026", "&");
 	}};
 	public static String decode(String st) {
-		
 		for(String s:Map.keySet()) {
 			st=st.replace(s, Map.get(s));
 		}
@@ -41,9 +41,16 @@ public class Tools {
 	
 	public static String parseHtml(String st) {
 		String s = "";
-		for(String trd: st.split("[{},]")) {
+		for(String trd: st.split("n\",")) {
 			if(trd.contains("html")) {
-				s = trd.split(":")[1].trim();
+				s = trd.split("\"html\":")[1].trim();
+				if(s.contains("\"author_name\"")) s = s.split(",")[0];
+				s = s.substring(1,s.length()-1);
+				s = decode(s);
+				s = s.replace("\\", "");
+				
+				
+				System.out.println(s);
 			}
 		}
 		return s;
