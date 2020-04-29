@@ -20,7 +20,7 @@ import model.resources.TweetsResource;
  */
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(TrendsController.class.getName());
+	private static final Logger log = Logger.getLogger(ViewController.class.getName());
 
 	/**
 	 * @see HttpServlet#HttpServlet()
