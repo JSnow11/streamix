@@ -4,19 +4,19 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-import aiss.api.resources.PlaylistResource;
-import aiss.api.resources.SongResource;
+import aiss.api.resources.LabelResource;
+import aiss.api.resources.NoteResource;
 
-public class NotesApp extends Application{
+public class NotesUpApp extends Application{
 	private Set<Object> singletons = new HashSet<Object>();
 	private Set<Class<?>> classes = new HashSet<Class<?>>();
 
 	// Loads all resources that are implemented in the application
 	// so that they can be found by RESTEasy.
-	public MusicApplication() {
+	public NotesUPApp() {
 
-		singletons.add(PlaylistResource.getInstance());
-		singletons.add(SongResource.getInstance());
+		singletons.add(LabelResource.getInstance());
+		singletons.add(NoteResource.getInstance());
 	}
 
 	@Override
