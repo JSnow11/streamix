@@ -1,4 +1,3 @@
-
 package model.twitch;
 
 import java.util.HashMap;
@@ -13,27 +12,45 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "streams"
+    "data",
+    "pagination"
 })
-public class Live {
+public class Games {
 
-    @JsonProperty("streams")
-    private List<Stream> streams = null;
+    @JsonProperty("data")
+    private List<Datum> data = null;
+    @JsonProperty("pagination")
+    private Pagination pagination;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("streams")
-    public List<Stream> getStreams() {
-        return streams;
+    @JsonProperty("data")
+    public List<Datum> getData() {
+        return data;
     }
 
-    @JsonProperty("streams")
-    public void setStreams(List<Stream> streams) {
-        this.streams = streams;
+    @JsonProperty("data")
+    public void setData(List<Datum> data) {
+        this.data = data;
     }
 
-    public Live withStreams(List<Stream> streams) {
-        this.streams = streams;
+    public Games withData(List<Datum> data) {
+        this.data = data;
+        return this;
+    }
+
+    @JsonProperty("pagination")
+    public Pagination getPagination() {
+        return pagination;
+    }
+
+    @JsonProperty("pagination")
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
+    }
+
+    public Games withPagination(Pagination pagination) {
+        this.pagination = pagination;
         return this;
     }
 
@@ -47,7 +64,7 @@ public class Live {
         this.additionalProperties.put(name, value);
     }
 
-    public Live withAdditionalProperty(String name, Object value) {
+    public Games withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

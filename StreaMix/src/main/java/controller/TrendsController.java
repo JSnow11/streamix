@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.io.WriteFlusher.Listener;
 
-import model.resources.LiveTwitchResource;
+import model.resources.GamesTwitchResource;
 import model.resources.TrendsResource;
 import model.resources.TwitchSearchResource;
 import model.resources.YTSearchResource;
-import model.twitch.Live;
+import model.twitch.Games;
 import model.twitch.TwitchSearch;
 import model.twitter.Trending;
 import model.yt.YtSearch;
@@ -39,18 +39,18 @@ public class TrendsController extends HttpServlet {
 		TrendsResource tr = new TrendsResource();
 		Trending t = tr.getTrends();
 		
-		//LiveTwitchResource ltr = new LiveTwitchResource();
-		//Live l = ltr.getStreams();
+		GamesTwitchResource ltr = new GamesTwitchResource();
+		Games l = ltr.getGames();
 		
-		if(t != null) {
+		if(t != null && l != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
 			request.setAttribute("trends", t.getTrends());
-			//request.setAttribute("live", l.getStreams());
+			request.setAttribute("games", l.getData());
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			List<String> errores = new ArrayList<>();
 			if(t == null) errores.add("Fallo al obtener Trends de Twitter");
-			//if(rd == null) errores.add("Fallo al obtener Posts de Reddit");
+			if(l == null) errores.add("Fallo al obtener los Streams de Twitch");
 			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}

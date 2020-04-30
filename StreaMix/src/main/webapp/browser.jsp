@@ -23,11 +23,16 @@
         <div class="trend">
             <h2>TRENDING</h2>
             <div class="twitchTrending">
-                <h3>Streaming</h3>
+                <h3>Hot Games</h3>
+                <div class="scroll">
+	                <c:forEach items="${requestScope.games}" var="datum">
+						<a href="/search?searchQuery='hola'"><c:out value="${datum.name}"></c:out></a>    
+	                </c:forEach>
+                </div>
                 
             </div>
             <div class="twitterTrending">
-                <h3>Topics</h3>
+            <h3>Topics</h3>
                 <div class="scroll">
 	                <c:forEach items="${requestScope.trends}" var="trend">
 						<a href="/search?searchQuery='hola'"><c:out value="${trend.getName().toString()}"></c:out></a>    
