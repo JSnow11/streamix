@@ -3,9 +3,6 @@ package aiss.model.repository;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.w3c.dom.ls.LSOutput;
-
 import aiss.model.Label;
 import aiss.model.Note;
 
@@ -55,20 +52,13 @@ public class MapLabelRepository implements LabelRepository{
         N3.cleanLinks();
 
         Label L1 = new Label();
+        }
         
 		
 		
 		
 		// Add Notes to Labels
-		addNote(jaLabel.getId(), rollingInTheDeep.getId());
-		addNote(jaLabel.getId(), one.getId());
-		addNote(jaLabel.getId(), smellLikeTeenSpirit.getId());
-		addNote(jaLabel.getId(), losingMyReligion.getId());
 		
-		addNote(Label.getId(), losingMyReligion.getId());
-		addNote(Label.getId(), gotye.getId());
-	}
-	
 	// Label related operations
 	
 	public void addLabel(Label l) {

@@ -24,175 +24,134 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
-import aiss.api.resources.comparators.ComparatorNamePlaylist;
-import aiss.api.resources.comparators.ComparatorNamePlaylistReversed;
-import aiss.model.Playlist;
-import aiss.model.Song;
-import aiss.model.repository.MapPlaylistRepository;
-import aiss.model.repository.PlaylistRepository;
-
+import aiss.api.resources.comparators.ComparatorNotesCreateDate;
+import aiss.api.resources.comparators.ComparatorNotesCreateDateReversed;
+import aiss.api.resources.comparators.ComparatorNotesLastModified;
+import aiss.api.resources.comparators.ComparatorNotesLastModifiedReversed;
+import aiss.api.resources.comparators.ComparatorNotesTitle;
+import aiss.api.resources.comparators.ComparatorNotesTitleReversed;
+import aiss.model.Note;
+import aiss.model.repository.LabelRepository;
+import aiss.model.repository.MapLabelRepository;
+@Path("/note")
 public class NoteResource {
-	/* Singleton */
-	private static PlaylistResource _instance=null;
-	PlaylistRepository repository;
+	public static NoteResource _instance=null;
+	LabelRepository repository;
 	
-	private PlaylistResource() {
-		repository=MapPlaylistRepository.getInstance();
-
+	private NoteResource(){
+		repository=MapLabelRepository.getInstance();
 	}
 	
-	public static PlaylistResource getInstance()
+	public static NoteResource getInstance()
 	{
 		if(_instance==null)
-				_instance=new PlaylistResource();
-		return _instance;
+			_instance=new NoteResource();
+		return _instance; 
 	}
 	
-	
-    @GET
-    @Produces("application/json")
-    public Collection<Playlist> getAll(@QueryParam("order") String order,
-            @QueryParam("isEmpty") Boolean isEmpty, @QueryParam("name") String name)
-    {
-        List<Playlist> result = new ArrayList<Playlist>();
-            
-        for (Playlist playlist: repository.getAllPlaylists()) {
-            if (name == null || playlist.getName().equals(name)) { // Name filter
-                if (isEmpty == null // Empty playlist filter
-                        || (isEmpty && (playlist.getSongs() == null || playlist.getSongs().size() == 0))
-                        || (!isEmpty && (playlist.getSongs() != null && playlist.getSongs().size() > 0))) {
-                    result.add(playlist);
-                }
-            }
+	@GET
+	@Produces("application/json")
+	public Collection<Note> getAll(@QueryParam("order") String order, @QueryParam("q") String q)
+	{
+		List<Note> result = new ArrayList<Note>();
+        
+        for (Note note: repository.getAllNotes()) {
+            if (q == null
+            		|| note.getTitle().toLowerCase().contains(q.toLowerCase())
+            		|| (note.getCreatedDate() != null && note.getCreatedDate().toString().contains(q.toLowerCase()))
+            		|| (note.getLastModified() != null && note.getLastModified().toString().contains(q.toLowerCase())))
+            	result.add(note);
         }
             
         if (order != null) { // Order results
-            if (order.equals("name")) {
-                Collections.sort(result, new ComparatorNamePlaylist());
-            } else if (order.equals("-name")) {
-                Collections.sort(result, new ComparatorNamePlaylistReversed());
-            } else {
-                throw new BadRequestException("The order parameter must be 'name' or '-name'.");
+            if (order.equals("tittle")) {
+                Collections.sort(result, new ComparatorNotesTitle());
+            } else if (order.equals("-tittle")) {
+            	Collections.sort(result, new ComparatorNotesTitleReversed());
+            } else if (order.equals("CreateDate")) {
+            	Collections.sort(result, new ComparatorNotesCreateDate());
+            } else if (order.equals("-CreateDate")) {
+            	Collections.sort(result, new ComparatorNotesCreateDateReversed());
+            }  else if (order.equals("LastModified")) {
+            	Collections.sort(result, new ComparatorNotesLastModified());
+            } else if (order.equals("-LastModified")) {
+            	Collections.sort(result, new ComparatorNotesLastModifiedReversed());
+            }else {
+                throw new BadRequestException("The order parameter must be 'tittle', '-tittle, 'CreateDate','-CreateDate','LastModified' or '-LastModified'.");
             }
         }
 
         return result;
-    }
+	}
 	
 	
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public Playlist get(@PathParam("id") String id)
+	public Note get(@PathParam("id") String noteId)
 	{
-		Playlist list = repository.getPlaylist(id);
+		Note note = repository.getNote(noteId);
 		
-		if (list == null) {
-			throw new NotFoundException("The playlist wit id="+ id +" was not found");			
+		if (note == null) {
+			throw new NotFoundException("The note wit id="+ noteId +" was not found");			
 		}
 		
-		return list;
+		return note;
 	}
 	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addPlaylist(@Context UriInfo uriInfo, Playlist playlist) {
-		if (playlist.getName() == null || "".equals(playlist.getName()))
-			throw new BadRequestException("The name of the playlist must not be null");
-		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
+	public Response addSong(@Context UriInfo uriInfo, Note note) {
+		if (note.getTitle() == null || "".equals(note.getTitle()))
+			throw new BadRequestException("The title of the note must not be null");
 
-		repository.addPlaylist(playlist);
+		repository.addNote(note);
 
 		// Builds the response. Returns the playlist the has just been added.
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(playlist.getId());
+		URI uri = ub.build(note.getId());
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(playlist);			
+		resp.entity(note);			
 		return resp.build();
 	}
-
+	
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updatePlaylist(Playlist playlist) {
-		Playlist oldplaylist = repository.getPlaylist(playlist.getId());
-		if (oldplaylist == null) {
-			throw new NotFoundException("The playlist with id="+ playlist.getId() +" was not found");			
+	public Response updateSong(Note note) {
+		Note oldnote = repository.getNote(note.getId());
+		if (oldnote == null) {
+			throw new NotFoundException("The note with id="+ note.getId() +" was not found");			
 		}
 		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
+		// Update title
+		if (note.getTitle()!=null)
+			oldnote.setTitle(note.getTitle());
 		
-		// Update name
-		if (playlist.getName()!=null)
-			oldplaylist.setName(playlist.getName());
+		// Update album
 		
-		// Update description
-		if (playlist.getDescription()!=null)
-			oldplaylist.setDescription(playlist.getDescription());
+			oldnote.setLastModified();
+		
+		// Update artist
+		if (note.getNote()!=null)
+			oldnote.setNote(note.getNote());
+		
+		
 		
 		return Response.noContent().build();
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removePlaylist(@PathParam("id") String id) {
-		Playlist toberemoved=repository.getPlaylist(id);
+	public Response removeNote(@PathParam("id") String noteId) {
+		Note toberemoved=repository.getNote(noteId);
 		if (toberemoved == null)
-			throw new NotFoundException("The playlist with id="+ id +" was not found");
-		else
-			repository.deletePlaylist(id);
-		
-		return Response.noContent().build();
-	}
-	
-	
-	@POST	
-	@Path("/{playlistId}/{songId}")
-	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo,@PathParam("playlistId") String playlistId, @PathParam("songId") String songId)
-	{				
-		
-		Playlist playlist = repository.getPlaylist(playlistId);
-		Song song = repository.getSong(songId);
-		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
-		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
-		
-		if (playlist.getSong(songId)!=null)
-			throw new BadRequestException("The song is already included in the playlist.");
+			throw new NotFoundException("The song with id="+ noteId +" was not found");
+		else {
+			repository.deleteNote(noteId);
+		}
 			
-		repository.addSong(playlistId, songId);		
-
-		// Builds the response
-		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(playlistId);
-		ResponseBuilder resp = Response.created(uri);
-		resp.entity(playlist);			
-		return resp.build();
-	}
-	
-	
-	@DELETE
-	@Path("/{playlistId}/{songId}")
-	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("songId") String songId) {
-		Playlist playlist = repository.getPlaylist(playlistId);
-		Song song = repository.getSong(songId);
-		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
-		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
-		
-		
-		repository.removeSong(playlistId, songId);		
 		
 		return Response.noContent().build();
 	}

@@ -8,6 +8,8 @@ import aiss.model.Label;
 
 
 public interface LabelRepository {
+	
+	
 
 	public void addNote(Note s);
 	public Collection<Note> getAllNotes();
