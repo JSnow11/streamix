@@ -30,11 +30,9 @@ import aiss.api.resources.comparators.ComparatorNamePlaylist;
 import aiss.api.resources.comparators.ComparatorNamePlaylistReversed;
 import aiss.model.Label;
 import aiss.model.Note;
-import aiss.model.Playlist;
-import aiss.model.Song;
 import aiss.model.repository.LabelRepository;
 import aiss.model.repository.MapLabelRepository;
-import aiss.model.repository.MapPlaylistRepository;
+
 @Path("/label")
 public class LabelResource {
 	/* Singleton */

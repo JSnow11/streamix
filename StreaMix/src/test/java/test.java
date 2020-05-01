@@ -13,177 +13,147 @@ import model.twitter.User;
 public class test {
 
 	public static void main(String[] args) {
-		String st = "[\r\n" + 
-				"    {\r\n" + 
-				"        \"trends\": [\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u30C8\\u30EA\\u30CB\\u30AF\\u3063\\u3066\\u4F55\\u306E\\u8089\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E3%83%88%E3%83%AA%E3%83%8B%E3%82%AF%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%AE%E8%82%89\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E3%83%88%E3%83%AA%E3%83%8B%E3%82%AF%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%AE%E8%82%89\",\r\n" + 
-				"                \"tweet_volume\": 16417\r\n" + 
+	String st = "{\r\n" + 
+				"    \"statuses\": [{\r\n" + 
+				"        \"created_at\": \"Fri May 01 15:00:03 +0000 2020\",\r\n" + 
+				"        \"id\": 1256236952069844993,\r\n" + 
+				"        \"id_str\": \"1256236952069844993\",\r\n" + 
+				"        \"text\": \"\\u00bfHola?\",\r\n" + 
+				"        \"truncated\": false,\r\n" + 
+				"        \"entities\": {\r\n" + 
+				"            \"hashtags\": [],\r\n" + 
+				"            \"symbols\": [],\r\n" + 
+				"            \"user_mentions\": [],\r\n" + 
+				"            \"urls\": []\r\n" + 
+				"        },\r\n" + 
+				"        \"metadata\": {\r\n" + 
+				"            \"iso_language_code\": \"es\",\r\n" + 
+				"            \"result_type\": \"recent\"\r\n" + 
+				"        },\r\n" + 
+				"        \"source\": \"\\u003ca href=\\\"http:\\/\\/twitter.com\\/download\\/iphone\\\" rel=\\\"nofollow\\\"\\u003eTwitter for iPhone\\u003c\\/a\\u003e\",\r\n" + 
+				"        \"in_reply_to_status_id\": null,\r\n" + 
+				"        \"in_reply_to_status_id_str\": null,\r\n" + 
+				"        \"in_reply_to_user_id\": null,\r\n" + 
+				"        \"in_reply_to_user_id_str\": null,\r\n" + 
+				"        \"in_reply_to_screen_name\": null,\r\n" + 
+				"        \"user\": {\r\n" + 
+				"            \"id\": 1227038241746038784,\r\n" + 
+				"            \"id_str\": \"1227038241746038784\",\r\n" + 
+				"            \"name\": \"Dariel NH \\ud83c\\udde9\\ud83c\\uddf4\",\r\n" + 
+				"            \"screen_name\": \"DarielNh\",\r\n" + 
+				"            \"location\": \"\",\r\n" + 
+				"            \"description\": \"Instagram: Dariel.nh\",\r\n" + 
+				"            \"url\": \"https:\\/\\/t.co\\/HJT1GpePTh\",\r\n" + 
+				"            \"entities\": {\r\n" + 
+				"                \"url\": {\r\n" + 
+				"                    \"urls\": [{\r\n" + 
+				"                        \"url\": \"https:\\/\\/t.co\\/HJT1GpePTh\",\r\n" + 
+				"                        \"expanded_url\": \"https:\\/\\/www.youtube.com\\/channel\\/UCCjLJPjxGvs-f3K0kvAXZHQ\",\r\n" + 
+				"                        \"display_url\": \"youtube.com\\/channel\\/UCCjLJ\\u2026\",\r\n" + 
+				"                        \"indices\": [\r\n" + 
+				"                            0,\r\n" + 
+				"                            23\r\n" + 
+				"                        ]\r\n" + 
+				"                    }]\r\n" + 
+				"                },\r\n" + 
+				"                \"description\": {\r\n" + 
+				"                    \"urls\": []\r\n" + 
+				"                }\r\n" + 
 				"            },\r\n" + 
-
-				"            {\r\n" + 
-				"                \"name\": \"#\\u30DC\\u30EB\\u30D0\\u30EB\\u30B6\\u30FC\\u30AF\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E3%83%9C%E3%83%AB%E3%83%90%E3%83%AB%E3%82%B6%E3%83%BC%E3%82%AF\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E3%83%9C%E3%83%AB%E3%83%90%E3%83%AB%E3%82%B6%E3%83%BC%E3%82%AF\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u30DE\\u30C4\\u30B3\\u306E\\u77E5\\u3089\\u306A\\u3044\\u4E16\\u754C\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E3%83%9E%E3%83%84%E3%82%B3%E3%81%AE%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E4%B8%96%E7%95%8C\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E3%83%9E%E3%83%84%E3%82%B3%E3%81%AE%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E4%B8%96%E7%95%8C\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#HnD_SOULMATE_Debut\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23HnD_SOULMATE_Debut\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23HnD_SOULMATE_Debut\",\r\n" + 
-				"                \"tweet_volume\": 216695\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#SB19MENPA_Ken\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SB19MENPA_Ken\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23SB19MENPA_Ken\",\r\n" + 
-				"                \"tweet_volume\": 66304\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u30B8\\u30E3\\u30F3\\u30D7\\u30C1\\u30D2\\u30FC\\u30ED\\u30FC\\u30BA\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%97%E3%83%81%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%BA\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%97%E3%83%81%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%BA\",\r\n" + 
-				"                \"tweet_volume\": 17333\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u0E0A\\u0E23\\u0E32\\u0E44\\u0E25\\u0E19\\u0E4C\\u0E19\\u0E32\\u0E19\\u0E17\\u0E35\\u0E1B\\u0E35\\u0E25\\u0E30\\u0E04\\u0E23\\u0E31\\u0E49\\u0E07\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E0%B8%8A%E0%B8%A3%E0%B8%B2%E0%B9%84%E0%B8%A5%E0%B8%99%E0%B9%8C%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B8%9B%E0%B8%B5%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B9%89%E0%B8%87\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E0%B8%8A%E0%B8%A3%E0%B8%B2%E0%B9%84%E0%B8%A5%E0%B8%99%E0%B9%8C%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B8%9B%E0%B8%B5%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B9%89%E0%B8%87\",\r\n" + 
-				"                \"tweet_volume\": 78951\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#QueenElizabeth\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23QueenElizabeth\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23QueenElizabeth\",\r\n" + 
-				"                \"tweet_volume\": 11773\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#MaiaInimigoDoBrasil\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23MaiaInimigoDoBrasil\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23MaiaInimigoDoBrasil\",\r\n" + 
-				"                \"tweet_volume\": 74194\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#tuesdayvibes\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23tuesdayvibes\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23tuesdayvibes\",\r\n" + 
-				"                \"tweet_volume\": 10702\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#RIPPrince\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23RIPPrince\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23RIPPrince\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#AhmedArif\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23AhmedArif\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23AhmedArif\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#CAIXATemNADA\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23CAIXATemNADA\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23CAIXATemNADA\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u0627\\u0644\\u0627\\u064A\\u0627\\u0645_\\u0627\\u0644\\u0635\\u0639\\u0628\\u0647\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%D8%A7%D9%84%D8%A7%D9%8A%D8%A7%D9%85_%D8%A7%D9%84%D8%B5%D8%B9%D8%A8%D9%87\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%D8%A7%D9%84%D8%A7%D9%8A%D8%A7%D9%85_%D8%A7%D9%84%D8%B5%D8%B9%D8%A8%D9%87\",\r\n" + 
-				"                \"tweet_volume\": 15759\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#day26oflockdown\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23day26oflockdown\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23day26oflockdown\",\r\n" + 
-				"                \"tweet_volume\": null\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#SaintsupLIVExLINETV\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23SaintsupLIVExLINETV\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23SaintsupLIVExLINETV\",\r\n" + 
-				"                \"tweet_volume\": 58121\r\n" + 
-				"            },\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"#\\u0938\\u0902\\u0924\\u094B\\u0902_\\u0915\\u094B_\\u0907\\u0902\\u0938\\u093E\\u092B_\\u0926\\u094B\",\r\n" + 
-				"                \"url\": \"http:\\/\\/twitter.com\\/search?q=%23%E0%A4%B8%E0%A4%82%E0%A4%A4%E0%A5%8B%E0%A4%82_%E0%A4%95%E0%A5%8B_%E0%A4%87%E0%A4%82%E0%A4%B8%E0%A4%BE%E0%A4%AB_%E0%A4%A6%E0%A5%8B\",\r\n" + 
-				"                \"promoted_content\": null,\r\n" + 
-				"                \"query\": \"%23%E0%A4%B8%E0%A4%82%E0%A4%A4%E0%A5%8B%E0%A4%82_%E0%A4%95%E0%A5%8B_%E0%A4%87%E0%A4%82%E0%A4%B8%E0%A4%BE%E0%A4%AB_%E0%A4%A6%E0%A5%8B\",\r\n" + 
-				"                \"tweet_volume\": 77881\r\n" + 
-				"            }\r\n" + 
-				"        ],\r\n" + 
-				"        \"as_of\": \"2020-04-21T12:52:31Z\",\r\n" + 
-				"        \"created_at\": \"2020-04-21T12:51:34Z\",\r\n" + 
-				"        \"locations\": [\r\n" + 
-				"            {\r\n" + 
-				"                \"name\": \"Worldwide\",\r\n" + 
-				"                \"woeid\": 1\r\n" + 
-				"            }\r\n" + 
-				"        ]\r\n" + 
+				"            \"protected\": false,\r\n" + 
+				"            \"followers_count\": 2,\r\n" + 
+				"            \"friends_count\": 38,\r\n" + 
+				"            \"listed_count\": 0,\r\n" + 
+				"            \"created_at\": \"Tue Feb 11 01:14:58 +0000 2020\",\r\n" + 
+				"            \"favourites_count\": 23,\r\n" + 
+				"            \"utc_offset\": null,\r\n" + 
+				"            \"time_zone\": null,\r\n" + 
+				"            \"geo_enabled\": false,\r\n" + 
+				"            \"verified\": false,\r\n" + 
+				"            \"statuses_count\": 17,\r\n" + 
+				"            \"lang\": null,\r\n" + 
+				"            \"contributors_enabled\": false,\r\n" + 
+				"            \"is_translator\": false,\r\n" + 
+				"            \"is_translation_enabled\": false,\r\n" + 
+				"            \"profile_background_color\": \"F5F8FA\",\r\n" + 
+				"            \"profile_background_image_url\": null,\r\n" + 
+				"            \"profile_background_image_url_https\": null,\r\n" + 
+				"            \"profile_background_tile\": false,\r\n" + 
+				"            \"profile_image_url\": \"http:\\/\\/pbs.twimg.com\\/profile_images\\/1253679594613411842\\/eZDQScxx_normal.jpg\",\r\n" + 
+				"            \"profile_image_url_https\": \"https:\\/\\/pbs.twimg.com\\/profile_images\\/1253679594613411842\\/eZDQScxx_normal.jpg\",\r\n" + 
+				"            \"profile_banner_url\": \"https:\\/\\/pbs.twimg.com\\/profile_banners\\/1227038241746038784\\/1585568432\",\r\n" + 
+				"            \"profile_link_color\": \"1DA1F2\",\r\n" + 
+				"            \"profile_sidebar_border_color\": \"C0DEED\",\r\n" + 
+				"            \"profile_sidebar_fill_color\": \"DDEEF6\",\r\n" + 
+				"            \"profile_text_color\": \"333333\",\r\n" + 
+				"            \"profile_use_background_image\": true,\r\n" + 
+				"            \"has_extended_profile\": false,\r\n" + 
+				"            \"default_profile\": true,\r\n" + 
+				"            \"default_profile_image\": false,\r\n" + 
+				"            \"following\": null,\r\n" + 
+				"            \"follow_request_sent\": null,\r\n" + 
+				"            \"notifications\": null,\r\n" + 
+				"            \"translator_type\": \"none\"\r\n" + 
+				"        },\r\n" + 
+				"        \"geo\": null,\r\n" + 
+				"        \"coordinates\": null,\r\n" + 
+				"        \"place\": null,\r\n" + 
+				"        \"contributors\": null,\r\n" + 
+				"        \"is_quote_status\": false,\r\n" + 
+				"        \"retweet_count\": 0,\r\n" + 
+				"        \"favorite_count\": 0,\r\n" + 
+				"        \"favorited\": false,\r\n" + 
+				"        \"retweeted\": false,\r\n" + 
+				"        \"lang\": \"es\"\r\n" + 
+				"    }],\r\n" + 
+				"    \"search_metadata\": {\r\n" + 
+				"        \"completed_in\": 0.019,\r\n" + 
+				"        \"max_id\": 1256236952069844993,\r\n" + 
+				"        \"max_id_str\": \"1256236952069844993\",\r\n" + 
+				"        \"next_results\": \"?max_id=1256236952069844992&q=hola&count=2&include_entities=1\",\r\n" + 
+				"        \"query\": \"hola\",\r\n" + 
+				"        \"refresh_url\": \"?since_id=1256236952069844993&q=hola&include_entities=1\",\r\n" + 
+				"        \"count\": 2,\r\n" + 
+				"        \"since_id\": 0,\r\n" + 
+				"        \"since_id_str\": \"0\"\r\n" + 
 				"    }\r\n" + 
-				"]";
-				
-		Trending t = parse(st);
-		System.out.println(t.getTrends().get(0).getName());
+				"}";
+		
+		System.out.println( "comienza el parseo");
+		List<String> t= parse(st);
+		System.out.println( t.toString());
+		System.out.println( "Parseado" + t);
+		getHtml(t);
 	}
-	
-	private static Trending parse(String st) {
-		List<Trend> lt = new ArrayList<Trend>();
-		String name = "";
-		Integer volume = 0;
+	private static List<String> parse(String st) {
+		
+		List<String> lu = new ArrayList<>();
+		Boolean b=true;
+		String id ="";
 		for(String trd: st.split("[{},]")) {
-			if(!trd.contains("trends")) {
-				if(trd.contains("name")) {
-					name = trd.split(":")[1].trim();
-					name = name.substring(1,name.length()-2);
-					name=decode(name);
+			if(!trd.contains("statuses")&&!trd.contains("sidebar")) {
+				if(trd.contains("\"id\"") && b) {
+					id = trd.split(":")[1].trim();
+					System.out.println( "id:"+id);
+					lu.add(id);
+					b=false;
+					
 				}
-				if(trd.contains("tweet_volume")) {
-					String pv = trd.split(":")[1].trim();
-					volume = Integer.parseInt(pv.contains("null")? "0":pv);
-					lt.add(Trend.of(name, volume));
+				if(trd.contains("\"created_at\"")) {
+					b=true;
 				}
+				
 			}
 		}
-		return Trending.of(lt);
+		return lu;
 	}
-	private static String decode(String st) {
-		String str = st.split(" ")[0];
-		
-		str =  str.replace("\\"," ");
-		String[] arr = str.split("u");
-		
-		String text = "";
-		for(int i = 1; i < arr.length; i++){
-		    int hexVal = Integer.parseInt(arr[i].trim(), 16);
-		    text += (char)hexVal;
+	
+	private static void getHtml(List<String> ls){
+		List<String> lhtml = new ArrayList<>();
+		for(String s : ls) {
+			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s;
+			System.out.println( uri);
 		}
-		return text;
-		
+		System.out.println( "html conseguido");
 	}
 }

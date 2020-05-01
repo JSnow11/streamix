@@ -43,6 +43,7 @@ import java.util.logging.Level;
 			if((yts != null) /*&& (tws != null)*/) {
 				rd = request.getRequestDispatcher("/double.jsp");
 				request.setAttribute("ytvideos", yts.getItems());
+				request.setAttribute("searchQuery", query);
 				//request.setAttribute("twstreams", tws.getStreams());
 			}else {
 				log.log(Level.SEVERE, "Objects = null");

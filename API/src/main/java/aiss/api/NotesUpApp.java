@@ -13,11 +13,13 @@ public class NotesUpApp extends Application{
 
 	// Loads all resources that are implemented in the application
 	// so that they can be found by RESTEasy.
-	public NotesUPApp() {
 
+
+	public NotesUpApp() {
 		singletons.add(LabelResource.getInstance());
 		singletons.add(NoteResource.getInstance());
 	}
+	
 
 	@Override
 	public Set<Class<?>> getClasses() {

@@ -25,9 +25,7 @@
                     <hr><br>
                     <div class="videos">
                         <c:forEach items="${requestScope.ytvideos}" var="video">
-                        
-                                <a href="/view?pickedTopic=hola"><img src=<c:out value="${video.snippet.thumbnails.medium.url}"></c:out> width="110"></a>
-    
+                            <a href="/view?pickedTopic=${requestScope.searchQuery}&videoID=${video.id.videoId}"><img src=<c:out value="${video.snippet.thumbnails.medium.url}"></c:out> width="110"></a>
                         </c:forEach>
                     </div>
                 </div>

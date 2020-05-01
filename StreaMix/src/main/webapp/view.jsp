@@ -18,18 +18,18 @@
 
     <div class="viewContainer">
         <div class="screen">
-            <iframe src="https://www.youtube.com/embed/Pux2u8rLnHo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/${requestScope.videoID}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="social">
             <div class="scroll">
                 <div>
                     <c:forEach var="tweet" items="${requestScope.tweets}" >
-                                <c:out value="${tweet}"></c:out>
+                                <div><c:out value="${tweet}"></c:out></div>
                         </c:forEach>
                 </div>
                 <div>
                     <c:forEach var="rp" items="${requestScope.redditPosts}" >
-                                <c:out value="${rp}"></c:out>
+                                <div><c:out value="${rp}"></c:out></div>
                         </c:forEach>
                 </div>
             </div>

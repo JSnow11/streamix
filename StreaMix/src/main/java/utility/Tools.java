@@ -45,7 +45,6 @@ public class Tools {
 			if(trd.contains("html")) {
 				s = trd.split("\"html\":")[1].trim();
 				if(s.contains("\"author_name\"")) s = s.split(",")[0];
-				s = s.substring(1,s.length()-1);
 				s = decode(s);
 				s = s.replace("\\", "");
 				

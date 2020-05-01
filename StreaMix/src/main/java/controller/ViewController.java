@@ -37,17 +37,21 @@ public class ViewController extends HttpServlet {
 		log.log(Level.INFO, "Peticion de view realizada");
 
 		String pickedTopic = request.getParameter("pickedTopic");
+		String videoID = request.getParameter("videoID");
+
 		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
 		
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
+		log.log(Level.WARNING, "Se procede con twitter");
 		List<String> t = tr.getTweets(pickedTopic);
 		
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
 		
-		if(t != null) {
+		if(t != null && rp != null) {
 			rd = request.getRequestDispatcher("/view.jsp");
+			request.setAttribute("videoID", videoID);
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
 		}else {

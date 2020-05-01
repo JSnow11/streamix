@@ -19,7 +19,7 @@ public class PostsRedditResource {
 	public static final Logger log = Logger.getLogger(PostsRedditResource.class.getName());
 	
 	private RedditSearch getSubreddits(String queryFormatted) throws ResourceException, IOException {
-		String uri = "https://www.reddit.com/subreddits/search.json?q="+queryFormatted+"&limit=2";
+		String uri = "https://www.reddit.com/subreddits/search.json?q="+queryFormatted+"&limit=5";
 
 		log.log(Level.INFO, "reddit URI: "+uri);
 		
@@ -37,6 +37,7 @@ public class PostsRedditResource {
 		
 		List<String> lhtml = new ArrayList<>();
 		for(Child ch : ssrr.getData().getChildren()) {
+			if(ch.getData().getpr
 			String subredditFormated = URLEncoder.encode(ch.getData().getDisplayName(), "UTF-8");
 			String uri = "https://www.reddit.com/r/"+subredditFormated+"/new.json?sort=new&limit=2";
 			log.log(Level.INFO, "Reddit posts URI: "+uri);
