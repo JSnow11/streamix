@@ -47,6 +47,7 @@ public class Tools {
 				if(s.contains("\"author_name\"")) s = s.split(",")[0];
 				s = decode(s);
 				s = s.replace("\\", "");
+				s = s.replace("\"<", "<");
 				
 				
 				System.out.println(s);
