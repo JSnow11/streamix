@@ -23,14 +23,14 @@
         <div class="social">
             <div class="scroll">
                 <div>
-                    <c:forEach var="tweet" items="${requestScope.tweets}" >
-                                <div><c:out value="${tweet}"></c:out></div>
-                        </c:forEach>
+                    <c:forEach var="tweet" items="${requestScope.tweets}">
+                        <div>${tweet}</div>
+                    </c:forEach>
                 </div>
                 <div>
-                    <c:forEach var="rp" items="${requestScope.redditPosts}" >
-                                <div><c:out value="${rp}"></c:out></div>
-                        </c:forEach>
+                    <c:forEach var="rp" items="${requestScope.redditPosts}">
+                        <div><c:out value="${rp}"></c:out></div>
+                    </c:forEach>
                 </div>
             </div>
 

@@ -46,6 +46,7 @@ public class Tools {
 				s = trd.split("\"html\":")[1].trim();
 				if(s.contains("\"author_name\"")) s = s.split(",")[0];
 				s = decode(s);
+				s = s.replace("\\n", "");
 				s = s.replace("\\", "");
 				s = s.replace("\"<", "<");
 				

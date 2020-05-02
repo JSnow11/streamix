@@ -12,9 +12,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -26,14 +26,12 @@ import org.jboss.resteasy.spi.NotFoundException;
 
 import aiss.api.resources.comparators.ComparatorLabelName;
 import aiss.api.resources.comparators.ComparatorLabelNameReversed;
-import aiss.api.resources.comparators.ComparatorNamePlaylist;
-import aiss.api.resources.comparators.ComparatorNamePlaylistReversed;
 import aiss.model.Label;
 import aiss.model.Note;
 import aiss.model.repository.LabelRepository;
 import aiss.model.repository.MapLabelRepository;
 
-@Path("/label")
+@Path("/labels")
 public class LabelResource {
 	/* Singleton */
 	private static LabelResource _instance=null;
@@ -59,12 +57,12 @@ public class LabelResource {
     {
         List<Label> result = new ArrayList<Label>();
             
-        for (Label Labels: repository.getAllLabels()) {
-            if (name == null || Labels.getName().equals(name)) { // Name filter
-                if (isEmpty == null // Empty playlist filter
-                        || (isEmpty && (Labels.getNotes() == null || Labels.getNotes().size() == 0))
-                        || (!isEmpty && (Labels.getNotes() != null && Labels.getNotes().size() > 0))) {
-                    result.add(Labels);
+        for (Label label: repository.getAllLabels()) {
+            if (name == null || label.getName().toLowerCase().equals(name.toLowerCase())) { // Name filter
+                if (isEmpty == null // Empty label filter
+                        || (isEmpty && (label.getNotes() == null || label.getNotes().size() == 0))
+                        || (!isEmpty && (label.getNotes() != null && label.getNotes().size() > 0))) {
+                    result.add(label);
                 }
             }
         }
@@ -109,7 +107,7 @@ public class LabelResource {
 
 		repository.addLabel(Lab);
 
-		// Builds the response. Returns the playlist the has just been added.
+		// Builds the response. Returns the label the has just been added.
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(Lab.getId());
 		ResponseBuilder resp = Response.created(uri);
@@ -169,7 +167,7 @@ public class LabelResource {
 			throw new NotFoundException("The note with id=" + noteId + " was not found");
 		
 		if (label.getNote(noteId)!=null)
-			throw new BadRequestException("The note is already included in the playlist.");
+			throw new BadRequestException("The note is already included in the label.");
 			
 		repository.addNote(labelId, noteId);		
 

@@ -33,23 +33,23 @@ import java.util.logging.Level;
 			String query = request.getParameter("searchQuery");
 			log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
 			
-			YTSearchResource ytsr = new YTSearchResource();
-			YtSearch yts = ytsr.getVideos(query);
+			YTSearchResource videosr = new YTSearchResource();
+			YtSearch videos = videosr.getVideos(query);
 
 			//TwitchSearchResource twsr = new TwitchSearchResource();
-			//TwitchSearch tws = twsr.getStreams(query);
+			//Streams streams = twsr.getStreams(query);
 			
 			
-			if((yts != null) /*&& (tws != null)*/) {
+			if((videos != null) /*&& (tws != null)*/) {
 				rd = request.getRequestDispatcher("/double.jsp");
-				request.setAttribute("ytvideos", yts.getItems());
+				request.setAttribute("ytvideos", videos.getItems());
 				request.setAttribute("searchQuery", query);
 				//request.setAttribute("twstreams", tws.getStreams());
 			}else {
 				log.log(Level.SEVERE, "Objects = null");
 				List<String> errores = new ArrayList<>();
 				//if(tws == null) errores.add("Fallo al obtener Streams de Twitch");
-				if(yts == null) errores.add("Fallo al obtener Videos de YT");
+				if(videos == null) errores.add("Fallo al obtener Videos de YT");
 				request.setAttribute("errors", errores);
 				rd = request.getRequestDispatcher("/error.jsp");
 			}

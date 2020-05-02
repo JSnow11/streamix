@@ -3,12 +3,16 @@ package aiss.model.repository;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import aiss.model.Label;
 import aiss.model.Note;
 
 
 public class MapLabelRepository implements LabelRepository{
 
+	private static final Logger log = Logger.getLogger(MapLabelRepository.class.getName());
 	Map<String, Label> LabelMap;
 	Map<String, Note> NoteMap;
 	private static MapLabelRepository instance=null;
@@ -26,6 +30,7 @@ public class MapLabelRepository implements LabelRepository{
 	}
 	
 	public void init() {
+		
 		
 		LabelMap = new HashMap<String,Label>();
 		NoteMap = new HashMap<String,Note>();
@@ -54,18 +59,24 @@ public class MapLabelRepository implements LabelRepository{
         N3.setNote("Esta nota es una subnota de N0");
 		N3.cleanLinks();
 		addNote(N3);
-
+		
+		log.log(Level.FINE, "Initial notes added");
+		
 		// Create Labels
 		Label LInicio = new Label();
 		LInicio.setName("Autogenerada");
 		LInicio.setColor("Yellow");
-
+		addLabel(LInicio);
+		
+		log.log(Level.FINE, "Initial label added");
+		
 		// Add Notes to Labels
 		addNote(LInicio.getId(), N0.getId());
 		addNote(LInicio.getId(), N0.getId());
 		addNote(LInicio.getId(), N0.getId());
 		addNote(LInicio.getId(), N0.getId());
-
+		
+		log.log(Level.FINE, "Initial Notes linked to initial label");
 	}
 		
 

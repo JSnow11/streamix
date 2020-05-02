@@ -12,6 +12,7 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
+import model.twitter.Embeed;
 import utility.Tools;
 
 public class TweetsResource {
@@ -20,7 +21,7 @@ public class TweetsResource {
 	
 	public List<String> getTweets(String query) throws ResourceException, IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
-		String uri = "https://api.twitter.com/1.1/search/tweets.json?q="+queryFormatted+"&count=2";
+		String uri = "https://api.twitter.com/1.1/search/tweets.json?q="+queryFormatted+"&count=6";
 		log.log(Level.INFO, "tweets URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
@@ -29,8 +30,8 @@ public class TweetsResource {
 		cr.setChallengeResponse(chr);
 
 		log.log(Level.WARNING, cr.get().getText());
-		//String st = cr.get(String.class);
-		String st = "{\r\n" + 
+		String st = cr.get(String.class);
+		/*String st = "{\r\n" + 
 				"    \"statuses\": [{\r\n" + 
 				"        \"created_at\": \"Fri May 01 15:00:03 +0000 2020\",\r\n" + 
 				"        \"id\": 1256236952069844993,\r\n" + 
@@ -134,8 +135,9 @@ public class TweetsResource {
 				"        \"since_id\": 0,\r\n" + 
 				"        \"since_id_str\": \"0\"\r\n" + 
 				"    }\r\n" + 
-				"}";
-		
+				"}";*/
+
+		log.log(Level.WARNING, st);
 		log.log(Level.WARNING, "comienza el parseo");
 		List<String> t= parse(st);
 		log.log(Level.WARNING, t.toString());
@@ -172,7 +174,8 @@ public class TweetsResource {
 			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s;
 			log.log(Level.WARNING, uri);
 			ClientResource cr = new ClientResource(uri);
-			lhtml.add(Tools.parseHtml(cr.get().getText()));
+			Embeed e = cr.get(Embeed.class);
+			if(e!=null) lhtml.add(e.getHtml());
 		}
 		log.log(Level.WARNING, "html conseguido");
 		return lhtml;

@@ -1,5 +1,5 @@
 
-package model.Reddit;
+package model.reddit;
 
 import java.util.HashMap;
 import java.util.Map;

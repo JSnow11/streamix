@@ -10,45 +10,52 @@ import java.util.logging.Logger;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import model.Reddit.Child;
-import model.Reddit.RedditPosts;
-import model.Reddit.RedditSearch;
-import utility.Tools;
+import model.reddit.subreddits.Child;
+import model.reddit.REmbeed;
+import model.reddit.posts.Posts;
+import model.reddit.subreddits.Subreddits;
 
 public class PostsRedditResource {
 	public static final Logger log = Logger.getLogger(PostsRedditResource.class.getName());
 	
-	private RedditSearch getSubreddits(String queryFormatted) throws ResourceException, IOException {
+	private Subreddits getSubreddits(String queryFormatted) throws ResourceException, IOException {
 		String uri = "https://www.reddit.com/subreddits/search.json?q="+queryFormatted+"&limit=5";
 
-		log.log(Level.INFO, "reddit URI: "+uri);
+		log.log(Level.INFO, "SUBREDDITS URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
-
-		log.log(Level.WARNING, cr.get().getText());
 		
-	    RedditSearch ssrr = cr.get(RedditSearch.class);
+	    Subreddits ssrr = cr.get(Subreddits.class);
 		return ssrr;
 	}
 	
 	public List<String> getPosts(String query) throws ResourceException, IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
-		RedditSearch ssrr = getSubreddits(queryFormatted);
+		Subreddits ssrr = getSubreddits(queryFormatted);
 		
 		List<String> lhtml = new ArrayList<>();
 		for(Child ch : ssrr.getData().getChildren()) {
-			//if(ch.getData().getpr
-			String subredditFormated = URLEncoder.encode(ch.getData().getDisplayName(), "UTF-8");
-			String uri = "https://www.reddit.com/r/"+subredditFormated+"/new.json?sort=new&limit=2";
-			log.log(Level.INFO, "Reddit posts URI: "+uri);
-		
-			ClientResource cr = new ClientResource(uri);
-			RedditPosts rp = cr.get(RedditPosts.class);
+			if(ch.getData().getSubredditType().equals("public")){
+				String subredditFormated = URLEncoder.encode(ch.getData().getDisplayName(), "UTF-8");
+				String uri = "https://www.reddit.com/r/"+subredditFormated+"/new.json?sort=new&limit=5";
+				
+				log.log(Level.INFO, "REDDIT POSTS URI: "+uri);
 			
-			for(Child ch2 : rp.getData().getChildren()) {
-				String uri2 = "https://www.reddit.com/oembed?url=https://www.reddit.com/r/Showerthoughts/comments/2safxv/we_should_start_keeping_giraffes_a_secret_from/cno7zic/";
-				ClientResource cr2 = new ClientResource(uri2);
-				lhtml.add(Tools.parseHtml(cr2.get().getText()));
+				ClientResource cr = new ClientResource(uri);
+				Posts rp = cr.get(Posts.class);
+				
+				for(model.reddit.posts.Child ch2 : rp.getData().getChildren()) {
+					String uri2 = "https://www.reddit.com/oembed?url="+ch2.getData().getUrl();
+					
+					log.log(Level.INFO, "REDDIT EMBEED URI: "+uri);
+	
+					if(uri2.contains("url=https://www.reddit.com/r/")) {
+						System.out.println(uri2);
+						ClientResource cr2 = new ClientResource(uri2);
+						REmbeed re = cr2.get(REmbeed.class);
+						if(re != null) lhtml.add(re.getHtml());
+					}
+				}
 			}
 			
 		}

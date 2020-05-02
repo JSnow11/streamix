@@ -1,12 +1,5 @@
 package aiss.api.resources;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,10 +8,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+
+import java.net.URI;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.jboss.resteasy.spi.BadRequestException;
@@ -33,7 +35,8 @@ import aiss.api.resources.comparators.ComparatorNotesTitleReversed;
 import aiss.model.Note;
 import aiss.model.repository.LabelRepository;
 import aiss.model.repository.MapLabelRepository;
-@Path("/note")
+
+@Path("/notes")
 public class NoteResource {
 	public static NoteResource _instance=null;
 	LabelRepository repository;
@@ -57,27 +60,28 @@ public class NoteResource {
         
         for (Note note: repository.getAllNotes()) {
             if (q == null
-            		|| note.getTitle().toLowerCase().contains(q.toLowerCase())
+					|| note.getTitle().toLowerCase().contains(q.toLowerCase())
+					|| note.getNote().toLowerCase().contains(q.toLowerCase())
             		|| (note.getCreatedDate() != null && note.getCreatedDate().toString().contains(q.toLowerCase()))
             		|| (note.getLastModified() != null && note.getLastModified().toString().contains(q.toLowerCase())))
             	result.add(note);
         }
             
         if (order != null) { // Order results
-            if (order.equals("tittle")) {
+            if (order.equals("title")) {
                 Collections.sort(result, new ComparatorNotesTitle());
-            } else if (order.equals("-tittle")) {
+            } else if (order.equals("-title")) {
             	Collections.sort(result, new ComparatorNotesTitleReversed());
-            } else if (order.equals("CreateDate")) {
+            } else if (order.equals("createDate")) {
             	Collections.sort(result, new ComparatorNotesCreateDate());
-            } else if (order.equals("-CreateDate")) {
+            } else if (order.equals("-createDate")) {
             	Collections.sort(result, new ComparatorNotesCreateDateReversed());
-            }  else if (order.equals("LastModified")) {
+            }  else if (order.equals("lastModified")) {
             	Collections.sort(result, new ComparatorNotesLastModified());
-            } else if (order.equals("-LastModified")) {
+            } else if (order.equals("-lastModified")) {
             	Collections.sort(result, new ComparatorNotesLastModifiedReversed());
             }else {
-                throw new BadRequestException("The order parameter must be 'tittle', '-tittle, 'CreateDate','-CreateDate','LastModified' or '-LastModified'.");
+                throw new BadRequestException("The order parameter must be 'title', '-title, 'createDate','-createDate','lastModified' or '-lastModified'.");
             }
         }
 
@@ -147,7 +151,7 @@ public class NoteResource {
 	public Response removeNote(@PathParam("id") String noteId) {
 		Note toberemoved=repository.getNote(noteId);
 		if (toberemoved == null)
-			throw new NotFoundException("The song with id="+ noteId +" was not found");
+			throw new NotFoundException("The note with id="+ noteId +" was not found");
 		else {
 			repository.deleteNote(noteId);
 		}

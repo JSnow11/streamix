@@ -12,16 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.io.WriteFlusher.Listener;
 
 import model.resources.GamesTwitchResource;
 import model.resources.TrendsResource;
-import model.resources.TwitchSearchResource;
-import model.resources.YTSearchResource;
 import model.twitch.Games;
-import model.twitch.TwitchSearch;
 import model.twitter.Trending;
-import model.yt.YtSearch;
 
 public class TrendsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,20 +32,20 @@ public class TrendsController extends HttpServlet {
 
 		RequestDispatcher rd = null;
 		TrendsResource tr = new TrendsResource();
-		Trending t = tr.getTrends();
+		Trending trends = tr.getTrends();
 		
-		GamesTwitchResource ltr = new GamesTwitchResource();
-		Games l = ltr.getGames();
+		GamesTwitchResource gtr = new GamesTwitchResource();
+		Games games = gtr.getGames();
 		
-		if(t != null && l != null) {
+		if(trends != null && games != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
-			request.setAttribute("trends", t.getTrends());
-			request.setAttribute("games", l.getData());
+			request.setAttribute("trends", trends.getTrends());
+			request.setAttribute("games", games.getData());
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			List<String> errores = new ArrayList<>();
-			if(t == null) errores.add("Fallo al obtener Trends de Twitter");
-			if(l == null) errores.add("Fallo al obtener los Streams de Twitch");
+			if(trends == null) errores.add("Fallo al obtener Trends de Twitter");
+			if(games == null) errores.add("Fallo al obtener los Streams de Twitch");
 			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
