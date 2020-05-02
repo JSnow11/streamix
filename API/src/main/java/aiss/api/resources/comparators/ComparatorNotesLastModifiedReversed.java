@@ -10,7 +10,7 @@ public class ComparatorNotesLastModifiedReversed implements Comparator<Note> {
 
 	@Override
 	public int compare(Note n1, Note n2) {
-		return n2.getTitle().compareTo(n1.getTitle());
+		return n2.getLastModified().compareTo(n1.getLastModified());
 	}
 
 }
