@@ -1,0 +1,379 @@
+swagger: '2.0'
+info:
+  description: Simple documentation for NotesUp API
+  version: 1.0.0
+  title: Simple NotesUp API
+  # put the contact info for your development or API team
+  contact:
+    email: streamixproject@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: notesUp-276114.appspot.com
+basePath: /api
+
+# tags are used for organizing operations
+tags:
+- name: notes
+  description: Notes
+- name: labels
+  description: Labels
+
+paths:
+  /notes:
+    get:
+      tags:
+      - notes
+      summary: Get notes
+      operationId: getNotes
+      description: Get all notes
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: order
+        description: Order results by title, color, lastModified date and created date
+        required: false
+        type: string
+        enum:
+        - title
+        - -title
+        - color
+        - -color
+        - lastModified
+        - -lastModified
+      - in: query
+        name: q
+        description: Query to filter
+        type: string
+        required: false
+      responses:
+        200:
+          description: Search results 
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Note'
+        400:
+          description: Bad request
+    post:
+      tags:
+      - notes
+      summary: Create a note
+      operationId: createNote
+      description: Create a note
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: note
+        description: Note to create
+        required: true
+        schema:
+          $ref: '#/definitions/Note'
+      responses:
+        201:
+          description: Note created
+          schema:
+            $ref: '#/definitions/Note'
+        400:
+          description: Bad request
+    put:
+      tags:
+      - notes
+      summary: Update a note
+      operationId: updateNote
+      description: Update a note
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: note
+        description: Note to update
+        required: true
+        schema:
+          $ref: '#/definitions/Note'
+      responses:
+        204:
+          description: Note updated
+        400:
+          description: Bad request
+        404:
+          description: Note not found
+  /notes/{id}:
+    get:
+      tags:
+      - notes
+      summary: Get one note
+      operationId: getNote
+      description: Get one note by its id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Id of the note
+        required: true
+        type: string
+      responses:
+        200:
+          description: Note matching id
+          schema:
+            $ref: '#/definitions/Note'
+        404:
+          description: Note not found
+    delete:
+      tags:
+      - notes
+      summary: Delete note
+      operationId: deleteNote
+      description: Delete note
+      parameters:
+      - in: path
+        name: id
+        description: Id of the note
+        required: true
+        type: string
+      responses:
+        204:
+          description: Note deleted
+        404:
+          description: Note not found
+  /labels:
+    get:
+      tags:
+      - labels
+      summary: Get labels
+      operationId: getLabels
+      description: Get all labels
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: order
+        description: Order results by name
+        required: false
+        type: string
+        enum:
+        - name
+        - -name
+      - in: query
+        name: isEmpty
+        description: Filter labels with no notes
+        type: boolean
+        required: false
+      - in: query
+        name: name
+        description: Filter labels by name
+        type: string
+        required: false
+      responses:
+        200:
+          description: Search results
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Label'
+        400:
+          description: Bad request
+    post:
+      tags:
+      - labels
+      summary: Create a label
+      operationId: createLabel
+      description: Create a Label
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: label
+        description: Label to add
+        schema:
+          $ref: '#/definitions/Label'
+      responses:
+        201:
+          description: Label created
+          schema:
+            $ref: '#/definitions/Label'
+        400:
+          description: Bad request
+    put:
+      tags:
+      - labels
+      summary: Update a label
+      operationId: updateLabel
+      description: Update a Label
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: label
+        description: Label to update
+        schema:
+          $ref: '#/definitions/Label'
+      responses:
+        204:
+          description: Label updated
+        400:
+          description: Bad request
+        404:
+          description: Label not found
+  /labels/{id}:
+    get:
+      tags:
+      - labels
+      summary: Get one label
+      operationId: getLabel
+      description: Get one label by its id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Id of the label
+        required: true
+        type: string
+      responses:
+        200:
+          description: Label matching id
+          schema:
+            $ref: '#/definitions/Label'
+        404:
+          description: Label not found
+    delete:
+      tags:
+      - labels
+      summary: Delete label
+      operationId: deleteLabel
+      description: Delete label
+      parameters:
+      - in: path
+        name: id
+        description: Id of the label
+        required: true
+        type: string
+      responses:
+        204:
+          description: Label deleted
+        404:
+          description: Label not found
+  /labels/{labelId}/{noteId}:
+    post:
+      tags:
+      - labels
+      summary: Add note to label
+      operationId: addNoteToLabel
+      description: Add a note to a label
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: labelId
+        description: Id of the label
+        required: true
+        type: string
+      - in: path
+        name: noteId
+        description: Id of the note
+        required: true
+        type: string
+      responses:
+        201:
+          description: Note added to label
+          schema:
+            $ref: '#/definitions/Label'
+        400:
+          description: Bad request
+        404:
+          description: Label or note not found
+    delete:
+      tags:
+      - labels
+      summary: Delete note from label
+      operationId: deleteNoteFromLabel
+      description: Delete a note from a label
+      parameters:
+      - in: path
+        name: labelId
+        description: Id of the label
+        required: true
+        type: string
+      - in: path
+        name: noteId
+        description: Id of the note
+        required: true
+        type: string
+      responses:
+        204:
+          description: Note deleted from label
+        404:
+          description: Label or note not found
+definitions:
+  Note:
+    type: object
+    required:
+    - title
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      note:
+        type: string
+      color:
+        type: string
+      createdDate:
+        type: string
+      lastModified:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      
+    example: 
+      id: "n1"
+      title: "Nota 1"
+      color: "Yellow"
+      createdDate: "03/05/2020 - 14:33"
+      lastModified: "03/05/2020 - 14:33"
+      links:
+        - id: "n2"
+          title: "Nota 2, subnota de n1"
+          color: "Yellow"
+          createdDate: "03/05/2020 - 14:33"
+          lastModified: "03/05/2020 - 14:33"
+      
+  Label:
+    required:
+    - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      notes:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+    example:
+      id: p5
+      name: Favourites
+      description: My favourite notes
+      notes:
+        - id: "n2"
+          title: "Nota 2, subnota de n1"
+          color: "Yellow"
+          createdDate: "03/05/2020 - 14:33"
+          lastModified: "03/05/2020 - 14:33"
+        - id: "n3"
+          title: "Nota 3"
+          color: "Red"
+          createdDate: "01/05/2020 - 14:33"
+          lastModified: "02/05/2020 - 14:00"
