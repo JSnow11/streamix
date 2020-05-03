@@ -4,11 +4,11 @@ import java.util.Comparator;
 
 import aiss.model.Note;
 
-public class ComparatorNotesCreateDateReversed implements Comparator<Note> {
+public class ComparatorNotesColorReversed implements Comparator<Note> {
 
 	@Override
 	public int compare(Note n1, Note n2) {
-		return n1.getCreatedDate().compareTo(n2.getCreatedDate());
+		return n2.getColor().compareTo(n1.getColor());
 	}
 
 }

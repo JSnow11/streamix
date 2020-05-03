@@ -26,6 +26,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
+import aiss.api.resources.comparators.ComparatorNotesColor;
+import aiss.api.resources.comparators.ComparatorNotesColorReversed;
 import aiss.api.resources.comparators.ComparatorNotesCreateDate;
 import aiss.api.resources.comparators.ComparatorNotesCreateDateReversed;
 import aiss.api.resources.comparators.ComparatorNotesLastModified;
@@ -58,16 +60,19 @@ public class NoteResource {
 	{
 		List<Note> result = new ArrayList<Note>();
         
+		//Search by query "q"
         for (Note note: repository.getAllNotes()) {
             if (q == null
 					|| note.getTitle().toLowerCase().contains(q.toLowerCase())
 					|| note.getNote().toLowerCase().contains(q.toLowerCase())
+					|| note.getColor().toLowerCase().contains(q.toLowerCase())
             		|| (note.getCreatedDate() != null && note.getCreatedDate().toString().contains(q.toLowerCase()))
             		|| (note.getLastModified() != null && note.getLastModified().toString().contains(q.toLowerCase())))
             	result.add(note);
         }
-            
-        if (order != null) { // Order results
+        
+        //Order by "order"
+        if (order != null) {
             if (order.equals("title")) {
                 Collections.sort(result, new ComparatorNotesTitle());
             } else if (order.equals("-title")) {
@@ -76,12 +81,16 @@ public class NoteResource {
             	Collections.sort(result, new ComparatorNotesCreateDate());
             } else if (order.equals("-createDate")) {
             	Collections.sort(result, new ComparatorNotesCreateDateReversed());
-            }  else if (order.equals("lastModified")) {
+            } else if (order.equals("lastModified")) {
             	Collections.sort(result, new ComparatorNotesLastModified());
             } else if (order.equals("-lastModified")) {
             	Collections.sort(result, new ComparatorNotesLastModifiedReversed());
+            }  else if (order.equals("color")) {
+            	Collections.sort(result, new ComparatorNotesColor());
+            } else if (order.equals("-color")) {
+            	Collections.sort(result, new ComparatorNotesColorReversed());
             }else {
-                throw new BadRequestException("The order parameter must be 'title', '-title, 'createDate','-createDate','lastModified' or '-lastModified'.");
+                throw new BadRequestException("The order parameter must be 'title', '-title, 'color', '-color', 'createDate','-createDate','lastModified' or '-lastModified'.");
             }
         }
 
@@ -97,7 +106,7 @@ public class NoteResource {
 		Note note = repository.getNote(noteId);
 		
 		if (note == null) {
-			throw new NotFoundException("The note wit id="+ noteId +" was not found");			
+			throw new NotFoundException("The note with id="+ noteId +" was not found");			
 		}
 		
 		return note;
@@ -106,7 +115,7 @@ public class NoteResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo, Note note) {
+	public Response addNote(@Context UriInfo uriInfo, Note note) {
 		if (note.getTitle() == null || "".equals(note.getTitle()))
 			throw new BadRequestException("The title of the note must not be null");
 
@@ -123,24 +132,22 @@ public class NoteResource {
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updateSong(Note note) {
+	public Response updateNote(Note note) {
 		Note oldnote = repository.getNote(note.getId());
 		if (oldnote == null) {
 			throw new NotFoundException("The note with id="+ note.getId() +" was not found");			
 		}
 		
-		// Update title
 		if (note.getTitle()!=null)
 			oldnote.setTitle(note.getTitle());
 		
-		// Update album
-		
 			oldnote.setLastModified();
 		
-		// Update artist
 		if (note.getNote()!=null)
 			oldnote.setNote(note.getNote());
 		
+		if (note.getColor()!=null)
+			oldnote.setColor(note.getColor());
 		
 		
 		return Response.noContent().build();

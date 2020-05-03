@@ -19,6 +19,8 @@
 	</repositories>
 
 	<properties>
+		<project.projectId>notesup-276111</project.projectId>
+	
 		<appengine.version>1.9.71</appengine.version>	<!-- AppEngine version -->
 		<servlet.version>2.5</servlet.version>	<!-- Servlet version -->
 		<jslt.version>1.2</jslt.version>	<!-- JSLT version -->

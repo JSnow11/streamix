@@ -1,25 +1,28 @@
 package aiss.model;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.appengine.repackaged.org.joda.time.LocalDate;
 
 public class Note {
 
     private String id;
     private String title;
     private String note;
+	private String color;
+    private String createdDate;
+    private String lastModified;
     private List<Note> links;
-    private LocalDate createdDate;
-    private LocalDate lastModified;
 
     public Note(String id, String title, String note, List<Note> links) {
         this.id = id;
         this.title = title;
         this.note = note;
         this.links = links;
-        this.createdDate = LocalDate.now();
+        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy -  HH:mm"));
         this.lastModified = createdDate;
     }
 
@@ -30,8 +33,9 @@ public class Note {
     }
 
     public Note() {
-        this.createdDate = LocalDate.now();
+        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy -  HH:mm"));
         this.lastModified = createdDate;
+        this.color = "default";
         this.links = new ArrayList<Note>();
 	}
 
@@ -58,6 +62,18 @@ public class Note {
     public void setNote(String note) {
         this.note = note;
     }
+    
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+    
+    public void cleanColor() {
+		this.color = "default";
+	}
 
     public List<Note> getLinks() {
         return links;
@@ -71,19 +87,15 @@ public class Note {
         this.links.add(link);
     }
 
-    public LocalDate getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDate getLastModified() {
+    public String getLastModified() {
         return lastModified;
     }
 
     public void setLastModified() {
-        this.lastModified = LocalDate.now();
+        this.lastModified = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy -  HH:mm"));
     }
 }

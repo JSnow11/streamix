@@ -39,24 +39,28 @@ public class MapLabelRepository implements LabelRepository{
 		Note N0 = new Note();
         N0.setTitle("Nueva nota 0");
         N0.setNote("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo justo quis sapien dignissim, ut commodo neque elementum. Ut sollicitudin, est quis maximus tempor, turpis velit hendrerit odio, vitae dapibus magna libero quis erat. Phasellus in risus neque. Nulla hendrerit massa lectus. Aenean tincidunt, est sit amet aliquam vehicula, diam justo scelerisque metus, sed condimentum erat lorem eget magna. Etiam volutpat, mi a pharetra placerat, dui tortor varius metus, eget aliquet dolor lectus sed neque. Nunc tincidunt libero quam, in venenatis justo consequat sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu sagittis magna. Vivamus purus lacus, vulputate sed diam ut, varius imperdiet quam. Duis et lacus quis ante consequat condimentum eget quis eros. Vivamus cursus efficitur blandit. Duis quis dui convallis neque rutrum accumsan nec sed velit. Integer dignissim risus erat, sit amet malesuada magna lacinia eget.");
-		N0.cleanLinks();
+		N0.cleanColor();
+        N0.cleanLinks();
 		addNote(N0);
 
         Note N1 = new Note();
         N1.setTitle("Nueva nota 1");
         N1.setNote("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo justo quis sapien dignissim, ut commodo neque elementum. Ut sollicitudin, est quis maximus tempor, turpis velit hendrerit odio, vitae dapibus magna libero quis erat. Phasellus in risus neque. Nulla hendrerit massa lectus. Aenean tincidunt, est sit amet aliquam vehicula, diam justo scelerisque metus, sed condimentum erat lorem eget magna. Etiam volutpat, mi a pharetra placerat, dui tortor varius metus, eget aliquet dolor lectus sed neque. Nunc tincidunt libero quam, in venenatis justo consequat sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu sagittis magna. Vivamus purus lacus, vulputate sed diam ut, varius imperdiet quam. Duis et lacus quis ante consequat condimentum eget quis eros. Vivamus cursus efficitur blandit. Duis quis dui convallis neque rutrum accumsan nec sed velit. Integer dignissim risus erat, sit amet malesuada magna lacinia eget.");
-		N1.cleanLinks();
+        N1.setColor("Red");
+        N1.cleanLinks();
 		addNote(N1);
 
         Note N2 = new Note();
         N2.setTitle("Nueva nota 2");
         N2.setNote("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo justo quis sapien dignissim, ut commodo neque elementum. Ut sollicitudin, est quis maximus tempor, turpis velit hendrerit odio, vitae dapibus magna libero quis erat. Phasellus in risus neque. Nulla hendrerit massa lectus. Aenean tincidunt, est sit amet aliquam vehicula, diam justo scelerisque metus, sed condimentum erat lorem eget magna. Etiam volutpat, mi a pharetra placerat, dui tortor varius metus, eget aliquet dolor lectus sed neque. Nunc tincidunt libero quam, in venenatis justo consequat sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu sagittis magna. Vivamus purus lacus, vulputate sed diam ut, varius imperdiet quam. Duis et lacus quis ante consequat condimentum eget quis eros. Vivamus cursus efficitur blandit. Duis quis dui convallis neque rutrum accumsan nec sed velit. Integer dignissim risus erat, sit amet malesuada magna lacinia eget.");
-		N2.cleanLinks();
+        N2.setColor("Yellow");
+        N2.cleanLinks();
 		addNote(N2);
 
         Note N3 = Note.subNote(N0);
         N3.setTitle("Subnota de N0");
         N3.setNote("Esta nota es una subnota de N0");
+        N3.setColor("Yellow");
 		N3.cleanLinks();
 		addNote(N3);
 		
@@ -65,10 +69,13 @@ public class MapLabelRepository implements LabelRepository{
 		// Create Labels
 		Label LInicio = new Label();
 		LInicio.setName("Autogenerada");
-		LInicio.setColor("Yellow");
 		addLabel(LInicio);
 		
-		log.log(Level.FINE, "Initial label added");
+		Label LInicio2 = new Label();
+		LInicio2.setName("Label");
+		addLabel(LInicio2);
+		
+		log.log(Level.FINE, "Initial labels added");
 		
 		// Add Notes to Labels
 		addNote(LInicio.getId(), N0.getId());

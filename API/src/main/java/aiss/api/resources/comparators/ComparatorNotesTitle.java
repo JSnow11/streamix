@@ -3,8 +3,6 @@ package aiss.api.resources.comparators;
 import java.util.Comparator;
 
 import aiss.model.Note;
-import aiss.model.Playlist;
-import aiss.model.Song;
 
 public class ComparatorNotesTitle implements Comparator<Note> {
 

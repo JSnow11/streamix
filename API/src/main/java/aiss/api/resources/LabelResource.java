@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -33,6 +35,7 @@ import aiss.model.repository.MapLabelRepository;
 
 @Path("/labels")
 public class LabelResource {
+	private static final Logger log = Logger.getLogger(LabelResource.class.getName());
 	/* Singleton */
 	private static LabelResource _instance=null;
 	LabelRepository repository;
@@ -76,7 +79,7 @@ public class LabelResource {
                 throw new BadRequestException("The order parameter must be 'name' or '-name'.");
             }
         }
-
+        log.log(Level.INFO, "GET Labels done");
         return result;
     }
 	
@@ -91,7 +94,8 @@ public class LabelResource {
 		if (la == null) {
 			throw new NotFoundException("The label wit id="+ id +" was not found");			
 		}
-		
+
+		log.log(Level.INFO, "GET Label by id "+id+" done");	
 		return la;
 	}
 	
@@ -111,7 +115,8 @@ public class LabelResource {
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(Lab.getId());
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(Lab);			
+		resp.entity(Lab);
+		log.log(Level.INFO, "POST Label "+Lab.getId()+" done");	
 		return resp.build();
 	}
 
@@ -131,22 +136,19 @@ public class LabelResource {
 		if (Lab.getName()!=null)
 			oldLabel.setName(Lab.getName());
 		
-		// Update description
-		if (Lab.getColor()!=null)
-			oldLabel.setColor(Lab.getColor());
-		
+		log.log(Level.INFO, "UPDATE Label "+Lab.getId()+" done");		
 		return Response.noContent().build();
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removePlaylist(@PathParam("id") String id) {
+	public Response removeLabel(@PathParam("id") String id) {
 		Label toberemoved=repository.getLabel(id);
 		if (toberemoved == null)
 			throw new NotFoundException("The label with id="+ id +" was not found");
 		else
 			repository.deleteLabel(id);
-		
+		log.log(Level.INFO, "DELETE Label by id "+id+" done");
 		return Response.noContent().build();
 	}
 	
@@ -175,7 +177,8 @@ public class LabelResource {
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(labelId);
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(label);			
+		resp.entity(label);
+		log.log(Level.INFO, "POST note "+noteId+"to label "+labelId+" done");
 		return resp.build();
 	}
 	
@@ -192,9 +195,8 @@ public class LabelResource {
 		if (note == null)
 			throw new NotFoundException("The note with id=" + noteId + " was not found");
 		
-		
 		repository.removeNote(labelId, noteId);		
-		
+		log.log(Level.INFO, "DELETE note of Label done");
 		return Response.noContent().build();
 	}
 }
