@@ -33,7 +33,11 @@
                     <h2>Twitch: </h2>
                     <br>
                     <hr><br>
-
+					<div class="videos">
+                        <c:forEach items="${requestScope.twstreams}" var="stream">
+                            <a href="/view?pickedTopic=${requestScope.searchQuery}&streamID=${stream.userName}"><img src=<c:out value="${stream.getThumbnailUrl()}"></c:out>></a>
+                        </c:forEach>
+                    </div>
                 </div>
 
             </div>

@@ -21,7 +21,7 @@ public class TweetsResource {
 	
 	public List<String> getTweets(String query) throws ResourceException, IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
-		String uri = "https://api.twitter.com/1.1/search/tweets.json?q="+queryFormatted+"&count=6";
+		String uri = "https://api.twitter.com/1.1/search/tweets.json?q="+queryFormatted+"&count=5";
 		log.log(Level.INFO, "tweets URI: "+uri);
 		
 		ClientResource cr = new ClientResource(uri);
@@ -29,7 +29,6 @@ public class TweetsResource {
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
 
-		log.log(Level.WARNING, cr.get().getText());
 		String st = cr.get(String.class);
 		/*String st = "{\r\n" + 
 				"    \"statuses\": [{\r\n" + 
@@ -171,11 +170,13 @@ public class TweetsResource {
 	private static List<String> getHtml(List<String> ls) throws ResourceException, IOException {
 		List<String> lhtml = new ArrayList<>();
 		for(String s : ls) {
-			String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s;
-			log.log(Level.WARNING, uri);
-			ClientResource cr = new ClientResource(uri);
-			Embeed e = cr.get(Embeed.class);
-			if(e!=null) lhtml.add(e.getHtml());
+			if(s.matches("[0-9]{19}")) {
+				String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/"+s;
+				log.log(Level.WARNING, uri);	
+				ClientResource cr = new ClientResource(uri);
+				Embeed e = cr.get(Embeed.class);
+				if(e!=null) lhtml.add(e.getHtml());
+			}
 		}
 		log.log(Level.WARNING, "html conseguido");
 		return lhtml;

@@ -185,7 +185,7 @@ public class DatumS {
 
     @JsonProperty("thumbnail_url")
     public String getThumbnailUrl() {
-        return thumbnailUrl;
+        return thumbnailUrl.replace("{width}", "110").replace("{height}", "62");
     }
 
     @JsonProperty("thumbnail_url")

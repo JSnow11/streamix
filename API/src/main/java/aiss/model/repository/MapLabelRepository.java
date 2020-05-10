@@ -16,7 +16,7 @@ public class MapLabelRepository implements LabelRepository{
 	Map<String, Label> LabelMap;
 	Map<String, Note> NoteMap;
 	private static MapLabelRepository instance=null;
-	private int index=0;			// Index to create Labels and Notes identifiers.
+	private int index=0; // Index to create Labels and Notes identifiers.
 	
 	
 	public static MapLabelRepository getInstance() {

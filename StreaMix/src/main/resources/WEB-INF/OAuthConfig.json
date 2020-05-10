@@ -1,27 +1,9 @@
 {
-	"Twitter":{
-		"tokenUrl":"https://api.twitter.com/oauth2/token",
-		"clientId":"1242495925710454784-mz0jaalEKWyTmjEXl1K4ZKZS6rb58p",
-		"clientSecret":"IIuAZwplABJnTZCsoDdXhZAKDPjO8VOHMhMjzd8lfB4VW",
-		"authorizationFormUrl":"https://discordapp.com/api/oauth2/authorize?client_id=692063894600024085&redirect_uri=http%3A%2F%2Flocalhost%3A8090%2Foauth2callback%2FDiscord&response_type=code",
-		"scopes":"identity"
-		
-		
-	},
 	"Youtube":{
-		"tokenUrl":"",
-		"clientId":"",
-		"clientSecret":"",
-		"authorizationFormUrl":"",
-		"scopes":[]
-	
-	
-	},
-	"Twitch":{
-		"tokenUrl":"",
-		"clientId":"nafycue8z9e8v8z4ntwkw2pham4nem",
-		"clientSecret":"mbq0in7y5vncdqlfylxivb7grg5vuo",
-		"authorizationFormUrl":"https://id.twitch.tv/oauth2/authorize?client_id=nafycue8z9e8v8z4ntwkw2pham4nem&redirect_uri=http://localhost&response_type=code&scope=identity",
-		"scopes":"identity"
+		"tokenUrl":"https://www.googleapis.com/oauth2/v4/token",
+		"clientId":"280979302760-annabuvk6r353h80bvm3f30t2c6a6r4k.apps.googleusercontent.com",
+		"clientSecret":"CH0r2g1KZnpTecv5-TYkDcoc",
+		"authorizationFormUrl":"https://accounts.google.com/o/oauth2/v2/auth",
+		"scopes":["https://www.googleapis.com/auth/youtube.force-ssl"]
 	}	
 }

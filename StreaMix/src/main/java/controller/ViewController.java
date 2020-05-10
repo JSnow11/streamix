@@ -15,29 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import model.resources.PostsRedditResource;
 import model.resources.TweetsResource;
 
-/**
- * Servlet implementation class statusesController
- */
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ViewController.class.getName());
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ViewController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de view realizada");
 
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
+		String streamID = request.getParameter("streamID");
 
 		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
 		
@@ -49,9 +40,10 @@ public class ViewController extends HttpServlet {
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
 		
-		if(t != null && rp != null) {
+		if(t != null /*&& rp != null*/) {
 			rd = request.getRequestDispatcher("/view.jsp");
-			request.setAttribute("videoID", videoID);
+			if(videoID!=null) request.setAttribute("videoID", videoID);
+			if(streamID!=null) request.setAttribute("streamID", streamID);
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
 		}else {
