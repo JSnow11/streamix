@@ -1,5 +1,5 @@
 
-package model.yt;
+package model.yt.comments;
 
 import java.util.HashMap;
 import java.util.Map;

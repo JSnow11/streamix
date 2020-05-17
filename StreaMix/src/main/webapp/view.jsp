@@ -57,6 +57,22 @@
 						<div>${rp}</div>
 					</c:forEach>
 				</div>
+				<div>
+				<c:forEach var="comment" items="${requestScope.comments}">
+					<div class="ytComment">
+						<img src="${comment.snippet.topLevelComment.snippet.authorProfileImageUrl}"> <b>${comment.snippet.topLevelComment.snippet.authorDisplayName }</b> <br><br>
+						${comment.snippet.topLevelComment.snippet.textOriginal}
+					</div>
+				</c:forEach>
+				
+					<div>
+						<form action="/CommentController" method="post">
+							Comentar: <input type="text" name="comentario">
+							<input hidden type="text" name="videoId" value="${requestScope.videoID }">
+							<input type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 
 			<div class="socialPicker"></div>
@@ -73,5 +89,5 @@
 		</h2>
 	</footer>
 </body>
-
 </html>
+

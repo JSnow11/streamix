@@ -33,5 +33,46 @@
     <exception-type>java.lang.Throwable</exception-type>
     <location>/error.jsp</location>
   </error-page>
-  
+  <servlet>
+    <description></description>
+    <display-name>CommentController</display-name>
+    <servlet-name>CommentController</servlet-name>
+    <servlet-class>controller.CommentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentController</servlet-name>
+    <url-pattern>/CommentController</url-pattern>
+  </servlet-mapping>
+  <!--   Youtube oAuth2 servlets    -->
+    <servlet>
+        <description/>
+        <servlet-name>YTAuthController</servlet-name>
+        <servlet-class>controller.oauth.GenericAuthController</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Youtube</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>YTAuthController</servlet-name>
+        <url-pattern>/AuthController/Youtube</url-pattern>
+    </servlet-mapping>
+  <!--GoogleDriveOAuth2Callback-->
+    <servlet>
+        <description/>
+        <servlet-name>YTOAuth2Callback</servlet-name>
+        <servlet-class>controller.oauth.OAuth2Callback</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Youtube</param-value>
+        </init-param>
+        <init-param>
+            <param-name>onSuccess</param-name>
+            <param-value>redirect:/CommentController</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>YTOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/Youtube</url-pattern>
+    </servlet-mapping>
 </web-app>

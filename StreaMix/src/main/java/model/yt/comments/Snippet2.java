@@ -1,5 +1,5 @@
 
-package model.yt;
+package model.yt.comments;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "publishedAt",
     "updatedAt"
 })
-public class Snippet_ {
+public class Snippet2 {
 
     @JsonProperty("videoId")
     private String videoId;
@@ -64,7 +64,7 @@ public class Snippet_ {
         this.videoId = videoId;
     }
 
-    public Snippet_ withVideoId(String videoId) {
+    public Snippet2 withVideoId(String videoId) {
         this.videoId = videoId;
         return this;
     }
@@ -79,7 +79,7 @@ public class Snippet_ {
         this.textDisplay = textDisplay;
     }
 
-    public Snippet_ withTextDisplay(String textDisplay) {
+    public Snippet2 withTextDisplay(String textDisplay) {
         this.textDisplay = textDisplay;
         return this;
     }
@@ -94,7 +94,7 @@ public class Snippet_ {
         this.textOriginal = textOriginal;
     }
 
-    public Snippet_ withTextOriginal(String textOriginal) {
+    public Snippet2 withTextOriginal(String textOriginal) {
         this.textOriginal = textOriginal;
         return this;
     }
@@ -109,7 +109,7 @@ public class Snippet_ {
         this.authorDisplayName = authorDisplayName;
     }
 
-    public Snippet_ withAuthorDisplayName(String authorDisplayName) {
+    public Snippet2 withAuthorDisplayName(String authorDisplayName) {
         this.authorDisplayName = authorDisplayName;
         return this;
     }
@@ -124,7 +124,7 @@ public class Snippet_ {
         this.authorProfileImageUrl = authorProfileImageUrl;
     }
 
-    public Snippet_ withAuthorProfileImageUrl(String authorProfileImageUrl) {
+    public Snippet2 withAuthorProfileImageUrl(String authorProfileImageUrl) {
         this.authorProfileImageUrl = authorProfileImageUrl;
         return this;
     }
@@ -139,7 +139,7 @@ public class Snippet_ {
         this.authorChannelUrl = authorChannelUrl;
     }
 
-    public Snippet_ withAuthorChannelUrl(String authorChannelUrl) {
+    public Snippet2 withAuthorChannelUrl(String authorChannelUrl) {
         this.authorChannelUrl = authorChannelUrl;
         return this;
     }
@@ -154,7 +154,7 @@ public class Snippet_ {
         this.authorChannelId = authorChannelId;
     }
 
-    public Snippet_ withAuthorChannelId(AuthorChannelId authorChannelId) {
+    public Snippet2 withAuthorChannelId(AuthorChannelId authorChannelId) {
         this.authorChannelId = authorChannelId;
         return this;
     }
@@ -169,7 +169,7 @@ public class Snippet_ {
         this.canRate = canRate;
     }
 
-    public Snippet_ withCanRate(Boolean canRate) {
+    public Snippet2 withCanRate(Boolean canRate) {
         this.canRate = canRate;
         return this;
     }
@@ -184,7 +184,7 @@ public class Snippet_ {
         this.viewerRating = viewerRating;
     }
 
-    public Snippet_ withViewerRating(String viewerRating) {
+    public Snippet2 withViewerRating(String viewerRating) {
         this.viewerRating = viewerRating;
         return this;
     }
@@ -199,7 +199,7 @@ public class Snippet_ {
         this.likeCount = likeCount;
     }
 
-    public Snippet_ withLikeCount(Integer likeCount) {
+    public Snippet2 withLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
         return this;
     }
@@ -214,7 +214,7 @@ public class Snippet_ {
         this.publishedAt = publishedAt;
     }
 
-    public Snippet_ withPublishedAt(String publishedAt) {
+    public Snippet2 withPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
         return this;
     }
@@ -229,7 +229,7 @@ public class Snippet_ {
         this.updatedAt = updatedAt;
     }
 
-    public Snippet_ withUpdatedAt(String updatedAt) {
+    public Snippet2 withUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -244,7 +244,7 @@ public class Snippet_ {
         this.additionalProperties.put(name, value);
     }
 
-    public Snippet_ withAdditionalProperty(String name, Object value) {
+    public Snippet2 withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

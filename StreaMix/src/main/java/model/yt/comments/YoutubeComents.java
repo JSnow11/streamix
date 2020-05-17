@@ -1,7 +1,8 @@
 
-package model.yt;
+package model.yt.comments;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -14,19 +15,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "id",
-    "snippet"
+    "pageInfo",
+    "items"
 })
-public class TopLevelComment {
+public class YoutubeComents {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("snippet")
-    private Snippet_ snippet;
+    @JsonProperty("pageInfo")
+    private PageInfo pageInfo;
+    @JsonProperty("items")
+    private List<Item> items = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -40,7 +41,7 @@ public class TopLevelComment {
         this.kind = kind;
     }
 
-    public TopLevelComment withKind(String kind) {
+    public YoutubeComents withKind(String kind) {
         this.kind = kind;
         return this;
     }
@@ -55,38 +56,38 @@ public class TopLevelComment {
         this.etag = etag;
     }
 
-    public TopLevelComment withEtag(String etag) {
+    public YoutubeComents withEtag(String etag) {
         this.etag = etag;
         return this;
     }
 
-    @JsonProperty("id")
-    public String getId() {
-        return id;
+    @JsonProperty("pageInfo")
+    public PageInfo getPageInfo() {
+        return pageInfo;
     }
 
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
+    @JsonProperty("pageInfo")
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
-    public TopLevelComment withId(String id) {
-        this.id = id;
+    public YoutubeComents withPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
         return this;
     }
 
-    @JsonProperty("snippet")
-    public Snippet_ getSnippet() {
-        return snippet;
+    @JsonProperty("items")
+    public List<Item> getItems() {
+        return items;
     }
 
-    @JsonProperty("snippet")
-    public void setSnippet(Snippet_ snippet) {
-        this.snippet = snippet;
+    @JsonProperty("items")
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
-    public TopLevelComment withSnippet(Snippet_ snippet) {
-        this.snippet = snippet;
+    public YoutubeComents withItems(List<Item> items) {
+        this.items = items;
         return this;
     }
 
@@ -100,7 +101,7 @@ public class TopLevelComment {
         this.additionalProperties.put(name, value);
     }
 
-    public TopLevelComment withAdditionalProperty(String name, Object value) {
+    public YoutubeComents withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

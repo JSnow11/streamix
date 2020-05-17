@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.resources.ComentsResource;
 import model.resources.PostsRedditResource;
 import model.resources.TweetsResource;
+import model.yt.comments.Item;
 
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,12 +42,18 @@ public class ViewController extends HttpServlet {
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
 		
-		if(t != null /*&& rp != null*/) {
+		String accessToken = (String) request.getSession().getAttribute("YouTube-token");
+		ComentsResource ytcr = new ComentsResource(accessToken);
+		List<Item> comments = ytcr.getComents(videoID);
+		
+		if(t != null && rp != null) {
 			rd = request.getRequestDispatcher("/view.jsp");
 			if(videoID!=null) request.setAttribute("videoID", videoID);
 			if(streamID!=null) request.setAttribute("streamID", streamID);
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
+			request.setAttribute("comments", comments);
+			request.setAttribute("pickedTopic", pickedTopic);
 		}else {
 			log.log(Level.SEVERE, "Objects = null");
 			List<String> errores = new ArrayList<>();
