@@ -17,37 +17,40 @@
                 <form action="/search" method="GET">
                     <input type="search" id="searchQuery" name="searchQuery" placeholder="Search" />
                 </form>
+                <a href="https://github.com/JSnow11/streamix/projects/1"><img src="images/GitHubIcon.png" alt="git" width="30"></a>
+                <a href="about.html"><img src="images/about.png" alt="about" width="30"></a>
             </div>
-            <div class=container>
+            <div class="viewContainer">
                 <div class="yt">
-                    <h2>YouTube: </h2>
-                    <br>
-                    <hr><br>
-                    <div class="videos">
-                        <c:forEach items="${requestScope.ytvideos}" var="video">
-                            <a href="/view?pickedTopic=${requestScope.searchQuery}&videoID=${video.id.videoId}"><img src=<c:out value="${video.snippet.thumbnails.medium.url}"></c:out> width="110"></a>
-                        </c:forEach>
+                    <h1>  <img src="images/yt.png" height="40px"> YouTube: </h1>
+                    <div class="scroll">
+	                    <div class="videos">
+	                        <c:forEach items="${requestScope.ytvideos}" var="video">
+	                        <div class="video">
+	                            <a href="/view?pickedTopic=${requestScope.searchQuery}&videoID=${video.id.videoId}">
+	                            	<img src=<c:out value="${video.snippet.thumbnails.medium.url}"></c:out> width="110"><br>
+	                            </a>
+	                            <p><b> @ <c:out value="${video.snippet.channelTitle}"></c:out></b></p>
+	                            <p><c:out value="${video.snippet.title}"></c:out></p>
+	                        </div>
+	                        </c:forEach>
+	                    </div>
                     </div>
                 </div>
                 <div class="twitch">
-                    <h2>Twitch: </h2>
-                    <br>
-                    <hr><br>
-					<div class="videos">
-                        <c:forEach items="${requestScope.twstreams}" var="stream">
-                            <a href="/view?pickedTopic=${requestScope.searchQuery}&streamID=${stream.userName}"><img src=<c:out value="${stream.getThumbnailUrl()}"></c:out>></a>
-                        </c:forEach>
-                    </div>
+                    <h1>  <img src="images/twitch.png" height="40px"> Twitch: </h1>
+                    <div class="scroll">
+						<div class="videos">
+	                        <c:forEach items="${requestScope.twstreams}" var="stream">
+	                        <div class="video">
+	                            <a href="/view?pickedTopic=${requestScope.searchQuery}&streamID=${stream.userName}"><img src=<c:out value="${stream.getThumbnailUrl()}"></c:out>></a>
+	                        	<p><b> @ <c:out value="${stream.userName}"></c:out></b></p>
+	                            <p><c:out value="${stream.title}"></c:out></p>    
+	                        </div>
+	                        </c:forEach>
+	                    </div>
+					</div>
                 </div>
-
             </div>
-            <footer>
-                <h2>
-                    <a href="https://github.com/JSnow11/streamix/projects/1"><img src="images/GitHubIcon.png" alt="git" width="30"></a>
-                    <a href="about.html"><img src="images/about.png" alt="about" width="30"></a>
-                </h2>
-            </footer>
-
         </body>
-
-        </html>
+</html>

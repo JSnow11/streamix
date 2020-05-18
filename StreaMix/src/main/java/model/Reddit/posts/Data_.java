@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "pwls",
     "link_flair_css_class",
     "downs",
-    "thumbnail_height",
     "hide_score",
     "name",
     "quarantine",
@@ -39,7 +38,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "ups",
     "total_awards_received",
     "media_embed",
-    "thumbnail_width",
     "author_flair_template_id",
     "is_original_content",
     "user_reports",
@@ -82,6 +80,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "all_awardings",
     "awarders",
     "media_only",
+    "link_flair_template_id",
     "can_gild",
     "spoiler",
     "locked",
@@ -115,8 +114,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "created_utc",
     "num_crossposts",
     "media",
-    "is_video",
-    "link_flair_template_id"
+    "is_video"
 })
 public class Data_ {
 
@@ -147,11 +145,9 @@ public class Data_ {
     @JsonProperty("pwls")
     private Integer pwls;
     @JsonProperty("link_flair_css_class")
-    private String linkFlairCssClass;
+    private Object linkFlairCssClass;
     @JsonProperty("downs")
     private Integer downs;
-    @JsonProperty("thumbnail_height")
-    private Object thumbnailHeight;
     @JsonProperty("hide_score")
     private Boolean hideScore;
     @JsonProperty("name")
@@ -172,8 +168,6 @@ public class Data_ {
     private Integer totalAwardsReceived;
     @JsonProperty("media_embed")
     private MediaEmbed mediaEmbed;
-    @JsonProperty("thumbnail_width")
-    private Object thumbnailWidth;
     @JsonProperty("author_flair_template_id")
     private Object authorFlairTemplateId;
     @JsonProperty("is_original_content")
@@ -191,7 +185,7 @@ public class Data_ {
     @JsonProperty("secure_media_embed")
     private SecureMediaEmbed secureMediaEmbed;
     @JsonProperty("link_flair_text")
-    private String linkFlairText;
+    private Object linkFlairText;
     @JsonProperty("can_mod_post")
     private Boolean canModPost;
     @JsonProperty("score")
@@ -203,7 +197,7 @@ public class Data_ {
     @JsonProperty("thumbnail")
     private String thumbnail;
     @JsonProperty("edited")
-    private Boolean edited;
+    private String edited;
     @JsonProperty("author_flair_css_class")
     private Object authorFlairCssClass;
     @JsonProperty("author_flair_richtext")
@@ -233,7 +227,7 @@ public class Data_ {
     @JsonProperty("allow_live_comments")
     private Boolean allowLiveComments;
     @JsonProperty("selftext_html")
-    private Object selftextHtml;
+    private String selftextHtml;
     @JsonProperty("likes")
     private Object likes;
     @JsonProperty("suggested_sort")
@@ -258,6 +252,8 @@ public class Data_ {
     private List<Object> awarders = null;
     @JsonProperty("media_only")
     private Boolean mediaOnly;
+    @JsonProperty("link_flair_template_id")
+    private String linkFlairTemplateId;
     @JsonProperty("can_gild")
     private Boolean canGild;
     @JsonProperty("spoiler")
@@ -326,8 +322,6 @@ public class Data_ {
     private Object media;
     @JsonProperty("is_video")
     private Boolean isVideo;
-    @JsonProperty("link_flair_template_id")
-    private String linkFlairTemplateId;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -527,16 +521,16 @@ public class Data_ {
     }
 
     @JsonProperty("link_flair_css_class")
-    public String getLinkFlairCssClass() {
+    public Object getLinkFlairCssClass() {
         return linkFlairCssClass;
     }
 
     @JsonProperty("link_flair_css_class")
-    public void setLinkFlairCssClass(String linkFlairCssClass) {
+    public void setLinkFlairCssClass(Object linkFlairCssClass) {
         this.linkFlairCssClass = linkFlairCssClass;
     }
 
-    public Data_ withLinkFlairCssClass(String linkFlairCssClass) {
+    public Data_ withLinkFlairCssClass(Object linkFlairCssClass) {
         this.linkFlairCssClass = linkFlairCssClass;
         return this;
     }
@@ -553,21 +547,6 @@ public class Data_ {
 
     public Data_ withDowns(Integer downs) {
         this.downs = downs;
-        return this;
-    }
-
-    @JsonProperty("thumbnail_height")
-    public Object getThumbnailHeight() {
-        return thumbnailHeight;
-    }
-
-    @JsonProperty("thumbnail_height")
-    public void setThumbnailHeight(Object thumbnailHeight) {
-        this.thumbnailHeight = thumbnailHeight;
-    }
-
-    public Data_ withThumbnailHeight(Object thumbnailHeight) {
-        this.thumbnailHeight = thumbnailHeight;
         return this;
     }
 
@@ -721,21 +700,6 @@ public class Data_ {
         return this;
     }
 
-    @JsonProperty("thumbnail_width")
-    public Object getThumbnailWidth() {
-        return thumbnailWidth;
-    }
-
-    @JsonProperty("thumbnail_width")
-    public void setThumbnailWidth(Object thumbnailWidth) {
-        this.thumbnailWidth = thumbnailWidth;
-    }
-
-    public Data_ withThumbnailWidth(Object thumbnailWidth) {
-        this.thumbnailWidth = thumbnailWidth;
-        return this;
-    }
-
     @JsonProperty("author_flair_template_id")
     public Object getAuthorFlairTemplateId() {
         return authorFlairTemplateId;
@@ -857,16 +821,16 @@ public class Data_ {
     }
 
     @JsonProperty("link_flair_text")
-    public String getLinkFlairText() {
+    public Object getLinkFlairText() {
         return linkFlairText;
     }
 
     @JsonProperty("link_flair_text")
-    public void setLinkFlairText(String linkFlairText) {
+    public void setLinkFlairText(Object linkFlairText) {
         this.linkFlairText = linkFlairText;
     }
 
-    public Data_ withLinkFlairText(String linkFlairText) {
+    public Data_ withLinkFlairText(Object linkFlairText) {
         this.linkFlairText = linkFlairText;
         return this;
     }
@@ -947,16 +911,16 @@ public class Data_ {
     }
 
     @JsonProperty("edited")
-    public Boolean getEdited() {
+    public String getEdited() {
         return edited;
     }
 
     @JsonProperty("edited")
-    public void setEdited(Boolean edited) {
+    public void setEdited(String edited) {
         this.edited = edited;
     }
 
-    public Data_ withEdited(Boolean edited) {
+    public Data_ withEdited(String edited) {
         this.edited = edited;
         return this;
     }
@@ -1172,16 +1136,16 @@ public class Data_ {
     }
 
     @JsonProperty("selftext_html")
-    public Object getSelftextHtml() {
+    public String getSelftextHtml() {
         return selftextHtml;
     }
 
     @JsonProperty("selftext_html")
-    public void setSelftextHtml(Object selftextHtml) {
+    public void setSelftextHtml(String selftextHtml) {
         this.selftextHtml = selftextHtml;
     }
 
-    public Data_ withSelftextHtml(Object selftextHtml) {
+    public Data_ withSelftextHtml(String selftextHtml) {
         this.selftextHtml = selftextHtml;
         return this;
     }
@@ -1363,6 +1327,21 @@ public class Data_ {
 
     public Data_ withMediaOnly(Boolean mediaOnly) {
         this.mediaOnly = mediaOnly;
+        return this;
+    }
+
+    @JsonProperty("link_flair_template_id")
+    public String getLinkFlairTemplateId() {
+        return linkFlairTemplateId;
+    }
+
+    @JsonProperty("link_flair_template_id")
+    public void setLinkFlairTemplateId(String linkFlairTemplateId) {
+        this.linkFlairTemplateId = linkFlairTemplateId;
+    }
+
+    public Data_ withLinkFlairTemplateId(String linkFlairTemplateId) {
+        this.linkFlairTemplateId = linkFlairTemplateId;
         return this;
     }
 
@@ -1873,21 +1852,6 @@ public class Data_ {
 
     public Data_ withIsVideo(Boolean isVideo) {
         this.isVideo = isVideo;
-        return this;
-    }
-
-    @JsonProperty("link_flair_template_id")
-    public String getLinkFlairTemplateId() {
-        return linkFlairTemplateId;
-    }
-
-    @JsonProperty("link_flair_template_id")
-    public void setLinkFlairTemplateId(String linkFlairTemplateId) {
-        this.linkFlairTemplateId = linkFlairTemplateId;
-    }
-
-    public Data_ withLinkFlairTemplateId(String linkFlairTemplateId) {
-        this.linkFlairTemplateId = linkFlairTemplateId;
         return this;
     }
 

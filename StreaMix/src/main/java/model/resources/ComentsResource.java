@@ -1,11 +1,13 @@
 package model.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
+import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
@@ -26,9 +28,10 @@ public class ComentsResource {
     
     
     public ComentsResource(String access_token) {
-        this.access_token = access_token;
+		this.access_token = access_token;
     }
-    public List<Item> getComents(String videoid) {
+    
+	public List<Item> getComents(String videoid) {
         ClientResource cr = new ClientResource(uri +"?part=snippet&maxResults=20&videoId="+videoid+"&key="+apiKey);
         YoutubeComents coments = cr.get(YoutubeComents.class);
         log.log(Level.INFO, "comentarios solicitados");
@@ -36,8 +39,9 @@ public class ComentsResource {
     }
     
     public void postComents(String videoid, String comment) {
-    	ClientResource cr = new ClientResource(uri + "?part=snippet&key=" + apiKey);
-    	
+    	ClientResource cr = new ClientResource(uri + "?part=snippet&key=" + apiKey+"&access_token="+access_token);
+    	log.log(Level.INFO, "TOKEN usado " + access_token.toString());
+    	YoutubeComents ytc = new YoutubeComents();
     	Item newcomment = new Item();
     	Snippet sn = new Snippet();
     	TopLevelComment tlc = new TopLevelComment();
@@ -47,12 +51,11 @@ public class ComentsResource {
     	sn.setVideoId(videoid);
     	sn.setTopLevelComment(tlc);
     	newcomment.setSnippet(sn);
-    	
-    	ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
-		chr.setRawValue(access_token);
-		cr.setChallengeResponse(chr);
-    	Tools.addHeader(cr, "Content-Type", "application/json");
-    	
-    	cr.post(newcomment, Item.class);  
+    	List<Item> ls = new ArrayList<Item>();
+    	ls.add(newcomment);
+    	ytc.setItems(ls);
+    	log.log(Level.INFO, "COMMENT SETEADO");	
+    	log.log(Level.INFO, comment + ", " + videoid);
+    	cr.post(ytc, YoutubeComents.class);  
     }
 }

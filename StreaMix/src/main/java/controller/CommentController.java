@@ -31,8 +31,8 @@ public class CommentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
-        String videoId = request.getParameter("videoId");
-        String content = request.getParameter("content");
+        String videoId = request.getParameter("videoID");
+        String content = request.getParameter("comentario");
         String pickedTopic = request.getParameter("pickedTopic");
          
         if (accessToken != null && !"".equals(accessToken)) {

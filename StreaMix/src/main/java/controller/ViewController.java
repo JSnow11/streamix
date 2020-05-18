@@ -41,18 +41,20 @@ public class ViewController extends HttpServlet {
 		
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
-		
-		String accessToken = (String) request.getSession().getAttribute("YouTube-token");
-		ComentsResource ytcr = new ComentsResource(accessToken);
-		List<Item> comments = ytcr.getComents(videoID);
+			
 		
 		if(t != null && rp != null) {
 			rd = request.getRequestDispatcher("/view.jsp");
-			if(videoID!=null) request.setAttribute("videoID", videoID);
+			if(videoID!=null) {
+				request.setAttribute("videoID", videoID);
+				String accessToken = (String) request.getSession().getAttribute("YouTube-token");
+				ComentsResource ytcr = new ComentsResource(accessToken);
+				List<Item> comments = ytcr.getComents(videoID);
+				request.setAttribute("comments", comments);
+			}
 			if(streamID!=null) request.setAttribute("streamID", streamID);
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
-			request.setAttribute("comments", comments);
 			request.setAttribute("pickedTopic", pickedTopic);
 		}else {
 			log.log(Level.SEVERE, "Objects = null");

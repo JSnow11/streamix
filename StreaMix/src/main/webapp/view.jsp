@@ -11,6 +11,32 @@
 <link rel="icon" href="images/Logo.png">
 <link rel="stylesheet" href="style.css">
 <title>StreaMix</title>
+
+<script>
+			function show(b) {
+				var twitter = document.getElementById("twitterPosts");
+				var reddit = document.getElementById("redditPosts");
+				var chat = document.getElementById("chatPosts");
+				
+			  if (b == 1) {
+			    twitter.style.display = "block";
+			    reddit.style.display = "none";
+			    chat.style.display = "none";
+			    
+			  } else if(b == 2) {
+				twitter.style.display = "none";
+				reddit.style.display = "block";
+				chat.style.display = "none";
+				
+			  }else if(b == 3) {
+				twitter.style.display = "none";
+				reddit.style.display = "none";
+				chat.style.display = "block";
+			  }else{
+				  document.body.innerHTML = "<h1>Today's date is</h1>"
+			  }
+			}
+		</script>
 </head>
 
 <body>
@@ -47,38 +73,54 @@
 
 		<div class="social">
 			<div class="scroll">
-				<div>
+				<div id="twitterPosts">
 					<c:forEach var="tweet" items="${requestScope.tweets}">
 						<div>${tweet}</div>
 					</c:forEach>
 				</div>
-				<div>
+				<div id="redditPosts">
 					<c:forEach var="rp" items="${requestScope.redditPosts}">
-						<div>${rp}</div>
+						<div class="redditPost">${rp}</div>
 					</c:forEach>
 				</div>
-				<div>
-				<c:forEach var="comment" items="${requestScope.comments}">
-					<div class="ytComment">
-						<img src="${comment.snippet.topLevelComment.snippet.authorProfileImageUrl}"> <b>${comment.snippet.topLevelComment.snippet.authorDisplayName }</b> <br><br>
-						${comment.snippet.topLevelComment.snippet.textOriginal}
-					</div>
-				</c:forEach>
-				
+				<div id="chatPosts">
+					<%
+						if(request.getAttribute("videoID") != null) {
+					%>
+					<c:forEach var="comment" items="${requestScope.comments}">
+						<div class="ytComment">
+							<img
+								src="${comment.snippet.topLevelComment.snippet.authorProfileImageUrl}">
+							<b>${comment.snippet.topLevelComment.snippet.authorDisplayName }</b>
+							<br>
+							<br> ${comment.snippet.topLevelComment.snippet.textOriginal}
+						</div>
+					</c:forEach>
 					<div>
 						<form action="/CommentController" method="post">
-							Comentar: <input type="text" name="comentario">
-							<input hidden type="text" name="videoId" value="${requestScope.videoID }">
-							<input type="submit">
+							Comentar: <input type="text" name="comentario"> <input
+								hidden type="text" name="videoID"
+								value="${requestScope.videoID}"> <input type="submit">
 						</form>
 					</div>
+					<%
+						} else {
+					%>
+
+					<%
+						}
+					%>
 				</div>
 			</div>
-
-			<div class="socialPicker"></div>
+			<div class="socialPicker">
+				<img onclick="show(1)" src="images/twitterIcon.png" width="50px">
+				<img onclick="show(2)" src="images/reddit.png" width="50px">
+				<img onclick="show(3)" src="images/chatIcon.png" width="50px">
+				<button onclick="show(twitter)">TW</button>
+			</div>
 		</div>
+		
 	</div>
-
 
 	<footer>
 		<h2>
