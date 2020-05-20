@@ -20,14 +20,13 @@ body {
 }
 
 .errorContainer {
-	background-color:rgba(14, 14, 14, 0.534);
+    background-color: rgba(14, 14, 14, 0.534);
     align-items: center;
     text-align: center;
     height: 40%;
     margin: 2%;
     padding: 80px;
-    border-radius:20px; 
-    
+    border-radius: 20px;
 }
 
 .container {
@@ -249,6 +248,7 @@ body {
 
 .socialPicker img:hover {
     background-color: rgba(14, 14, 14, 0.685);
+    border-radius: 40px;
 }
 
 .socialPicker:hover {

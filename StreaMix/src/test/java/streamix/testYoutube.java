@@ -17,16 +17,15 @@ import model.yt.comments.Item;
 public class testYoutube {
 	String accesToken=null;
 	public final ComentsResource comentsR = new ComentsResource(accesToken);
-	public final ComentsResource coPost = new ComentsResource(accesToken);
+	
 	@Test
 	public void getVideoTest() throws UnsupportedEncodingException {
-		String query="Valorant";
-		String queryFormatted = URLEncoder.encode(query, "UTF-8");
 		YTSearchResource videosr = new YTSearchResource();
-		YtSearch videos = videosr.getVideos(queryFormatted);
+		YtSearch videos = videosr.getVideos("Valorant");
 		assertNotNull("The videos are not null", videos);
 		assertTrue("The list of coments is not empty", videos.getItems().size() >= 1);
 	}
+	
 	@Test
 	public void getCommentsTest() {
 		String videoId="yYz_TcxpG2s";
@@ -39,7 +38,7 @@ public class testYoutube {
 	public void postCommentTest() {
 		String videoId="yYz_TcxpG2s";
 		String content="Hola, este comentario es una prueba";
-		Boolean b=coPost.postComents(videoId, content);
+		Boolean b=comentsR.postComents(videoId, content);
 		assertTrue("The coment have been post succesfully", b);
 	}
 }
