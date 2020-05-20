@@ -1,5 +1,6 @@
 package model.resources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,33 +30,48 @@ public class ComentsResource {
 	}
 
 	public List<Item> getComents(String videoid) {
-		ClientResource cr = new ClientResource(
-				uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
-		YoutubeComents coments = cr.get(YoutubeComents.class);
-		log.log(Level.INFO, "comentarios solicitados");
-		return coments.getItems();
+		try {
+			ClientResource cr = new ClientResource(
+					uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+			YoutubeComents coments = cr.get(YoutubeComents.class);
+			log.log(Level.INFO, "comentarios solicitados");
+			return coments.getItems();
+		}
+		catch(ResourceException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
-	public void postComents(String videoid, String comment) {
-		ClientResource cr = new ClientResource(uri + "part=snippet&access_token=" + access_token);
-		log.log(Level.INFO, "TOKEN usado " + access_token.toString() + "en la uri: " + uri
-				+ "part=snippet&access_token=" + access_token);
-		YoutubeComents ytc = new YoutubeComents();
-		Item newcomment = new Item();
-		Snippet sn = new Snippet();
-		TopLevelComment tlc = new TopLevelComment();
-		Snippet2 sn2 = new Snippet2();
-		sn2.setTextOriginal(comment);
-		tlc.setSnippet(sn2);
-		sn.setVideoId(videoid);
-		sn.setTopLevelComment(tlc);
-		newcomment.setSnippet(sn);
-		List<Item> ls = new ArrayList<Item>();
-		ls.add(newcomment);
-		ytc.setItems(ls);
-		log.log(Level.INFO, "COMMENT SETEADO");
-		log.log(Level.INFO, comment + ", " + videoid);
-		cr.post(ytc, YoutubeComents.class);
+	public Boolean postComents(String videoid, String comment) {
+		try {
+			ClientResource cr = new ClientResource(uri + "part=snippet&access_token=" + access_token);
+			log.log(Level.INFO, "TOKEN usado " + access_token.toString() + "en la uri: " + uri
+					+ "part=snippet&access_token=" + access_token);
+			YoutubeComents ytc = new YoutubeComents();
+			Item newcomment = new Item();
+			Snippet sn = new Snippet();
+			TopLevelComment tlc = new TopLevelComment();
+			Snippet2 sn2 = new Snippet2();
+			sn2.setTextOriginal(comment);
+			tlc.setSnippet(sn2);
+			sn.setVideoId(videoid);
+			sn.setTopLevelComment(tlc);
+			newcomment.setSnippet(sn);
+			List<Item> ls = new ArrayList<Item>();
+			ls.add(newcomment);
+			ytc.setItems(ls);
+			log.log(Level.INFO, "COMMENT SETEADO");
+			log.log(Level.INFO, comment + ", " + videoid);
+			cr.post(ytc, YoutubeComents.class);
+			return true;
+		}
+		catch(ResourceException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 }
