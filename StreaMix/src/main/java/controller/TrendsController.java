@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import model.resources.GamesTwitchResource;
 import model.resources.TrendsResource;
 import model.twitch.Games;
@@ -23,38 +22,42 @@ public class TrendsController extends HttpServlet {
 	private static final Logger log = Logger.getLogger(TrendsController.class.getName());
 
 	public TrendsController() {
-        super();
-        
-    }
+		super();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de trends realizada");
 
 		RequestDispatcher rd = null;
 		TrendsResource tr = new TrendsResource();
 		Trending trends = tr.getTrends();
-		
+
 		GamesTwitchResource gtr = new GamesTwitchResource();
 		Games games = gtr.getGames();
-		
-		if(trends != null && games != null) {
+
+		if (trends != null && games != null) {
 			rd = request.getRequestDispatcher("/browser.jsp");
 			request.setAttribute("trends", trends.getTrends());
 			request.setAttribute("games", games.getData());
-		}else {
+		} else {
 			log.log(Level.SEVERE, "Objects = null");
 			List<String> errores = new ArrayList<>();
-			if(trends == null) errores.add("Fallo al obtener Trends de Twitter");
-			if(games == null) errores.add("Fallo al obtener los Streams de Twitch");
+			if (trends == null)
+				errores.add("Fallo al obtener Trends de Twitter");
+			if (games == null)
+				errores.add("Fallo al obtener los Streams de Twitch");
 			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
-		
-		rd.forward(request, response);	
-	
+
+		rd.forward(request, response);
+
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

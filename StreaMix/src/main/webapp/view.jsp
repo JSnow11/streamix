@@ -32,8 +32,6 @@
 				twitter.style.display = "none";
 				reddit.style.display = "none";
 				chat.style.display = "block";
-			  }else{
-				  document.body.innerHTML = "<h1>Today's date is</h1>"
 			  }
 			}
 		</script>
@@ -98,9 +96,11 @@
 					</c:forEach>
 					<div>
 						<form action="/CommentController" method="post">
-							Comentar: <input type="text" name="comentario"> <input
-								hidden type="text" name="videoID"
-								value="${requestScope.videoID}"> <input type="submit">
+							Comentar: <input type="text" name="comentario"> 
+								<input hidden type="text" name="videoID"
+								value="${requestScope.videoID}">
+								<input hidden type="text" name="pickedTopic"
+								value="${requestScope.pickedTopic}"> <input type="submit">
 						</form>
 					</div>
 					<%
@@ -116,7 +116,6 @@
 				<img onclick="show(1)" src="images/twitterIcon.png" width="50px">
 				<img onclick="show(2)" src="images/reddit.png" width="50px">
 				<img onclick="show(3)" src="images/chatIcon.png" width="50px">
-				<button onclick="show(twitter)">TW</button>
 			</div>
 		</div>
 		

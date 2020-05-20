@@ -4,6 +4,7 @@
 		"clientId":"280979302760-annabuvk6r353h80bvm3f30t2c6a6r4k.apps.googleusercontent.com",
 		"clientSecret":"CH0r2g1KZnpTecv5-TYkDcoc",
 		"authorizationFormUrl":"https://accounts.google.com/o/oauth2/v2/auth",
-		"scopes":["https://www.googleapis.com/auth/youtube.force-ssl"]
+		"scopes":["https://www.googleapis.com/auth/youtube",
+				"https://www.googleapis.com/auth/youtube.force-ssl"]
 	}	
 }

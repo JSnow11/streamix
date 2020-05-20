@@ -18,44 +18,44 @@ import model.yt.comments.TopLevelComment;
 import model.yt.comments.YoutubeComents;
 import utility.Tools;
 
-
-
 public class ComentsResource {
 	private static final Logger log = Logger.getLogger(ComentsResource.class.getName());
-	public static final String apiKey = "AIzaSyAyYc09Pm_U_PLG5wu-rmLGsp-NZj5Kq8k";
-    private final String access_token;
-    private final String uri = "https://www.googleapis.com/youtube/v3/commentThreads";
-    
-    
-    public ComentsResource(String access_token) {
+	public static final String apiKey = "AIzaSyC7Re8HZ04TuYF-0pH3Q_oK6lO_uCUfWkA";
+	private final String access_token;
+	private final String uri = "https://www.googleapis.com/youtube/v3/commentThreads";
+
+	public ComentsResource(String access_token) {
 		this.access_token = access_token;
-    }
-    
+	}
+
 	public List<Item> getComents(String videoid) {
-        ClientResource cr = new ClientResource(uri +"?part=snippet&maxResults=20&videoId="+videoid+"&key="+apiKey);
-        YoutubeComents coments = cr.get(YoutubeComents.class);
-        log.log(Level.INFO, "comentarios solicitados");
-        return coments.getItems();
-    }
-    
-    public void postComents(String videoid, String comment) {
-    	ClientResource cr = new ClientResource(uri + "?part=snippet&key=" + apiKey+"&access_token="+access_token);
-    	log.log(Level.INFO, "TOKEN usado " + access_token.toString());
-    	YoutubeComents ytc = new YoutubeComents();
-    	Item newcomment = new Item();
-    	Snippet sn = new Snippet();
-    	TopLevelComment tlc = new TopLevelComment();
-    	Snippet2 sn2 = new Snippet2();
-    	sn2.setTextOriginal(comment);
-    	tlc.setSnippet(sn2);
-    	sn.setVideoId(videoid);
-    	sn.setTopLevelComment(tlc);
-    	newcomment.setSnippet(sn);
-    	List<Item> ls = new ArrayList<Item>();
-    	ls.add(newcomment);
-    	ytc.setItems(ls);
-    	log.log(Level.INFO, "COMMENT SETEADO");	
-    	log.log(Level.INFO, comment + ", " + videoid);
-    	cr.post(ytc, YoutubeComents.class);  
-    }
+		ClientResource cr = new ClientResource(
+				uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+		YoutubeComents coments = cr.get(YoutubeComents.class);
+		log.log(Level.INFO, "comentarios solicitados");
+		return coments.getItems();
+	}
+
+	public void postComents(String videoid, String comment) {
+		ClientResource cr = new ClientResource(uri + "part=snippet&access_token=" + access_token);
+		log.log(Level.INFO, "TOKEN usado " + access_token.toString() + "en la uri: " + uri
+				+ "part=snippet&access_token=" + access_token);
+		YoutubeComents ytc = new YoutubeComents();
+		Item newcomment = new Item();
+		Snippet sn = new Snippet();
+		TopLevelComment tlc = new TopLevelComment();
+		Snippet2 sn2 = new Snippet2();
+		sn2.setTextOriginal(comment);
+		tlc.setSnippet(sn2);
+		sn.setVideoId(videoid);
+		sn.setTopLevelComment(tlc);
+		newcomment.setSnippet(sn);
+		List<Item> ls = new ArrayList<Item>();
+		ls.add(newcomment);
+		ytc.setItems(ls);
+		log.log(Level.INFO, "COMMENT SETEADO");
+		log.log(Level.INFO, comment + ", " + videoid);
+		cr.post(ytc, YoutubeComents.class);
+	}
+
 }

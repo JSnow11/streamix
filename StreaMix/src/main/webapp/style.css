@@ -19,6 +19,17 @@ body {
     overflow: hidden;
 }
 
+.errorContainer {
+	background-color:rgba(14, 14, 14, 0.534);
+    align-items: center;
+    text-align: center;
+    height: 40%;
+    margin: 2%;
+    padding: 80px;
+    border-radius:20px; 
+    
+}
+
 .container {
     display: flex;
     flex-flow: row;
@@ -53,7 +64,6 @@ body {
     border-radius: 20px;
     justify-content: center;
     height: 92%;
-    
 }
 
 .videos {
@@ -78,6 +88,7 @@ body {
     justify-content: center;
     height: 92%;
 }
+
 
 /*--------------------------------------------------------------------------------------------------*/
 
@@ -138,28 +149,26 @@ body {
     padding: 20px;
 }
 
-.redditPost{
-	background-color: white;
-	padding: 2%;
-	border-radius: 10px;
-	margin-bottom: 1%;
-	margin-top: 2%;
-	
-}
-
-
-.video{
-	width:130px;
-	height:200px;
-	padding:2%;
-	margin:1%;
+.redditPost {
+    background-color: white;
+    padding: 2%;
     border-radius: 10px;
-    text-overflow: ellipsis; 
-	background-color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 1%;
+    margin-top: 2%;
 }
 
-.video:hover{
-	background-color: rgba(0, 0, 0, 0.6);
+.video {
+    width: 130px;
+    height: 200px;
+    padding: 2%;
+    margin: 1%;
+    border-radius: 10px;
+    text-overflow: ellipsis;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.video:hover {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -201,18 +210,17 @@ body {
     height: 90%;
 }
 
-.ytComment{
-	background-color: white;
-	border-radius: 10px;
-	color: black;
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-top:2%;
-	padding-bottom:2%;
-	text-align: left;
-	margin-top: 2%;
+.ytComment {
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: left;
+    margin-top: 2%;
 }
-
 
 ::-webkit-scrollbar {
     width: 3px;
@@ -239,8 +247,8 @@ body {
     padding: 2%;
 }
 
-.socialPicker img:hover{
-	background-color: rgba(14, 14, 14, 0.685);
+.socialPicker img:hover {
+    background-color: rgba(14, 14, 14, 0.685);
 }
 
 .socialPicker:hover {
@@ -275,8 +283,9 @@ input[type=search]:hover {
     color: rgb(245, 245, 245);
 }
 
-button{
-	background-color: rgba(14, 14, 14, 0.534);
+button,
+input[type=submit] {
+    background-color: rgba(14, 14, 14, 0.534);
     color: white;
     padding: 12px 20px;
     border: none;
@@ -284,8 +293,9 @@ button{
     cursor: pointer;
 }
 
-button:hover{
-	background-color: rgba(14, 14, 14, 0.685);
+button:hover,
+input[type=submit]:hover {
+    background-color: rgba(14, 14, 14, 0.685);
     color: rgb(245, 245, 245);
 }
 

@@ -22,10 +22,11 @@ public class ViewController extends HttpServlet {
 	private static final Logger log = Logger.getLogger(ViewController.class.getName());
 
 	public ViewController() {
-        super();
-    }
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de view realizada");
 
 		String pickedTopic = request.getParameter("pickedTopic");
@@ -33,42 +34,45 @@ public class ViewController extends HttpServlet {
 		String streamID = request.getParameter("streamID");
 
 		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
-		
+
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
 		log.log(Level.WARNING, "Se procede con twitter");
 		List<String> t = tr.getTweets(pickedTopic);
-		
+
 		PostsRedditResource sprr = new PostsRedditResource();
 		List<String> rp = sprr.getPosts(pickedTopic);
-			
-		
-		if(t != null && rp != null) {
+
+		if (t != null && rp != null) {
 			rd = request.getRequestDispatcher("/view.jsp");
-			if(videoID!=null) {
+			if (videoID != null) {
 				request.setAttribute("videoID", videoID);
 				String accessToken = (String) request.getSession().getAttribute("YouTube-token");
 				ComentsResource ytcr = new ComentsResource(accessToken);
 				List<Item> comments = ytcr.getComents(videoID);
 				request.setAttribute("comments", comments);
 			}
-			if(streamID!=null) request.setAttribute("streamID", streamID);
+			if (streamID != null)
+				request.setAttribute("streamID", streamID);
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
 			request.setAttribute("pickedTopic", pickedTopic);
-		}else {
+		} else {
 			log.log(Level.SEVERE, "Objects = null");
 			List<String> errores = new ArrayList<>();
-			if(t == null) errores.add("Fallo al obtener Trends de Twitter");
-			if(rp == null) errores.add("Fallo al obtener Posts de Reddit");
+			if (t == null)
+				errores.add("Fallo al obtener Trends de Twitter");
+			if (rp == null)
+				errores.add("Fallo al obtener Posts de Reddit");
 			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
-		
-		rd.forward(request, response);	
+
+		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

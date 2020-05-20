@@ -11,47 +11,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "totalResults",
-    "resultsPerPage"
-})
+@JsonPropertyOrder({ "totalResults", "resultsPerPage" })
 public class PageInfo {
 
-    @JsonProperty("totalResults")
-    private Integer totalResults;
-    @JsonProperty("resultsPerPage")
-    private Integer resultsPerPage;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	@JsonProperty("totalResults")
+	private Integer totalResults;
+	@JsonProperty("resultsPerPage")
+	private Integer resultsPerPage;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("totalResults")
-    public Integer getTotalResults() {
-        return totalResults;
-    }
+	@JsonProperty("totalResults")
+	public Integer getTotalResults() {
+		return totalResults;
+	}
 
-    @JsonProperty("totalResults")
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-    }
+	@JsonProperty("totalResults")
+	public void setTotalResults(Integer totalResults) {
+		this.totalResults = totalResults;
+	}
 
-    @JsonProperty("resultsPerPage")
-    public Integer getResultsPerPage() {
-        return resultsPerPage;
-    }
+	@JsonProperty("resultsPerPage")
+	public Integer getResultsPerPage() {
+		return resultsPerPage;
+	}
 
-    @JsonProperty("resultsPerPage")
-    public void setResultsPerPage(Integer resultsPerPage) {
-        this.resultsPerPage = resultsPerPage;
-    }
+	@JsonProperty("resultsPerPage")
+	public void setResultsPerPage(Integer resultsPerPage) {
+		this.resultsPerPage = resultsPerPage;
+	}
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

@@ -2,6 +2,7 @@ package utility;
 
 import java.util.Set;
 import java.util.HashSet;
+
 /**
  * Configuration for an OAuth 2.0 service provider.
  * 
@@ -11,15 +12,14 @@ import java.util.HashSet;
 public class OAuthServiceConfiguration {
 	private String tokenUrl;
 	private String clientId;
-	private String clientSecret; 
+	private String clientSecret;
 	private String authorizationFormUrl;
 	private Set<String> scopes;
-	
-	
-	public OAuthServiceConfiguration(){
+
+	public OAuthServiceConfiguration() {
 		this("", "", "", "", new HashSet<String>());
 	}
-	
+
 	public OAuthServiceConfiguration(String tokenUrl, String clientId, String clientSecret, String authorizationFormUrl,
 			Set<String> scopes) {
 		super();
@@ -29,7 +29,7 @@ public class OAuthServiceConfiguration {
 		this.authorizationFormUrl = authorizationFormUrl;
 		this.scopes = scopes;
 	}
-	
+
 	public void setTokenUrl(String tokenUrl) {
 		this.tokenUrl = tokenUrl;
 	}
@@ -49,22 +49,25 @@ public class OAuthServiceConfiguration {
 	public void setScopes(Set<String> scopes) {
 		this.scopes = scopes;
 	}
-	
+
 	public String getTokenUrl() {
 		return tokenUrl;
 	}
+
 	public String getClientId() {
 		return clientId;
 	}
+
 	public String getClientSecret() {
 		return clientSecret;
 	}
+
 	public String getAuthorizationFormUrl() {
 		return authorizationFormUrl;
 	}
+
 	public Set<String> getScopes() {
 		return scopes;
 	}
-	
-	
+
 }
