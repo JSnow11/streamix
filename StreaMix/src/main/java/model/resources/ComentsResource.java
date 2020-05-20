@@ -30,9 +30,10 @@ public class ComentsResource {
 	}
 
 	public List<Item> getComents(String videoid) {
-		try {
+		
 			ClientResource cr = new ClientResource(
 					uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+		try {	
 			YoutubeComents coments = cr.get(YoutubeComents.class);
 			log.log(Level.INFO, "comentarios solicitados");
 			return coments.getItems();
@@ -45,7 +46,7 @@ public class ComentsResource {
 	}
 
 	public Boolean postComents(String videoid, String comment) {
-		try {
+		
 			ClientResource cr = new ClientResource(uri + "part=snippet&access_token=" + access_token);
 			log.log(Level.INFO, "TOKEN usado " + access_token.toString() + "en la uri: " + uri
 					+ "part=snippet&access_token=" + access_token);
@@ -64,6 +65,7 @@ public class ComentsResource {
 			ytc.setItems(ls);
 			log.log(Level.INFO, "COMMENT SETEADO");
 			log.log(Level.INFO, comment + ", " + videoid);
+		try {
 			cr.post(ytc, YoutubeComents.class);
 			return true;
 		}
