@@ -30,9 +30,10 @@ public class ComentsResource {
 	}
 
 	public List<Item> getComents(String videoid) {
-		try {
+		
 			ClientResource cr = new ClientResource(
 					uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+		try {	
 			YoutubeComents coments = cr.get(YoutubeComents.class);
 			log.log(Level.INFO, "comentarios solicitados");
 			return coments.getItems();

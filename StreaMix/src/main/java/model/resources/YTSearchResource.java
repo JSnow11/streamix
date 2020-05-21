@@ -15,14 +15,15 @@ public class YTSearchResource {
 	public static final Logger log = Logger.getLogger(YTSearchResource.class.getName());
 
 	public YtSearch getVideos(String query) throws UnsupportedEncodingException {
-		try {
+		
 			String queryFormatted = URLEncoder.encode(query, "UTF-8");
 			String uri = "https://www.googleapis.com/youtube/v3/search?key=" + apiKey + "&part=snippet&maxResults=20&q="
 					+ queryFormatted;
 
 			log.log(Level.WARNING, "ytsearch URI: " + uri);
-
+		
 			ClientResource cr = new ClientResource(uri);
+		try {
 			YtSearch yts = cr.get(YtSearch.class);
 
 			return yts;
