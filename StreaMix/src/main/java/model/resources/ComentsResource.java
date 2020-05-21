@@ -46,29 +46,35 @@ public class ComentsResource {
 
 	public Boolean postComents(String videoid, String comment) {
 		try {
-			ClientResource cr = new ClientResource(uri + "part=snippet&access_token=" + access_token);
-			log.log(Level.INFO, "TOKEN usado " + access_token.toString() + "en la uri: " + uri
-					+ "part=snippet&access_token=" + access_token);
-			YoutubeComents ytc = new YoutubeComents();
+			log.log(Level.INFO, "Intentando postear el comentario: "+comment + ", videoID=" + videoid);
+			ClientResource cr = new ClientResource(uri + "?access_token=" + access_token + "&part=snippet");
+			
+			YoutubeComents yc = new YoutubeComents();
 			Item newcomment = new Item();
 			Snippet sn = new Snippet();
 			TopLevelComment tlc = new TopLevelComment();
 			Snippet2 sn2 = new Snippet2();
+			
 			sn2.setTextOriginal(comment);
+			sn2.setVideoId(videoid);
 			tlc.setSnippet(sn2);
+			
 			sn.setVideoId(videoid);
 			sn.setTopLevelComment(tlc);
 			newcomment.setSnippet(sn);
 			List<Item> ls = new ArrayList<Item>();
 			ls.add(newcomment);
-			ytc.setItems(ls);
+			yc.setItems(ls);
+			
 			log.log(Level.INFO, "COMMENT SETEADO");
 			log.log(Level.INFO, comment + ", " + videoid);
-			cr.post(ytc, YoutubeComents.class);
+			cr.post(newcomment, Item.class);
+			cr.put(newcomment);
 			return true;
 		}
 		catch(ResourceException e) {
-			e.printStackTrace();
+			log.log(Level.WARNING, "Error al postear el comentario, \n uri = "+ uri + "?access_token=" + access_token + "&part=snippet");
+			System.out.println(e);
 			return false;
 		}
 		

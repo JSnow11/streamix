@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.codehaus.jackson.map.JsonMappingException;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
@@ -20,7 +18,7 @@ import model.reddit.subreddits.Subreddits;
 public class PostsRedditResource {
 	public static final Logger log = Logger.getLogger(PostsRedditResource.class.getName());
 
-	private Subreddits getSubreddits(String queryFormatted) throws ResourceException, IOException {
+	private Subreddits getSubreddits(String queryFormatted) throws IOException {
 		String uri = "https://www.reddit.com/subreddits/search.json?q=" + queryFormatted + "&limit=2";
 
 		log.log(Level.INFO, "SUBREDDITS URI: " + uri);
@@ -30,7 +28,7 @@ public class PostsRedditResource {
 		return ssrr;
 	}
 
-	public List<String> getPosts(String query) throws ResourceException, IOException {
+	public List<String> getPosts(String query) throws IOException {
 		String queryFormatted = URLEncoder.encode(query, "UTF-8");
 		Subreddits ssrr = getSubreddits(queryFormatted);
 
@@ -42,21 +40,25 @@ public class PostsRedditResource {
 
 				log.log(Level.INFO, "REDDIT POSTS URI: " + uri);
 				ClientResource cr = new ClientResource(uri);
-				Posts rp = cr.get(Posts.class);
+				try {
+					Posts rp = cr.get(Posts.class);
+					for (model.reddit.posts.Child ch2 : rp.getData().getChildren()) {
+						String uri2 = "https://www.reddit.com/oembed?url=" + ch2.getData().getUrl();
 
-				for (model.reddit.posts.Child ch2 : rp.getData().getChildren()) {
-					String uri2 = "https://www.reddit.com/oembed?url=" + ch2.getData().getUrl();
+						log.log(Level.INFO, "REDDIT EMBEED URI: " + uri2);
 
-					log.log(Level.INFO, "REDDIT EMBEED URI: " + uri2);
-
-					if (uri2.contains("url=https://www.reddit.com/r/")) {
-						System.out.println(uri2);
-						ClientResource cr2 = new ClientResource(uri2);
-						REmbeed re = cr2.get(REmbeed.class);
-						if (re != null)
-							lhtml.add(re.getHtml());
+						if (uri2.contains("url=https://www.reddit.com/r/")) {
+							System.out.println(uri2);
+							ClientResource cr2 = new ClientResource(uri2);
+							REmbeed re = cr2.get(REmbeed.class);
+							if (re != null)
+								lhtml.add(re.getHtml());
+						}
 					}
+				}catch(ResourceException re) {
+					
 				}
+				
 
 			}
 

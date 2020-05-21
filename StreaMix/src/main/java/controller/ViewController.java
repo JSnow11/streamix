@@ -28,7 +28,6 @@ public class ViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de view realizada");
-
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
 		String streamID = request.getParameter("streamID");
