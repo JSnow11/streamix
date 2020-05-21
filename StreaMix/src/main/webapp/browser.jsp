@@ -26,7 +26,7 @@
                 <h3>Hot Games</h3>
                 <div class="scroll">
 	                <c:forEach items="${requestScope.games}" var="datum">
-						<a href="/search?searchQuery='hola'"><c:out value="${datum.name}"></c:out></a>    
+						<a href="/search?searchQuery=${datum.name}"><c:out value="${datum.name}"></c:out></a>    
 	                </c:forEach>
                 </div>
                 
@@ -35,7 +35,7 @@
             <h3>Topics</h3>
                 <div class="scroll">
 	                <c:forEach items="${requestScope.trends}" var="trend">
-						<a href="/search?searchQuery='hola'"><c:out value="${trend.getName().toString()}"></c:out></a>    
+						<a href="/search?searchQuery=${trend.getName().toString()}"><c:out value="${trend.getName().toString()}"></c:out></a>    
 	                </c:forEach>
                 </div>
             </div>

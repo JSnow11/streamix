@@ -46,6 +46,7 @@ public class SearchController extends HttpServlet {
 		String gameId = "";
 
 		for (Datum game : games.getData()) {
+			
 			if ((game.getName().toLowerCase().contains(queryFormatted.toLowerCase())))
 				gameId = game.getId();
 		}

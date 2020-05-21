@@ -30,8 +30,16 @@ public class TwitchSearchResource {
 
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
-
-		Streams twS = cr.get(Streams.class);
-		return twS;
+		
+		try {
+			Streams twS = cr.get(Streams.class);
+			return twS;
+		}
+		
+		catch(ResourceException re){
+			re.getStackTrace();
+			return null;
+		}
+		
 	}
 }

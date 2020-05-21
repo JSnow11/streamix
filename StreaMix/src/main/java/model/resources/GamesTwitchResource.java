@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import model.twitch.Games;
 import utility.Tools;
@@ -28,10 +29,18 @@ public class GamesTwitchResource {
 
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
+		try {
+			games = cr.get(Games.class);
+			return games;
+		}
+		catch(ResourceException re){
+			re.getStackTrace();
+			games=null;
+			return games;
+		}
+		
 
-		games = cr.get(Games.class);
-
-		return games;
+		
 	}
 
 	public static Games getGamesStatic() {
@@ -46,8 +55,16 @@ public class GamesTwitchResource {
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
 
-		games = cr.get(Games.class);
+		try {
+			games = cr.get(Games.class);
+			return games;
+		}
+		catch(ResourceException re){
+			re.getStackTrace();
+			games=null;
+			return games;
+		}
 
-		return games;
+		
 	}
 }
