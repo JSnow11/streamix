@@ -16,15 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.resources.GamesTwitchResource;
 import model.resources.TwitchSearchResource;
 import model.resources.YTSearchResource;
-import model.twitch.Datum;
-import model.twitch.Games;
 import model.twitch.Streams;
-import model.twitch.TwitchSearch;
 import model.yt.YtSearch;
 
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private static final Logger log = Logger.getLogger(SearchController.class.getName());
 
 	public SearchController() {
@@ -33,24 +29,17 @@ public class SearchController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		log.log(Level.INFO, "La query es: " + request.getParameter("searchQuery"));
 		RequestDispatcher rd = null;
 		String query = request.getParameter("searchQuery");
-		String queryFormatted = URLEncoder.encode(query, "UTF-8");
+		String queryFormatted = query;
 		log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
 
 		YTSearchResource videosr = new YTSearchResource();
 		YtSearch videos = videosr.getVideos(query);
-
-		Games games = GamesTwitchResource.getGamesStatic();
-		String gameId = "";
-
-		for (Datum game : games.getData()) {
-			
-			if ((game.getName().toLowerCase().contains(queryFormatted.toLowerCase())))
-				gameId = game.getId();
-		}
-
+		
+		String gameId = GamesTwitchResource.getGameID(queryFormatted);
 		Streams streams = null;
 
 		if (!gameId.equals("")) {

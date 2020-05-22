@@ -5,10 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.security.InvalidParameterException;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +24,7 @@ public class testTwitter {
 		Trending trends = trendsR.getTrends();
 		
 		assertNotNull("The trends are not null", trends);
-		assertTrue("The list of contacts is empty", trends.getTrends().size() >= 1);
+		assertTrue("The list of contacts is not empty", trends.getTrends().size() >= 1);
 	}
 
 	@Test
@@ -36,6 +32,6 @@ public class testTwitter {
 		List<String> tweets = tweetsR.getTweets("test");
 		
 		assertNotNull("The trends are not null", tweets);
-		assertTrue("The list of contacts is empty", tweets.size() >= 1);
+		assertTrue("The list of contacts is not empty", tweets.size() >= 1);
 	}
 }

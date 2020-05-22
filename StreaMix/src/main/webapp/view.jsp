@@ -13,28 +13,28 @@
 <title>StreaMix</title>
 
 <script>
-			function show(b) {
-				var twitter = document.getElementById("twitterPosts");
-				var reddit = document.getElementById("redditPosts");
-				var chat = document.getElementById("chatPosts");
-				
-			  if (b == 1) {
-			    twitter.style.display = "block";
-			    reddit.style.display = "none";
-			    chat.style.display = "none";
-			    
-			  } else if(b == 2) {
-				twitter.style.display = "none";
-				reddit.style.display = "block";
-				chat.style.display = "none";
-				
-			  }else if(b == 3) {
-				twitter.style.display = "none";
-				reddit.style.display = "none";
-				chat.style.display = "block";
-			  }
-			}
-		</script>
+	function show(b) {
+		var twitter = document.getElementById("twitterPosts");
+		var reddit = document.getElementById("redditPosts");
+		var chat = document.getElementById("chatPosts");
+
+		if (b == 1) {
+			twitter.style.display = "block";
+			reddit.style.display = "none";
+			chat.style.display = "none";
+
+		} else if (b == 2) {
+			twitter.style.display = "none";
+			reddit.style.display = "block";
+			chat.style.display = "none";
+
+		} else if (b == 3) {
+			twitter.style.display = "none";
+			reddit.style.display = "none";
+			chat.style.display = "block";
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -83,30 +83,37 @@
 				</div>
 				<div id="chatPosts">
 					<%
-						if(request.getAttribute("videoID") != null) {
+						if (request.getAttribute("videoID") != null) {
 					%>
 					<c:forEach var="comment" items="${requestScope.comments}">
 						<div class="ytComment">
 							<img
 								src="${comment.snippet.topLevelComment.snippet.authorProfileImageUrl}">
 							<b>${comment.snippet.topLevelComment.snippet.authorDisplayName }</b>
-							<br>
-							<br> ${comment.snippet.topLevelComment.snippet.textOriginal}
+							<br> <br>
+							${comment.snippet.topLevelComment.snippet.textOriginal}
 						</div>
 					</c:forEach>
 					<div>
 						<form action="/CommentController" method="post">
-							Comentar: <input type="text" name="comentario"> 
-								<input hidden type="text" name="videoID"
-								value="${requestScope.videoID}">
-								<input hidden type="text" name="pickedTopic"
-								value="${requestScope.pickedTopic}"> <input type="submit">
+							Comentar: <input type="text" name="comentario"> <input
+								hidden type="text" name="videoID"
+								value="${requestScope.videoID}"> <input hidden
+								type="text" name="pickedTopic"
+								value="${requestScope.pickedTopic}"> <input
+								type="submit">
 						</form>
 					</div>
 					<%
 						} else {
 					%>
-
+					<div>
+						<iframe 
+							frameborder="0" scrolling="yes"
+							id="chat_embed" src="https://www.twitch.tv/embed/${requestScope.streamID}/chat?streamernews.example.com" 
+							height="400"> 
+						</iframe>
+					</div>
 					<%
 						}
 					%>
@@ -114,11 +121,11 @@
 			</div>
 			<div class="socialPicker">
 				<img onclick="show(1)" src="images/twitterIcon.png" width="50px">
-				<img onclick="show(2)" src="images/reddit.png" width="50px">
-				<img onclick="show(3)" src="images/chatIcon.png" width="50px">
+				<img onclick="show(2)" src="images/reddit.png" width="50px"> <img
+					onclick="show(3)" src="images/chatIcon.png" width="50px">
 			</div>
 		</div>
-		
+
 	</div>
 
 	<footer>

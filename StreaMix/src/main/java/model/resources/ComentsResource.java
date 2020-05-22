@@ -30,16 +30,14 @@ public class ComentsResource {
 	}
 
 	public List<Item> getComents(String videoid) {
-		
-			ClientResource cr = new ClientResource(
-					uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+		ClientResource cr = new ClientResource(uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
 		try {	
 			YoutubeComents coments = cr.get(YoutubeComents.class);
 			log.log(Level.INFO, "comentarios solicitados");
 			return coments.getItems();
 		}
 		catch(ResourceException e) {
-			e.printStackTrace();
+			log.log(Level.WARNING, "El video no tiene los comentarios habilitados");
 			return null;
 		}
 		
@@ -69,7 +67,7 @@ public class ComentsResource {
 			
 			log.log(Level.INFO, "COMMENT SETEADO");
 			log.log(Level.INFO, comment + ", " + videoid);
-			cr.post(newcomment, Item.class);
+			YoutubeComents x = cr.post(newcomment, YoutubeComents.class);
 			cr.put(newcomment);
 			return true;
 		}

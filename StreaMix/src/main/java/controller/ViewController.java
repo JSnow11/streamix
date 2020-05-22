@@ -40,6 +40,7 @@ public class ViewController extends HttpServlet {
 		List<String> t = tr.getTweets(pickedTopic);
 
 		PostsRedditResource sprr = new PostsRedditResource();
+		log.log(Level.WARNING, "Se procede con reddit");
 		List<String> rp = sprr.getPosts(pickedTopic);
 
 		if (t != null && rp != null) {

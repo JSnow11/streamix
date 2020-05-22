@@ -57,7 +57,7 @@
         <servlet-name>YTAuthController</servlet-name>
         <url-pattern>/AuthController/Youtube</url-pattern>
     </servlet-mapping>
-  <!--GoogleDriveOAuth2Callback-->
+  <!--YT OAuth2Callback-->
     <servlet>
         <description/>
         <servlet-name>YTOAuth2Callback</servlet-name>
@@ -68,7 +68,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:/CommentController</param-value>
+            <param-value>redirect:/trends</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

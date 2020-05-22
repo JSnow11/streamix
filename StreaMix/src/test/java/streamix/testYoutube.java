@@ -1,5 +1,6 @@
 package streamix;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -39,6 +40,6 @@ public class testYoutube {
 		String videoId="yYz_TcxpG2s";
 		String content="Hola, este comentario es una prueba";
 		Boolean b=comentsR.postComents(videoId, content);
-		assertTrue("The coment have been post succesfully", b);
+		assertFalse("Posting a comment needs authorization", b);
 	}
 }

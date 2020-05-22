@@ -2,6 +2,8 @@ package model.resources;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,6 +12,7 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
+import model.twitch.Datum;
 import model.twitch.Streams;
 import utility.Tools;
 
@@ -18,8 +21,15 @@ public class TwitchSearchResource {
 	public static final String bearerToken = "5o47f1w8vqw80c8wxoli38qz9hy6s6";
 	public static final Logger log = Logger.getLogger(TwitchSearchResource.class.getName());
 
-	public Streams getStreams(String gameId) throws ResourceException, IOException {
-		String gameIdFormatted = URLEncoder.encode(gameId, "UTF-8");
+	public Streams getStreams(String gameId) {
+		String gameIdFormatted = gameId;
+		try {
+			 gameIdFormatted = URLEncoder.encode(gameId, "UTF-8");
+		}catch(IOException ioe) {
+			log.log(Level.WARNING, "Error al codificar la query");
+			System.out.println(ioe);
+		}
+		
 		String uri = "https://api.twitch.tv/helix/streams?game_id=" + gameIdFormatted;
 
 		log.log(Level.INFO, "twitchSearch URI: " + uri);
@@ -34,9 +44,7 @@ public class TwitchSearchResource {
 		try {
 			Streams twS = cr.get(Streams.class);
 			return twS;
-		}
-		
-		catch(ResourceException re){
+		}catch(ResourceException re){
 			re.getStackTrace();
 			return null;
 		}

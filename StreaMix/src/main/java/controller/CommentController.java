@@ -29,6 +29,7 @@ public class CommentController extends HttpServlet {
 		String videoId = request.getParameter("videoID");
 		String content = request.getParameter("comentario");
 		String pickedTopic = request.getParameter("pickedTopic");
+		System.out.println(accessToken + ", " + videoId + ", " + content + pickedTopic);
 
 		if (accessToken != null && !"".equals(accessToken)) {
 			if (videoId != null && !"".equals(videoId)) {
@@ -44,7 +45,7 @@ public class CommentController extends HttpServlet {
 				request.setAttribute("content", content);
 				request.setAttribute("videoId", videoId);
 				request.setAttribute("pickedTopic", pickedTopic);
-				request.getRequestDispatcher("/view").forward(request, response);
+				request.getRequestDispatcher("/trends").forward(request, response);
 			}
 		} else {
 			log.info("Trying to access YT without an access token, redirecting to OAuth servlet");
