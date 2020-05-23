@@ -26,34 +26,37 @@ public class CommentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
-		String videoId = (String) request.getSession().getAttribute("videoID");
+		String pickedTopic = request.getParameter("pickedTopic");
+		String videoID = request.getParameter("videoID");
 		String content = request.getParameter("comentario");
-		String pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
-		System.out.println(accessToken + ", " + videoId + ", " + content + pickedTopic);
+		if(pickedTopic==null) {
+			pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
+			videoID = (String) request.getSession().getAttribute("videoID");
+			content = (String) request.getSession().getAttribute("content");
+		}
+		System.out.println(accessToken + ", " + videoID + ", " + content + pickedTopic);
 
 		if (accessToken != null && !"".equals(accessToken)) {
-			if (videoId != null && !"".equals(videoId)) {
+			if (videoID != null && !"".equals(videoID)) {
 				log.info("Posting");
 				System.out.println(pickedTopic);
-				System.out.println(videoId);
+				System.out.println(videoID);
 				ComentsResource coR = new ComentsResource(accessToken);
-				if(content == null) content = (String) request.getSession().getAttribute("content");
-				if(pickedTopic == null) content = (String) request.getSession().getAttribute("pickedTopic");
-				coR.postComents(videoId, content);
-				request.setAttribute("videoID", videoId);
+				coR.postComents(videoID, content);
+				request.setAttribute("videoID", videoID);
 				request.setAttribute("pickedTopic", pickedTopic);
 				request.getRequestDispatcher("/view").forward(request, response);
 			} else {
 				log.info("Invalid comment");
 				request.setAttribute("message", "You must provide a valid title for file");
 				request.setAttribute("content", content);
-				request.setAttribute("videoId", videoId);
+				request.setAttribute("videoId", videoID);
 				request.setAttribute("pickedTopic", pickedTopic);
 				request.getRequestDispatcher("/trends").forward(request, response);
 			}
 		} else {
 			request.getSession().setAttribute("content", content);
-			request.getSession().setAttribute("videoID", videoId);
+			request.getSession().setAttribute("videoID", videoID);
 			request.getSession().setAttribute("pickedTopic", pickedTopic);
 			log.info("Trying to access YT without an access token, redirecting to OAuth servlet");
 			request.getRequestDispatcher("/AuthController/Youtube").forward(request, response);
