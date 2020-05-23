@@ -21,6 +21,7 @@ public class GamesTwitchResource {
 	public static final String uri = "https://api.twitch.tv/helix/games/top";
 	public static Games games = new Games();
 	private static final Map<String, String> usual = new HashMap<String, String>() {
+		private static final long serialVersionUID = -70447858632348945L;
 		{
 			put("lol", "21779");
 		}
@@ -35,6 +36,7 @@ public class GamesTwitchResource {
 
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
+		
 		try {
 			games = cr.get(Games.class);
 			return games;
@@ -88,7 +90,6 @@ public class GamesTwitchResource {
 				Boolean b = false;
 				System.out.println(game.getName().toLowerCase());
 				for (String s : query.split(" ")) {
-					
 					System.out.println(s);
 					if ((game.getName().toLowerCase().contains(s.toLowerCase()))) {
 						gameId = game.getId();

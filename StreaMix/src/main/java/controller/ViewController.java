@@ -31,8 +31,12 @@ public class ViewController extends HttpServlet {
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
 		String streamID = request.getParameter("streamID");
+		if(videoID == null) videoID = request.getParameter("videoID");
+		if(pickedTopic == null) videoID = request.getParameter("pickedTopic");
 
-		log.log(Level.FINE, "Processing GET request, keywords: " + pickedTopic + " processed.");
+		request.getSession().setAttribute("videoID", videoID);
+		request.getSession().setAttribute("pickedTopic", pickedTopic);
+		log.log(Level.WARNING, "Processing GET request, keywords: " + pickedTopic + " processed." + videoID);
 
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();

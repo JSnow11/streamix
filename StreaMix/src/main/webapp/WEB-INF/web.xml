@@ -41,7 +41,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CommentController</servlet-name>
-    <url-pattern>/CommentController</url-pattern>
+    <url-pattern>/comment</url-pattern>
   </servlet-mapping>
   <!--   Youtube oAuth2 servlets    -->
     <servlet>
@@ -68,7 +68,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:/trends</param-value>
+            <param-value>redirect:/comment</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

@@ -25,11 +25,11 @@ public class TrendsController extends HttpServlet {
 		super();
 
 	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de trends realizada");
 
+		request.getSession().removeAttribute("Youtube-token");
 		RequestDispatcher rd = null;
 		TrendsResource tr = new TrendsResource();
 		Trending trends = tr.getTrends();

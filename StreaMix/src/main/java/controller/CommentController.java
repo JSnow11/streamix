@@ -20,23 +20,27 @@ public class CommentController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
-		String videoId = request.getParameter("videoID");
+		String videoId = (String) request.getSession().getAttribute("videoID");
 		String content = request.getParameter("comentario");
-		String pickedTopic = request.getParameter("pickedTopic");
+		String pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
 		System.out.println(accessToken + ", " + videoId + ", " + content + pickedTopic);
 
 		if (accessToken != null && !"".equals(accessToken)) {
 			if (videoId != null && !"".equals(videoId)) {
 				log.info("Posting");
+				System.out.println(pickedTopic);
+				System.out.println(videoId);
 				ComentsResource coR = new ComentsResource(accessToken);
+				if(content == null) content = (String) request.getSession().getAttribute("content");
+				if(pickedTopic == null) content = (String) request.getSession().getAttribute("pickedTopic");
 				coR.postComents(videoId, content);
-				request.setAttribute("videoId", videoId);
+				request.setAttribute("videoID", videoId);
 				request.setAttribute("pickedTopic", pickedTopic);
 				request.getRequestDispatcher("/view").forward(request, response);
 			} else {
@@ -48,6 +52,9 @@ public class CommentController extends HttpServlet {
 				request.getRequestDispatcher("/trends").forward(request, response);
 			}
 		} else {
+			request.getSession().setAttribute("content", content);
+			request.getSession().setAttribute("videoID", videoId);
+			request.getSession().setAttribute("pickedTopic", pickedTopic);
 			log.info("Trying to access YT without an access token, redirecting to OAuth servlet");
 			request.getRequestDispatcher("/AuthController/Youtube").forward(request, response);
 		}

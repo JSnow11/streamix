@@ -19,6 +19,10 @@ body {
     overflow: hidden;
 }
 
+.chat {
+    height: 9107320917329817203487;
+}
+
 .errorContainer {
     background-color: rgba(14, 14, 14, 0.534);
     align-items: center;
@@ -182,7 +186,7 @@ body {
     justify-content: center;
     border-radius: 10px;
     margin: 2%;
-    width: 60%;
+    width: 65%;
     height: 80%;
     background-color: rgba(14, 14, 14, 0.534);
 }
@@ -195,7 +199,7 @@ body {
 .social {
     margin: 2%;
     height: 80%;
-    width: 25%;
+    width: 28%;
     background-color: rgba(14, 14, 14, 0.534);
     color: rgba(255, 255, 255, 0.733);
     border-radius: 10px;
@@ -203,8 +207,7 @@ body {
 }
 
 .scroll {
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: scroll;
     border-radius: 10px;
     height: 90%;
 }

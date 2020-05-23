@@ -63,7 +63,8 @@
 			<iframe
 				src="https://player.twitch.tv/?channel=${requestScope.streamID}&parent=streamernews.example.com"
 				height="720" width="1280" frameborder="0" scrolling="no"
-				allowfullscreen="true"> </iframe>
+				allowfullscreen="true"> 
+			</iframe>
 			<%
 				}
 			%>
@@ -95,7 +96,7 @@
 						</div>
 					</c:forEach>
 					<div>
-						<form action="/CommentController" method="post">
+						<form action="/comment" method="post">
 							Comentar: <input type="text" name="comentario"> <input
 								hidden type="text" name="videoID"
 								value="${requestScope.videoID}"> <input hidden
@@ -107,13 +108,12 @@
 					<%
 						} else {
 					%>
-					<div>
 						<iframe 
-							frameborder="0" scrolling="yes"
+							frameborder="0" scrolling="no"
 							id="chat_embed" src="https://www.twitch.tv/embed/${requestScope.streamID}/chat?streamernews.example.com" 
-							height="400"> 
+							width="30"
+							height="80"> 
 						</iframe>
-					</div>
 					<%
 						}
 					%>
