@@ -20,7 +20,7 @@ public class testReddit {
 	@Test
 	public void getGamesTest() {
 		Subreddits sub = redditResource.getSubreddits("test");
-		
+
 		assertNotNull("The trends are not null", sub);
 		assertTrue("The list of subreddits is not empty", sub.getData().getChildren().size() >= 1);
 	}
@@ -28,7 +28,7 @@ public class testReddit {
 	@Test
 	public void getStreamsTest() {
 		List<String> posts = redditResource.getPosts("test");
-		
+
 		assertNotNull("The trends are not null", posts);
 		assertTrue("The list of posts is not empty", posts.size() >= 1);
 	}

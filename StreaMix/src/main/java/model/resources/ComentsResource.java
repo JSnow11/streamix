@@ -30,53 +30,53 @@ public class ComentsResource {
 	}
 
 	public List<Item> getComents(String videoid) {
-		ClientResource cr = new ClientResource(uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
-		try {	
+		ClientResource cr = new ClientResource(
+				uri + "?part=snippet&maxResults=20&videoId=" + videoid + "&key=" + apiKey);
+		try {
 			YoutubeComents coments = cr.get(YoutubeComents.class);
 			log.log(Level.INFO, "comentarios solicitados");
 			return coments.getItems();
-		}
-		catch(ResourceException e) {
+		} catch (ResourceException e) {
 			log.log(Level.WARNING, "El video no tiene los comentarios habilitados");
 			return null;
 		}
-		
+
 	}
 
 	public Boolean postComents(String videoid, String comment) {
 		try {
-			log.log(Level.INFO, "Intentando postear el comentario: "+comment + ", videoID=" + videoid);
+			log.log(Level.INFO, "Intentando postear el comentario: " + comment + ", videoID=" + videoid);
 			ClientResource cr = new ClientResource(uri + "?access_token=" + access_token + "&part=snippet");
-			
+
 			YoutubeComents yc = new YoutubeComents();
 			Item newcomment = new Item();
 			Snippet sn = new Snippet();
 			TopLevelComment tlc = new TopLevelComment();
 			Snippet2 sn2 = new Snippet2();
-			
+
 			sn2.setTextOriginal(comment);
 			sn2.setVideoId(videoid);
 			tlc.setSnippet(sn2);
-			
+
 			sn.setVideoId(videoid);
 			sn.setTopLevelComment(tlc);
 			newcomment.setSnippet(sn);
 			List<Item> ls = new ArrayList<Item>();
 			ls.add(newcomment);
 			yc.setItems(ls);
-			
+
 			log.log(Level.INFO, "COMMENT SETEADO");
 			log.log(Level.INFO, comment + ", " + videoid);
 			YoutubeComents x = cr.post(newcomment, YoutubeComents.class);
 			cr.put(newcomment);
 			return true;
-		}
-		catch(ResourceException e) {
-			log.log(Level.WARNING, "Error al postear el comentario, \n uri = "+ uri + "?access_token=" + access_token + "&part=snippet");
+		} catch (ResourceException e) {
+			log.log(Level.WARNING, "Error al postear el comentario, \n uri = " + uri + "?access_token=" + access_token
+					+ "&part=snippet");
 			System.out.println(e);
 			return false;
 		}
-		
+
 	}
 
 }

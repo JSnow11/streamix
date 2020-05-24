@@ -29,7 +29,7 @@ public class SearchController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		log.log(Level.INFO, "La query es: " + request.getParameter("searchQuery"));
 		RequestDispatcher rd = null;
 		String query = request.getParameter("searchQuery");
@@ -38,7 +38,7 @@ public class SearchController extends HttpServlet {
 
 		YTSearchResource videosr = new YTSearchResource();
 		YtSearch videos = videosr.getVideos(query);
-		
+
 		String gameId = GamesTwitchResource.getGameID(queryFormatted);
 		Streams streams = null;
 

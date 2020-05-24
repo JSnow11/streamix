@@ -15,14 +15,13 @@ import model.resources.TweetsResource;
 import model.twitter.Trending;
 
 public class testTwitter {
-
 	public final TweetsResource tweetsR = new TweetsResource();
 	public final TrendsResource trendsR = new TrendsResource();
 
 	@Test
 	public void getTrendsTest() {
 		Trending trends = trendsR.getTrends();
-		
+
 		assertNotNull("The trends are not null", trends);
 		assertTrue("The list of contacts is not empty", trends.getTrends().size() >= 1);
 	}
@@ -30,7 +29,7 @@ public class testTwitter {
 	@Test
 	public void getTweetsTest() {
 		List<String> tweets = tweetsR.getTweets("test");
-		
+
 		assertNotNull("The trends are not null", tweets);
 		assertTrue("The list of contacts is not empty", tweets.size() >= 1);
 	}

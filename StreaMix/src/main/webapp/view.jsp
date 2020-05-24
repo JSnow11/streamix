@@ -45,6 +45,10 @@
 			<input type="search" id="searchQuery" name="searchQuery"
 				placeholder="Search" />
 		</form>
+		<a href="https://github.com/JSnow11/streamix/projects/1"><img
+				src="images/GitHubIcon.png" alt="git" width="30"></a> <a
+				href="about.html"><img src="images/about.png" alt="about"
+				width="30"></a>
 	</div>
 
 	<div class="viewContainer">
@@ -95,6 +99,8 @@
 							${comment.snippet.topLevelComment.snippet.textOriginal}
 						</div>
 					</c:forEach>
+					<br>
+					<br>
 					<div>
 						<form action="/comment" method="post">
 							Comentar: <input type="text" name="comentario"> <input
@@ -121,21 +127,12 @@
 			</div>
 			<div class="socialPicker">
 				<img onclick="show(1)" src="images/twitterIcon.png" width="50px">
-				<img onclick="show(2)" src="images/reddit.png" width="50px"> <img
-					onclick="show(3)" src="images/chatIcon.png" width="50px">
+				<img onclick="show(2)" src="images/reddit.png" width="50px"> 
+				<img onclick="show(3)" src="images/chatIcon.png" width="50px">
 			</div>
 		</div>
 
 	</div>
-
-	<footer>
-		<h2>
-			<a href="https://github.com/JSnow11/streamix/projects/1"><img
-				src="images/GitHubIcon.png" alt="git" width="30"></a> <a
-				href="about.html"><img src="images/about.png" alt="about"
-				width="30"></a>
-		</h2>
-	</footer>
 </body>
 </html>
 

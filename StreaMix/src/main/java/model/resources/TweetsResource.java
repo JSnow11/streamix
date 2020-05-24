@@ -23,10 +23,10 @@ public class TweetsResource {
 		String queryFormatted = query;
 		try {
 			queryFormatted = URLEncoder.encode(query, "UTF-8");
-		}catch(IOException ioe) {
+		} catch (IOException ioe) {
 			log.log(Level.WARNING, "No se ha podido codificar la query");
 		}
-		
+
 		String uri = "https://api.twitter.com/1.1/search/tweets.json?q=" + queryFormatted + "&count=5";
 		log.log(Level.INFO, "tweets URI: " + uri);
 
@@ -34,14 +34,14 @@ public class TweetsResource {
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
-		
+
 		String st = null;
-		try{
+		try {
 			st = cr.get(String.class);
 		} catch (ResourceException re) {
 			log.log(Level.WARNING, "No se han podido obtener tweets");
-		} 
-		
+		}
+
 		log.log(Level.INFO, "comienza el parseo");
 		List<String> t = parse(st);
 		log.log(Level.INFO, "Parseo completado: " + t.toString());
@@ -79,7 +79,7 @@ public class TweetsResource {
 				String uri = "https://publish.twitter.com/oembed?url=https://twitter.com/user/status/" + s;
 				log.log(Level.WARNING, uri);
 				ClientResource cr = new ClientResource(uri);
-				
+
 				Embeed e = null;
 				try {
 					e = cr.get(Embeed.class);

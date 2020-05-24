@@ -140,6 +140,15 @@ body {
     color: rgba(255, 255, 255, 0.733);
 }
 
+.text {
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 15px;
+    background-color: rgba(14, 14, 14, 0.534);
+    width: 80%;
+}
+
 .twitterTrending {
     height: 40%;
     text-align: left;
@@ -168,6 +177,7 @@ body {
     border-radius: 10px;
     text-overflow: ellipsis;
     background-color: rgba(0, 0, 0, 0.4);
+    color: whitesmoke;
 }
 
 .video:hover {
@@ -243,7 +253,7 @@ body {
 }
 
 .socialPicker {
-    height: 10%;
+    height: 13%;
     text-align: center;
     width: 100%;
     padding: 2%;
@@ -255,7 +265,7 @@ body {
 }
 
 .socialPicker:hover {
-    background-color: rgba(14, 14, 14, 0.685);
+    background-color: rgba(14, 14, 14, 0.185);
     color: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
 }
@@ -287,7 +297,8 @@ input[type=search]:hover {
 }
 
 button,
-input[type=submit] {
+input[type=submit],
+input[type=text] {
     background-color: rgba(14, 14, 14, 0.534);
     color: white;
     padding: 12px 20px;
@@ -297,7 +308,8 @@ input[type=submit] {
 }
 
 button:hover,
-input[type=submit]:hover {
+input[type=submit]:hover,
+input[type=text]:hover {
     background-color: rgba(14, 14, 14, 0.685);
     color: rgb(245, 245, 245);
 }

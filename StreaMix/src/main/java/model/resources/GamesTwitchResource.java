@@ -36,7 +36,7 @@ public class GamesTwitchResource {
 
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
-		
+
 		try {
 			games = cr.get(Games.class);
 			return games;
@@ -72,7 +72,7 @@ public class GamesTwitchResource {
 
 	public static String getGameID(String query) {
 		String gameId = "";
-		
+
 		if (games.getData() == null) {
 			ClientResource cr = new ClientResource(uri);
 			Tools.addHeader(cr, "Client-ID", clientID);
@@ -98,7 +98,8 @@ public class GamesTwitchResource {
 						break;
 					}
 				}
-				if(b) break;
+				if (b)
+					break;
 			}
 		}
 

@@ -32,10 +32,10 @@ public class PostsRedditResource {
 		String queryFormatted = query;
 		try {
 			queryFormatted = URLEncoder.encode(query, "UTF-8");
-		}catch(IOException ioe) {
+		} catch (IOException ioe) {
 			log.log(Level.WARNING, "No se ha podido codificar la query");
 		}
-		
+
 		Subreddits ssrr = getSubreddits(queryFormatted);
 
 		List<String> lhtml = new ArrayList<>();
@@ -44,7 +44,7 @@ public class PostsRedditResource {
 				String subredditFormated = ch.getData().getDisplayName();
 				try {
 					subredditFormated = URLEncoder.encode(subredditFormated, "UTF-8");
-				}catch(IOException ioe) {
+				} catch (IOException ioe) {
 					log.log(Level.WARNING, "No se ha podido codificar la query");
 				}
 				String uri = "https://www.reddit.com/r/" + subredditFormated + "/new.json?sort=new&limit=10";
@@ -57,25 +57,24 @@ public class PostsRedditResource {
 						String uri2 = "https://www.reddit.com/oembed?url=" + ch2.getData().getUrl();
 
 						log.log(Level.INFO, "REDDIT EMBEED URI: " + uri2);
-						
+
 						if (uri2.contains("url=https://www.reddit.com/r/")) {
 							System.out.println(uri2);
 							ClientResource cr2 = new ClientResource(uri2);
 							REmbeed re = null;
 							try {
 								re = cr2.get(REmbeed.class);
-							}catch (ResourceException e) {
+							} catch (ResourceException e) {
 								log.log(Level.WARNING, "No se ha podido parsear un post de Reddit");
 							}
-							
+
 							if (re != null)
 								lhtml.add(re.getHtml());
 						}
 					}
-				}catch(ResourceException re) {
+				} catch (ResourceException re) {
 					log.log(Level.WARNING, "No se han podido obtener posts de un subreddit");
 				}
-				
 
 			}
 

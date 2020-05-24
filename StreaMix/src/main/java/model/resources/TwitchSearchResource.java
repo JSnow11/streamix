@@ -24,12 +24,12 @@ public class TwitchSearchResource {
 	public Streams getStreams(String gameId) {
 		String gameIdFormatted = gameId;
 		try {
-			 gameIdFormatted = URLEncoder.encode(gameId, "UTF-8");
-		}catch(IOException ioe) {
+			gameIdFormatted = URLEncoder.encode(gameId, "UTF-8");
+		} catch (IOException ioe) {
 			log.log(Level.WARNING, "Error al codificar la query");
 			System.out.println(ioe);
 		}
-		
+
 		String uri = "https://api.twitch.tv/helix/streams?game_id=" + gameIdFormatted;
 
 		log.log(Level.INFO, "twitchSearch URI: " + uri);
@@ -40,14 +40,14 @@ public class TwitchSearchResource {
 
 		chr.setRawValue(bearerToken);
 		cr.setChallengeResponse(chr);
-		
+
 		try {
 			Streams twS = cr.get(Streams.class);
 			return twS;
-		}catch(ResourceException re){
+		} catch (ResourceException re) {
 			re.getStackTrace();
 			return null;
 		}
-		
+
 	}
 }

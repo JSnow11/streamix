@@ -31,10 +31,10 @@ public class TrendsResource {
 		String st = null;
 		try {
 			st = cr.get(String.class);
-		}catch(ResourceException re) {
+		} catch (ResourceException re) {
 			st = "null";
 		}
-		
+
 		Trending t = parse(st);
 		log.log(Level.WARNING, "Parseado");
 		return t;

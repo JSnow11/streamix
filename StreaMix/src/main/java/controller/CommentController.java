@@ -20,7 +20,7 @@ public class CommentController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,7 +29,7 @@ public class CommentController extends HttpServlet {
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
 		String content = request.getParameter("comentario");
-		if(pickedTopic==null) {
+		if (pickedTopic == null) {
 			pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
 			videoID = (String) request.getSession().getAttribute("videoID");
 			content = (String) request.getSession().getAttribute("content");
