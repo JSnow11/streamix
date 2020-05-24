@@ -23,13 +23,16 @@ public class TrendsController extends HttpServlet {
 
 	public TrendsController() {
 		super();
-
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		log.log(Level.INFO, "Peticion de trends realizada");
-
-		request.getSession().removeAttribute("Youtube-token");
+		
+		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
+		System.out.println("AAAAAAAAAAAAA" +accessToken);
+		if(accessToken == null) {
+			request.getRequestDispatcher("/comment");
+		}
 		RequestDispatcher rd = null;
 		TrendsResource tr = new TrendsResource();
 		Trending trends = tr.getTrends();

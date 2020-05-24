@@ -26,9 +26,9 @@ public class CommentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
-		String videoId = (String) request.getSession().getAttribute("videoID");
+		String videoId = request.getParameter("videoID");
 		String content = request.getParameter("comentario");
-		String pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
+		String pickedTopic = request.getParameter("pickedTopic");
 		System.out.println(accessToken + ", " + videoId + ", " + content + pickedTopic);
 
 		if (accessToken != null && !"".equals(accessToken)) {
@@ -44,17 +44,10 @@ public class CommentController extends HttpServlet {
 				request.setAttribute("pickedTopic", pickedTopic);
 				request.getRequestDispatcher("/view").forward(request, response);
 			} else {
-				log.info("Invalid comment");
-				request.setAttribute("message", "You must provide a valid title for file");
-				request.setAttribute("content", content);
-				request.setAttribute("videoId", videoId);
-				request.setAttribute("pickedTopic", pickedTopic);
+				log.info("Invalid comment going back to trends");
 				request.getRequestDispatcher("/trends").forward(request, response);
 			}
 		} else {
-			request.getSession().setAttribute("content", content);
-			request.getSession().setAttribute("videoID", videoId);
-			request.getSession().setAttribute("pickedTopic", pickedTopic);
 			log.info("Trying to access YT without an access token, redirecting to OAuth servlet");
 			request.getRequestDispatcher("/AuthController/Youtube").forward(request, response);
 		}
