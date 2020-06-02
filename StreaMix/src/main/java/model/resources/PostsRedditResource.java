@@ -21,10 +21,10 @@ public class PostsRedditResource {
 	public Subreddits getSubreddits(String queryFormatted) {
 		String uri = "https://www.reddit.com/subreddits/search.json?q=" + queryFormatted + "&limit=5";
 
-		log.log(Level.INFO, "SUBREDDITS URI: " + uri);
-
 		ClientResource cr = new ClientResource(uri);
+		log.log(Level.INFO, "Buscando Subreddits: " + uri);
 		Subreddits ssrr = cr.get(Subreddits.class);
+		log.log(Level.INFO, "Subreddits encontrados");
 		return ssrr;
 	}
 
@@ -49,14 +49,12 @@ public class PostsRedditResource {
 				}
 				String uri = "https://www.reddit.com/r/" + subredditFormated + "/new.json?sort=new&limit=10";
 
-				log.log(Level.INFO, "REDDIT POSTS URI: " + uri);
 				ClientResource cr = new ClientResource(uri);
 				try {
 					Posts rp = cr.get(Posts.class);
+					log.log(Level.INFO, "Se han obtenido posts del subreddit: " + subredditFormated);
 					for (model.reddit.posts.Child ch2 : rp.getData().getChildren()) {
 						String uri2 = "https://www.reddit.com/oembed?url=" + ch2.getData().getUrl();
-
-						log.log(Level.INFO, "REDDIT EMBEED URI: " + uri2);
 
 						if (uri2.contains("url=https://www.reddit.com/r/")) {
 							System.out.println(uri2);
@@ -64,6 +62,7 @@ public class PostsRedditResource {
 							REmbeed re = null;
 							try {
 								re = cr2.get(REmbeed.class);
+								log.log(Level.INFO, "Post obtenido");
 							} catch (ResourceException e) {
 								log.log(Level.WARNING, "No se ha podido parsear un post de Reddit");
 							}
@@ -73,7 +72,7 @@ public class PostsRedditResource {
 						}
 					}
 				} catch (ResourceException re) {
-					log.log(Level.WARNING, "No se han podido obtener posts de un subreddit");
+					log.log(Level.WARNING, "No se han podido obtener posts del subreddit: " + subredditFormated);
 				}
 
 			}

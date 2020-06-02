@@ -32,6 +32,7 @@ import com.google.api.client.util.store.MemoryDataStoreFactory;
  *
  */
 
+@SuppressWarnings("unused")
 public class OAuthRegistry {
 
 	private static Logger log = Logger.getLogger(OAuthRegistry.class.getName());
@@ -105,6 +106,7 @@ public class OAuthRegistry {
 	/**
 	 * Load the configuration of the different OAuth providers from the Json file.
 	 */
+	@SuppressWarnings("unchecked")
 	private static void loadConfig() {
 		serviceConfigurations = new HashMap<>();
 		ObjectMapper om = new ObjectMapper();

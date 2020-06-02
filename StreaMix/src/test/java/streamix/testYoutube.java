@@ -40,6 +40,6 @@ public class testYoutube {
 		String videoId = "yYz_TcxpG2s";
 		String content = "Hola, este comentario es una prueba";
 		Boolean b = comentsR.postComents(videoId, content);
-		assertFalse("Posting a comment needs authorization", b);
+		assertFalse("Posting a comment needs actualized authorization", b);
 	}
 }

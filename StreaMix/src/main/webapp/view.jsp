@@ -103,7 +103,7 @@
 					<br>
 					<div>
 						<form action="/comment" method="post">
-							Comentar: <input type="text" name="comentario"> <input
+								<input type="text" name="comentario"> <input
 								hidden type="text" name="videoID"
 								value="${requestScope.videoID}"> <input hidden
 								type="text" name="pickedTopic"
@@ -114,12 +114,11 @@
 					<%
 						} else {
 					%>
-						<iframe 
-							frameborder="0" scrolling="no"
-							id="chat_embed" src="https://www.twitch.tv/embed/${requestScope.streamID}/chat?streamernews.example.com" 
-							width="30"
-							height="80"> 
-						</iframe>
+					<div>
+					<object type="text/html" width="100%" height="510" id="resultados_google" data="https://www.twitch.tv/embed/${requestScope.streamID}/chat?streamernews.example.com">
+           				<p>Si puede leer este mensaje es que su navegador no soporta correctamente el elemento <code>object</code></p>
+        			</object>
+					</div>
 					<%
 						}
 					%>

@@ -24,11 +24,17 @@ public class GamesTwitchResource {
 		private static final long serialVersionUID = -70447858632348945L;
 		{
 			put("lol", "21779");
+			put("gta", "32982");
+			put("gtav", "32982");
+			put("gta5", "32982");
+			put("wow", "18122");
+			put("cs", "32399");
+			put("csgo", "32399");
 		}
 	};
 
 	public Games getGames() {
-		log.log(Level.WARNING, "Games Streams URI: " + uri);
+		log.log(Level.WARNING, "Getting trending games: " + uri);
 
 		ClientResource cr = new ClientResource(uri);
 		Tools.addHeader(cr, "Client-ID", clientID);
@@ -39,38 +45,18 @@ public class GamesTwitchResource {
 
 		try {
 			games = cr.get(Games.class);
+			log.log(Level.INFO, "Games recibidos");
 			return games;
 		} catch (ResourceException re) {
 			re.getStackTrace();
 			games = null;
+			log.log(Level.WARNING, "Games no encontrados");
 			return games;
-		}
-	}
-
-	public static Games getGamesStatic() {
-		log.log(Level.WARNING, "Games Streams URI: " + uri);
-
-		if (games.getData() != null) {
-			return games;
-		} else {
-			ClientResource cr = new ClientResource(uri);
-			Tools.addHeader(cr, "Client-ID", clientID);
-			ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
-
-			chr.setRawValue(bearerToken);
-			cr.setChallengeResponse(chr);
-			try {
-				games = cr.get(Games.class);
-				return games;
-			} catch (ResourceException re) {
-				re.getStackTrace();
-				games = null;
-				return games;
-			}
 		}
 	}
 
 	public static String getGameID(String query) {
+		log.log(Level.INFO, "GameID solicitado");
 		String gameId = "";
 
 		if (games.getData() == null) {
@@ -82,15 +68,13 @@ public class GamesTwitchResource {
 			cr.setChallengeResponse(chr);
 			games = cr.get(Games.class);
 		}
+
 		if (usual.containsKey(query)) {
 			gameId = usual.get(query);
 		} else {
-			System.out.println(games.getData());
 			for (Datum game : games.getData()) {
 				Boolean b = false;
-				System.out.println(game.getName().toLowerCase());
 				for (String s : query.split(" ")) {
-					System.out.println(s);
 					if ((game.getName().toLowerCase().contains(s.toLowerCase()))) {
 						gameId = game.getId();
 						b = true;
@@ -102,7 +86,7 @@ public class GamesTwitchResource {
 					break;
 			}
 		}
-
+		log.log(Level.INFO, "GameID obtenido");
 		return gameId;
 	}
 }

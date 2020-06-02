@@ -13,13 +13,13 @@ import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
 import model.twitter.Embeed;
-import utility.Tools;
 
 public class TweetsResource {
 	public static final String bearerToken = "AAAAAAAAAAAAAAAAAAAAAFGTDgEAAAAAEZoGu1eukF9DG%2Fd1iNeDCfHMvWU%3DPR3zJLzXYZ7TgjyWbsRe1qgdntSe1QSGFmKvck1yc6IeUCn18L";
 	public static final Logger log = Logger.getLogger(TweetsResource.class.getName());
 
 	public List<String> getTweets(String query) {
+		log.log(Level.INFO, "Buscando tweets, query: " + query);
 		String queryFormatted = query;
 		try {
 			queryFormatted = URLEncoder.encode(query, "UTF-8");
@@ -28,7 +28,6 @@ public class TweetsResource {
 		}
 
 		String uri = "https://api.twitter.com/1.1/search/tweets.json?q=" + queryFormatted + "&count=5";
-		log.log(Level.INFO, "tweets URI: " + uri);
 
 		ClientResource cr = new ClientResource(uri);
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
@@ -38,20 +37,19 @@ public class TweetsResource {
 		String st = null;
 		try {
 			st = cr.get(String.class);
+			log.log(Level.INFO, "Tweets obtenidos");
 		} catch (ResourceException re) {
 			log.log(Level.WARNING, "No se han podido obtener tweets");
 		}
 
-		log.log(Level.INFO, "comienza el parseo");
 		List<String> t = parse(st);
-		log.log(Level.INFO, "Parseo completado: " + t.toString());
+		log.log(Level.INFO, "Tweets parseados");
 		t = getHtml(t);
-		log.log(Level.INFO, "HTML parseado");
+		log.log(Level.INFO, "HTML de tweets obtenido");
 		return t;
 	}
 
 	private static List<String> parse(String st) {
-
 		List<String> lu = new ArrayList<>();
 		Boolean b = true;
 		String id = "";
@@ -59,7 +57,6 @@ public class TweetsResource {
 			if (!trd.contains("statuses") && !trd.contains("sidebar")) {
 				if (trd.contains("\"id\"") && b) {
 					id = trd.split(":")[1].trim();
-					log.log(Level.WARNING, "id:" + id);
 					lu.add(id);
 					b = false;
 				}

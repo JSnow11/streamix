@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -25,40 +26,42 @@ public class CommentController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		log.log(Level.INFO, "COMMENTCONTROLLER - Posteo de comentarios ...");
 		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
 		String content = request.getParameter("comentario");
+
 		if (pickedTopic == null) {
 			pickedTopic = (String) request.getSession().getAttribute("pickedTopic");
 			videoID = (String) request.getSession().getAttribute("videoID");
 			content = (String) request.getSession().getAttribute("content");
 		}
-		System.out.println(accessToken + ", " + videoID + ", " + content + pickedTopic);
+
+		log.log(Level.INFO, "Parametros para el comentario obtenidos: ");
+		System.out.println("aT: " + accessToken + ",\n" + " vID: " + videoID + ",\n" + " c: " + content + ",\n"
+				+ " pT: " + pickedTopic);
 
 		if (accessToken != null && !"".equals(accessToken)) {
 			if (videoID != null && !"".equals(videoID)) {
-				log.info("Posting");
-				System.out.println(pickedTopic);
-				System.out.println(videoID);
+				log.log(Level.INFO, "Posteando el comentario: ");
+
 				ComentsResource coR = new ComentsResource(accessToken);
 				coR.postComents(videoID, content);
 				request.setAttribute("videoID", videoID);
 				request.setAttribute("pickedTopic", pickedTopic);
 				request.getRequestDispatcher("/view").forward(request, response);
 			} else {
-				log.info("Invalid comment");
-				request.setAttribute("message", "You must provide a valid title for file");
-				request.setAttribute("content", content);
+				log.log(Level.INFO, "Comentario no válido");
 				request.setAttribute("videoId", videoID);
 				request.setAttribute("pickedTopic", pickedTopic);
-				request.getRequestDispatcher("/trends").forward(request, response);
+				request.getRequestDispatcher("/view").forward(request, response);
 			}
 		} else {
 			request.getSession().setAttribute("content", content);
 			request.getSession().setAttribute("videoID", videoID);
 			request.getSession().setAttribute("pickedTopic", pickedTopic);
-			log.info("Trying to access YT without an access token, redirecting to OAuth servlet");
+			log.log(Level.INFO, "Se requiere autentificación, se procede con oauth, Identifiquese.");
 			request.getRequestDispatcher("/AuthController/Youtube").forward(request, response);
 		}
 	}

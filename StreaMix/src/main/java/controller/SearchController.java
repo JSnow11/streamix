@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,22 +29,22 @@ public class SearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		log.log(Level.INFO, "La query es: " + request.getParameter("searchQuery"));
+		log.log(Level.INFO, "SEARCHCONTROLLER - Buscando videos y streams ...");
+
 		RequestDispatcher rd = null;
 		String query = request.getParameter("searchQuery");
-		String queryFormatted = query;
-		log.log(Level.FINE, "Processing GET request, keywords: " + query + " processed.");
+		log.log(Level.INFO, "Query: " + query);
 
 		YTSearchResource videosr = new YTSearchResource();
 		YtSearch videos = videosr.getVideos(query);
+		log.log(Level.INFO,
+				videos != null ? "Videos recibidos en el controller" : "No se han recibido videos de youtube");
 
-		String gameId = GamesTwitchResource.getGameID(queryFormatted);
-		Streams streams = null;
-
-		if (!gameId.equals("")) {
-			TwitchSearchResource twsr = new TwitchSearchResource();
-			streams = twsr.getStreams(gameId);
-		}
+		String gameId = GamesTwitchResource.getGameID(query);
+		TwitchSearchResource twsr = new TwitchSearchResource();
+		Streams streams = twsr.getStreams(gameId);
+		log.log(Level.INFO,
+				streams != null ? "Streams recibidos en el controller" : "No se han recibido streams de twitch");
 
 		if ((videos != null)) {
 			rd = request.getRequestDispatcher("/double.jsp");
@@ -53,13 +52,15 @@ public class SearchController extends HttpServlet {
 			request.setAttribute("searchQuery", query);
 			if (streams != null)
 				request.setAttribute("twstreams", streams.getData());
+			log.log(Level.INFO, "Los videos y/o streams recibidos se han enviado a la vista double.jsp");
+
 		} else {
-			log.log(Level.SEVERE, "Objects = null");
+			log.log(Level.WARNING, "No se han obtenido recursos en el controller");
 			List<String> errores = new ArrayList<>();
 			if (streams == null)
-				errores.add("Fallo al obtener Streams de Twitch");
+				errores.add("No se han obtenido Streams");
 			if (videos == null)
-				errores.add("Fallo al obtener Videos de YT");
+				errores.add("No se han obtenido Videos de youtube");
 			request.setAttribute("errors", errores);
 			rd = request.getRequestDispatcher("/error.jsp");
 		}

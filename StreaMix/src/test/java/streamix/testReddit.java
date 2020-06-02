@@ -18,7 +18,7 @@ public class testReddit {
 	public final PostsRedditResource redditResource = new PostsRedditResource();
 
 	@Test
-	public void getGamesTest() {
+	public void getSubredditsTest() {
 		Subreddits sub = redditResource.getSubreddits("test");
 
 		assertNotNull("The trends are not null", sub);

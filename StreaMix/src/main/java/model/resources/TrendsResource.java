@@ -20,8 +20,8 @@ public class TrendsResource {
 	public static final Logger log = Logger.getLogger(TrendsResource.class.getName());
 
 	public Trending getTrends() {
+		log.log(Level.INFO, "Buscando tendencias de Twitter");
 		String uri = "https://api.twitter.com/1.1/trends/place.json?id=" + locationID + "&count=5";
-		log.log(Level.INFO, "trends URI: " + uri);
 
 		ClientResource cr = new ClientResource(uri);
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
@@ -31,12 +31,14 @@ public class TrendsResource {
 		String st = null;
 		try {
 			st = cr.get(String.class);
+			log.log(Level.INFO, "Trends obtenidas");
 		} catch (ResourceException re) {
+			log.log(Level.INFO, "Trends no encontradas");
 			st = "null";
 		}
 
 		Trending t = parse(st);
-		log.log(Level.WARNING, "Parseado");
+		log.log(Level.WARNING, "Trends parseadas");
 		return t;
 	}
 

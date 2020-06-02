@@ -27,7 +27,7 @@ public class ViewController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.log(Level.INFO, "Peticion de view realizada");
+		log.log(Level.INFO, "VIEWCONTROLLER - Buscando tweets, post de reddit y comentarios ...");
 		String pickedTopic = request.getParameter("pickedTopic");
 		String videoID = request.getParameter("videoID");
 		String streamID = request.getParameter("streamID");
@@ -36,33 +36,41 @@ public class ViewController extends HttpServlet {
 			videoID = (String) request.getSession().getAttribute("videoID");
 		}
 
-		log.log(Level.WARNING, "Processing GET request, keywords: " + pickedTopic + " processed." + videoID);
+		log.log(Level.WARNING, "Tema elegido: " + pickedTopic + ", ID:" + videoID != null ? videoID : streamID);
 
 		RequestDispatcher rd = null;
 		TweetsResource tr = new TweetsResource();
-		log.log(Level.WARNING, "Se procede con twitter");
 		List<String> t = tr.getTweets(pickedTopic);
+		log.log(Level.INFO, t != null ? "Tweets recibidos" : "No se han recibido tweets de Twitter");
 
 		PostsRedditResource sprr = new PostsRedditResource();
-		log.log(Level.WARNING, "Se procede con reddit");
 		List<String> rp = sprr.getPosts(pickedTopic);
+		log.log(Level.INFO, rp != null ? "Post recibidos en el controler" : "No se han recibido post de Reddit");
 
-		if (t != null && rp != null) {
+		if ((videoID != null || streamID != null) && t != null) {
 			rd = request.getRequestDispatcher("/view.jsp");
 			if (videoID != null) {
 				request.setAttribute("videoID", videoID);
 				String accessToken = (String) request.getSession().getAttribute("YouTube-token");
 				ComentsResource ytcr = new ComentsResource(accessToken);
 				List<Item> comments = ytcr.getComents(videoID);
+				log.log(Level.INFO,
+						comments != null ? "Comments recibidos en el controler" : "No se han recibido comments de YT");
+
 				request.setAttribute("comments", comments);
+				log.log(Level.INFO,
+						"El video, los tweets, los posts de reddit y los comments de yt recibidos se han enviado a la vista view.jsp");
 			}
 			if (streamID != null)
 				request.setAttribute("streamID", streamID);
+
 			request.setAttribute("tweets", t);
 			request.setAttribute("redditPosts", rp);
 			request.setAttribute("pickedTopic", pickedTopic);
+			log.log(Level.INFO,
+					"El stream, los tweets y los posts de reddit recibidos se han enviado a la vista view.jsp");
 		} else {
-			log.log(Level.SEVERE, "Objects = null");
+			log.log(Level.WARNING, "No se han obtenido respuestas en el controller");
 			List<String> errores = new ArrayList<>();
 			if (t == null)
 				errores.add("Fallo al obtener Trends de Twitter");

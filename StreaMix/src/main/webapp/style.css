@@ -145,8 +145,13 @@ body {
     border-radius: 20px;
     color: white;
     font-size: 15px;
-    background-color: rgba(14, 14, 14, 0.534);
+    background-color: rgba(14, 14, 14, 0.434);
     width: 80%;
+    margin: 10%;
+}
+
+.text:hover {
+    background-color: rgba(14, 14, 14, 0.634);
 }
 
 .twitterTrending {
@@ -218,6 +223,7 @@ body {
 
 .scroll {
     overflow-y: scroll;
+    overflow-x: hidden;
     border-radius: 10px;
     height: 90%;
 }

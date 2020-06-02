@@ -13,10 +13,15 @@ public class Tools {
 	private static final Map<String, String> Map = new HashMap<String, String>() {
 		{
 			put("\\u00ED", "í");
+			put("\\u00CD", "Í");
 			put("\\u00E9", "é");
+			put("\\u00C9", "É");
 			put("\\u00E1", "á");
+			put("\\u00C1", "Á");
 			put("\\u00F3", "ó");
+			put("\\u00D3", "Ó");
 			put("\\u00FA", "ú");
+			put("\\u00DA", "Ú");
 			put("\\u003C", "<");
 			put("\\u003E", ">");
 			put("\\u00F1", "ñ");
