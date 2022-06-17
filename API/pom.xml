@@ -21,7 +21,7 @@
         <mockito.version>1.10.19</mockito.version>        <!-- Mockito version -->
         <jackson.version>2.10.3</jackson.version>        <!-- Jackson version -->
         <restlet.version>2.4.3</restlet.version>        <!-- Restlet version -->
-        <resteasy.version>2.3.10.Final</resteasy.version>        <!-- RESTEasy version -->
+        <resteasy.version>3.0.11.Final</resteasy.version>        <!-- RESTEasy version -->
         <google.http.client.version>1.34.2</google.http.client.version>        <!-- Google HTTP Client version -->
         <google.oauth.client.version>1.30.6</google.oauth.client.version>        <!-- Google OAuth Client version -->
         <jetty.version>9.4.28.v20200408</jetty.version>        <!-- jetty version -->
